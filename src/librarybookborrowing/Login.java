@@ -15,6 +15,7 @@ import java.sql.*;
  */
 public class Login extends javax.swing.JFrame {
     ConnectDatabase db = new ConnectDatabase();
+    PasswordHash callHash = new PasswordHash();
     
     private static final java.util.logging.Logger logger =
             java.util.logging.Logger.getLogger(Login.class.getName());
@@ -231,6 +232,7 @@ public class Login extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String usn = txtUsername.getText();
         String txtPass = String.valueOf(txtPassword.getPassword());
+        String hashed = PasswordHash.hashPassword(txtPass);
         
         String sqlQuery = "SELECT * FROM tbl_accounts" +
                 " WHERE fld_username = ? AND fld_password = ?";
@@ -240,7 +242,7 @@ public class Login extends javax.swing.JFrame {
             PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
             
             pstmt.setString(1, txtUsername.getText());
-            pstmt.setString(2, txtPass);
+            pstmt.setString(2, hashed);
             
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {

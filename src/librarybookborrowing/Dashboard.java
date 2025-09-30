@@ -7,6 +7,7 @@ package librarybookborrowing;
 
 import java.sql.*;
 import java.awt.Font;
+import java.time.LocalDate;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -22,6 +23,7 @@ public class Dashboard extends javax.swing.JFrame {
     
     LocalDateTime dateTime = LocalDateTime.now();
     ConnectDatabase db = new ConnectDatabase();
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM-dd-yyyy");
     
     private static final java.util.logging.Logger logger =
             java.util.logging.Logger.getLogger(Dashboard.class.getName());
@@ -196,7 +198,7 @@ public class Dashboard extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Trasaction ID", "Member Name", "Book Title", "Borrow Date", "Due Date", "Return Date", "Status"
+                "Reference Number", "Member Name", "Book Title", "Borrow Date", "Due Date", "Return Date", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -803,8 +805,60 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddBookActionPerformed
 
     private void btnDoneBorrowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneBorrowingActionPerformed
+       
+        DefaultTableModel doneBorrow = (DefaultTableModel) tblBorrowList.getModel();
         
-//       
+//        try {
+//            Connection conn = db.createConnection();
+//
+//            // SQL query with all 8 columns
+//            String sqlQuery = "INSERT INTO tbl_transaction " +
+//                  "(fld_reference_id, fld_member_id, fld_staff_id, fld_book_id, " +
+//                  "fld_borrow_date, fld_due_date, fld_status) " +
+//                  "VALUES (?, ?, ?, ?, ?, ?, ?)";
+//
+//            PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
+//
+//            String referenceId = generateAlphanumericReference(8);
+//
+//            for (int row = 0; row < doneBorrow.getRowCount(); row++) {
+//                pstmt.setString(1, referenceId);
+//
+//                // Here you’re saving names instead of IDs
+//                pstmt.setString(2, doneBorrow.getValueAt(row, 0).toString()); // Member Name
+//                pstmt.setString(3, doneBorrow.getValueAt(row, 2).toString()); // Issued By (Staff)
+//                pstmt.setString(4, doneBorrow.getValueAt(row, 1).toString()); // Book Title
+//
+//                // Borrow Date (col 3)
+//                String borrowDateStr = doneBorrow.getValueAt(row, 3).toString();
+//                LocalDate borrowLocalDate = LocalDate.parse(borrowDateStr, dateFormat);
+//                pstmt.setDate(5, java.sql.Date.valueOf(borrowLocalDate));
+//
+//                // Due Date (col 4)
+//                String dueDateStr = doneBorrow.getValueAt(row, 4).toString();
+//                LocalDate dueLocalDate = LocalDate.parse(dueDateStr, dateFormat);
+//                pstmt.setDate(6, java.sql.Date.valueOf(dueLocalDate));
+//
+//                // Status
+//                pstmt.setString(7, "borrowed");
+//
+//                pstmt.addBatch();
+//            }
+//
+//
+//
+//            // Execute all insert statements
+//            pstmt.executeBatch();
+//
+//            JOptionPane.showMessageDialog(this, "All rows inserted successfully!");
+//
+//            pstmt.close();
+//            conn.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(this, "Error: " + e.toString());
+//        }
 
     }//GEN-LAST:event_btnDoneBorrowingActionPerformed
 
@@ -824,7 +878,6 @@ public class Dashboard extends javax.swing.JFrame {
         
         DefaultTableModel borrowList = (DefaultTableModel) tblBorrowList.getModel();
         
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         
         String memberName = txtBorrowerName.getText();
         String issuerName = txtIssuedBy.getText();
@@ -846,7 +899,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
         
         
-        String sqlQuery = "SELECT fld_transaction_id, fld_member_id, fld_staff_id, " +
+        String sqlQuery = "SELECT fld_reference_id, fld_member_id, fld_staff_id, " +
                      "fld_book_id, fld_borrow_date, fld_due_date, " +
                      "fld_return_date, fld_status " +
                      "FROM tbl_transaction";
@@ -857,7 +910,7 @@ public class Dashboard extends javax.swing.JFrame {
             ResultSet rs = pstmt.executeQuery();
             
             while (rs.next()) {                
-                int transactionId = rs.getInt("fld_transaction_id");
+                String referenceId = rs.getString("fld_reference_id");
                 int memberId = rs.getInt("fld_member_id");
                 int staffId = rs.getInt("fld_staff_id");
                 int bookId = rs.getInt("fld_book_id");
@@ -867,7 +920,7 @@ public class Dashboard extends javax.swing.JFrame {
                 String status = rs.getString("fld_status");
                 
                 dashboard.addRow(new Object[]{
-                    transactionId, memberId, staffId, bookId,
+                    referenceId, memberId, staffId, bookId,
                     borrowDate, dueDate, returnDate, status
                 });
             }

@@ -4,6 +4,8 @@
  */
 package librarybookborrowing;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -55,7 +57,7 @@ public class Register extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnRegisterMember = new javax.swing.JButton();
         pnlRegStaff = new javax.swing.JPanel();
-        pnlStaffForm = new javax.swing.JPanel();
+        pnlRegStaffForm = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtFirstNameStaff = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -63,13 +65,20 @@ public class Register extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtLastNameStaff = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtPhoneNumberStaff = new javax.swing.JTextField();
+        txtUsernameStaff = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtEmailStaff = new javax.swing.JTextField();
         cmbRoles = new javax.swing.JComboBox<>();
+        txtPasswordStaff = new javax.swing.JPasswordField();
+        txtReEntPasswordStaff = new javax.swing.JPasswordField();
         btnRegisterStaff = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1000, 1000));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 168, 107));
@@ -104,21 +113,21 @@ public class Register extends javax.swing.JFrame {
         pnlChooseReg.setLayout(pnlChooseRegLayout);
         pnlChooseRegLayout.setHorizontalGroup(
             pnlChooseRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlChooseRegLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlChooseRegLayout.createSequentialGroup()
+                .addContainerGap(165, Short.MAX_VALUE)
                 .addGroup(pnlChooseRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblRegMember, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRegStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addGap(161, 161, 161))
         );
         pnlChooseRegLayout.setVerticalGroup(
             pnlChooseRegLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlChooseRegLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(44, 44, 44)
                 .addComponent(lblRegMember, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
                 .addComponent(lblRegStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pnlRegister.add(pnlChooseReg, "card4");
@@ -234,25 +243,25 @@ public class Register extends javax.swing.JFrame {
         pnlRegMember.setLayout(pnlRegMemberLayout);
         pnlRegMemberLayout.setHorizontalGroup(
             pnlRegMemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegMemberLayout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+            .addGroup(pnlRegMemberLayout.createSequentialGroup()
+                .addGap(125, 125, 125)
                 .addComponent(pnlMemberForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         pnlRegMemberLayout.setVerticalGroup(
             pnlRegMemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRegMemberLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addGap(80, 80, 80)
                 .addComponent(pnlMemberForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         pnlRegister.add(pnlRegMember, "card2");
 
         pnlRegStaff.setBackground(new java.awt.Color(0, 168, 107));
 
-        pnlStaffForm.setBackground(new java.awt.Color(0, 168, 107));
-        pnlStaffForm.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlRegStaffForm.setBackground(new java.awt.Color(0, 168, 107));
+        pnlRegStaffForm.setMaximumSize(new java.awt.Dimension(500, 500));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -278,9 +287,9 @@ public class Register extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Email:");
+        jLabel10.setText("Username:");
 
-        txtPhoneNumberStaff.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtUsernameStaff.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
@@ -291,81 +300,142 @@ public class Register extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Password:");
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel15.setText("Re-enter Password:");
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel14.setText("Email:");
+
+        txtEmailStaff.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         cmbRoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Librarian", "Assistant Librarian", "Admin" }));
+        cmbRoles.setSelectedIndex(-1);
 
+        txtPasswordStaff.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPasswordStaff.setForeground(new java.awt.Color(0, 0, 0));
+        txtPasswordStaff.setPreferredSize(new java.awt.Dimension(64, 26));
+
+        txtReEntPasswordStaff.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtReEntPasswordStaff.setForeground(new java.awt.Color(0, 0, 0));
+        txtReEntPasswordStaff.setPreferredSize(new java.awt.Dimension(64, 26));
+        txtReEntPasswordStaff.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtReEntPasswordStaffFocusLost(evt);
+            }
+        });
+
+        btnRegisterStaff.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegisterStaff.setText("Register");
+        btnRegisterStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterStaffActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout pnlStaffFormLayout = new javax.swing.GroupLayout(pnlStaffForm);
-        pnlStaffForm.setLayout(pnlStaffFormLayout);
-        pnlStaffFormLayout.setHorizontalGroup(
-            pnlStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlStaffFormLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtFirstNameStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                    .addComponent(txtMidNameStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                    .addComponent(txtLastNameStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                    .addComponent(txtPhoneNumberStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                    .addComponent(cmbRoles, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlStaffFormLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegisterStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+        javax.swing.GroupLayout pnlRegStaffFormLayout = new javax.swing.GroupLayout(pnlRegStaffForm);
+        pnlRegStaffForm.setLayout(pnlRegStaffFormLayout);
+        pnlRegStaffFormLayout.setHorizontalGroup(
+            pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 443, Short.MAX_VALUE)
+            .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlRegStaffFormLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlRegStaffFormLayout.createSequentialGroup()
+                            .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel15))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtFirstNameStaff)
+                                .addComponent(txtMidNameStaff)
+                                .addComponent(txtLastNameStaff)
+                                .addComponent(txtUsernameStaff)
+                                .addComponent(txtPasswordStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtReEntPasswordStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtEmailStaff)
+                                .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(109, 109, 109))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegStaffFormLayout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegisterStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-        pnlStaffFormLayout.setVerticalGroup(
-            pnlStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlStaffFormLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtFirstNameStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtMidNameStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtLastNameStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtPhoneNumberStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegisterStaff)
-                .addContainerGap(16, Short.MAX_VALUE))
+        pnlRegStaffFormLayout.setVerticalGroup(
+            pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 332, Short.MAX_VALUE)
+            .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlRegStaffFormLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(txtFirstNameStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(txtMidNameStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(txtLastNameStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(txtUsernameStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(txtPasswordStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(txtReEntPasswordStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14)
+                        .addComponent(txtEmailStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(pnlRegStaffFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel12)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                    .addComponent(btnRegisterStaff)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout pnlRegStaffLayout = new javax.swing.GroupLayout(pnlRegStaff);
         pnlRegStaff.setLayout(pnlRegStaffLayout);
         pnlRegStaffLayout.setHorizontalGroup(
             pnlRegStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegStaffLayout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addComponent(pnlStaffForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+            .addGroup(pnlRegStaffLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(pnlRegStaffForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         pnlRegStaffLayout.setVerticalGroup(
             pnlRegStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRegStaffLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(pnlStaffForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(pnlRegStaffForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pnlRegister.add(pnlRegStaff, "card3");
@@ -374,17 +444,17 @@ public class Register extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
-                .addComponent(pnlRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(pnlRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -417,40 +487,146 @@ public class Register extends javax.swing.JFrame {
     private void lblRegStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegStaffMouseClicked
         pnlChooseReg.removeAll();
         pnlChooseReg.add(pnlRegStaff);
-        pnlChooseReg.add(pnlStaffForm);
+        pnlChooseReg.add(pnlRegStaffForm);
         pnlChooseReg.repaint();
         pnlChooseReg.revalidate();
     }//GEN-LAST:event_lblRegStaffMouseClicked
 
+    private void btnRegisterStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterStaffActionPerformed
+   
+        registerStaff();
+        txtFirstNameStaff.setText("");
+        txtMidNameStaff.setText("");
+        txtLastNameStaff.setText("");
+        txtEmailStaff.setText("");
+        txtUsernameStaff.setText("");
+        txtPasswordStaff.setText("");
+        txtReEntPasswordStaff.setText("");
+        txtEmailStaff.setText("");
+    }//GEN-LAST:event_btnRegisterStaffActionPerformed
+
+    public void registerStaff(){
+        try {
+            
+            String sqlToStaff = "INSERT INTO tbl_staff (fld_first_name, fld_middle_name, fld_last_name, fld_email) " +
+                                "VALUES (?, ?, ?, ?)";
+
+            Connection conn = db.createConnection();
+            PreparedStatement psStaff = conn.prepareStatement(sqlToStaff, Statement.RETURN_GENERATED_KEYS);
+
+            psStaff.setString(1, txtFirstNameStaff.getText());
+            psStaff.setString(2, txtMidNameStaff.getText());
+            psStaff.setString(3, txtLastNameStaff.getText());
+            psStaff.setString(4, txtEmailStaff.getText());
+
+            int rowsInserted = psStaff.executeUpdate();
+
+            if (rowsInserted > 0) {
+                
+                ResultSet generatedKeys = psStaff.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int staffId = generatedKeys.getInt(1);
+
+                    
+                    String sqlToAccounts = "INSERT INTO tbl_accounts (fld_staff_id, fld_username, fld_password, fld_role) " +
+                                           "VALUES (?, ?, ?, ?)";
+                    PreparedStatement psAccounts = conn.prepareStatement(sqlToAccounts);
+
+                    String password = passwordCheck();
+
+                    psAccounts.setInt(1, staffId);
+                    psAccounts.setString(2, txtUsernameStaff.getText());
+                    psAccounts.setString(3, password);
+                    psAccounts.setString(4, cmbRoles.getSelectedItem().toString());
+
+                    psAccounts.executeUpdate();
+                    psAccounts.close();
+
+                    JOptionPane.showMessageDialog(this, "Account Registered");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Staff Insert Failed");
+            }
+
+            psStaff.close();
+            conn.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+    
+    private void txtReEntPasswordStaffFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtReEntPasswordStaffFocusLost
+        
+    }//GEN-LAST:event_txtReEntPasswordStaffFocusLost
+
+    public String passwordCheck() {
+        String password = new String(txtPasswordStaff.getPassword());
+        String rePassword = new String(txtReEntPasswordStaff.getPassword());
+        String hashedPass = null;
+
+        if (password.equals(rePassword)) {
+            hashedPass = hashPassword(password);
+            btnRegisterStaff.setEnabled(true);
+        } else {
+            btnRegisterStaff.setEnabled(false);
+        }
+
+        return hashedPass;
+    }
+
+    public static String hashPassword(String password) {
+        try {
+            // Create SHA-256 digest
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = md.digest(password.getBytes());
+
+            // Convert bytes to hex
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password", e);
+        }
+    }
+    
+    
+    
+    
+    
     public void RegisterMember(){
         try {
             String sqlQuery = "INSERT INTO tbl_member(fld_first_name, fld_middle_name, fld_last_name, fld_phone_number, fld_email) " +
                 "VALUES (? ,? ,? ,? ,? );";
             
             Connection conn = db.createConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
+            PreparedStatement psMember = conn.prepareStatement(sqlQuery);
             
-            pstmt.setString(1, txtFirstNameMember.getText());
-            pstmt.setString(2, txtMidNameMember.getText());
-            pstmt.setString(3, txtLastNameMember.getText());
-            pstmt.setString(4, txtPhoneNumberMember.getText());
-            pstmt.setString(5, txtEmailMember.getText());
+            psMember.setString(1, txtFirstNameMember.getText());
+            psMember.setString(2, txtMidNameMember.getText());
+            psMember.setString(3, txtLastNameMember.getText());
+            psMember.setString(4, txtPhoneNumberMember.getText());
+            psMember.setString(5, txtEmailMember.getText());
             
-            int rowsInserted = pstmt.executeUpdate(); // use executeUpdate, returns number of rows affected
-    
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(this, "Account Registered");
-            } else {
-                JOptionPane.showMessageDialog(this, "Account Not Registered");
-            }
+            
             txtFirstNameMember.setText("");
             txtMidNameMember.setText("");
             txtLastNameMember.setText("");
             txtPhoneNumberMember.setText("");
             txtEmailMember.setText("");
             
+            int rowsInserted = psMember.executeUpdate();
+    
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(this, "Account Registered");
+            } else {
+                JOptionPane.showMessageDialog(this, "Account Not Registered");
+            }
             
-            pstmt.close();
+            psMember.close();
             conn.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -492,6 +668,9 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -507,16 +686,19 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMemberForm;
     private javax.swing.JPanel pnlRegMember;
     private javax.swing.JPanel pnlRegStaff;
+    private javax.swing.JPanel pnlRegStaffForm;
     private javax.swing.JPanel pnlRegister;
-    private javax.swing.JPanel pnlStaffForm;
     private javax.swing.JTextField txtEmailMember;
+    private javax.swing.JTextField txtEmailStaff;
     private javax.swing.JTextField txtFirstNameMember;
     private javax.swing.JTextField txtFirstNameStaff;
     private javax.swing.JTextField txtLastNameMember;
     private javax.swing.JTextField txtLastNameStaff;
     private javax.swing.JTextField txtMidNameMember;
     private javax.swing.JTextField txtMidNameStaff;
+    private javax.swing.JPasswordField txtPasswordStaff;
     private javax.swing.JTextField txtPhoneNumberMember;
-    private javax.swing.JTextField txtPhoneNumberStaff;
+    private javax.swing.JPasswordField txtReEntPasswordStaff;
+    private javax.swing.JTextField txtUsernameStaff;
     // End of variables declaration//GEN-END:variables
 }
