@@ -16,6 +16,7 @@ import java.sql.*;
 public class Login extends javax.swing.JFrame {
     ConnectDatabase db = new ConnectDatabase();
     PasswordHash callHash = new PasswordHash();
+    Filters callFilters = new Filters();
     
     private static final java.util.logging.Logger logger =
             java.util.logging.Logger.getLogger(Login.class.getName());
@@ -217,18 +218,6 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    boolean isConnected() {
-        boolean isConnected = true;
-        try {
-            Connection conn = db.createConnection();
-            
-            conn.close();
-        } catch (Exception e) {
-            isConnected = false;
-        }
-        return isConnected;
-    }
-    
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String usn = txtUsername.getText();
         String txtPass = String.valueOf(txtPassword.getPassword());
@@ -265,7 +254,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if (isConnected()) {
+        if (callFilters.isConnected()) {
             pnlConn1.setBackground(Color.green);
             pnlConn2.setBackground(Color.green);
             pnlConn3.setBackground(Color.green);

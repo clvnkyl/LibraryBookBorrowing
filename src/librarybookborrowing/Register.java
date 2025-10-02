@@ -322,11 +322,9 @@ public class Register extends javax.swing.JFrame {
 
         txtPasswordStaff.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPasswordStaff.setForeground(new java.awt.Color(0, 0, 0));
-        txtPasswordStaff.setPreferredSize(new java.awt.Dimension(64, 26));
 
         txtReEntPasswordStaff.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtReEntPasswordStaff.setForeground(new java.awt.Color(0, 0, 0));
-        txtReEntPasswordStaff.setPreferredSize(new java.awt.Dimension(64, 26));
         txtReEntPasswordStaff.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtReEntPasswordStaffFocusLost(evt);
@@ -367,8 +365,8 @@ public class Register extends javax.swing.JFrame {
                                 .addComponent(txtMidNameStaff)
                                 .addComponent(txtLastNameStaff)
                                 .addComponent(txtUsernameStaff)
-                                .addComponent(txtPasswordStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtReEntPasswordStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtPasswordStaff)
+                                .addComponent(txtReEntPasswordStaff)
                                 .addComponent(txtEmailStaff)
                                 .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(109, 109, 109))
