@@ -591,10 +591,6 @@ public class Register extends javax.swing.JFrame {
         }
     }
     
-    
-    
-    
-    
     public void RegisterMember(){
         try {
             String sqlQuery = "INSERT INTO tbl_member(fld_first_name, fld_middle_name, fld_last_name, fld_phone_number, fld_email) " +

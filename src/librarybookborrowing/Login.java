@@ -234,6 +234,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+      
         String usn = txtUsername.getText();
         String txtPass = String.valueOf(txtPassword.getPassword());
         String hashed = PasswordHash.hashPassword(txtPass);
@@ -251,16 +252,16 @@ public class Login extends javax.swing.JFrame {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 Dashboard callDashboard = new Dashboard();
-        
-                callDashboard.setVisible(true);
-                this.setVisible(false);
                 JOptionPane.showMessageDialog(this, "Login Sucessfull");
+                this.setVisible(false);
+                callDashboard.setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(this, "Login Failed");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.toString());
         }
         
         txtUsername.setText("");

@@ -1004,17 +1004,16 @@ public class Dashboard extends javax.swing.JFrame {
 
         DefaultTableModel doneBorrow = (DefaultTableModel) tblBorrowList.getModel();
 
-        try {
-            Connection conn = db.createConnection();
-            conn.setAutoCommit(false); 
-
-            String sqlInsert = "INSERT INTO tbl_transaction " +
+        String sqlInsert = "INSERT INTO tbl_transaction " +
                     "(fld_reference_id, fld_member_id, fld_staff_id, fld_book_id, " +
                     "fld_borrow_date, fld_due_date, fld_status) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            String sqlUpdateQty = "UPDATE tbl_book SET fld_quantity = fld_quantity - 1 WHERE fld_book_id = ?";
-
+        String sqlUpdateQty = "UPDATE tbl_book SET fld_quantity = fld_quantity - 1 WHERE fld_book_id = ?";
+        
+        try {
+            Connection conn = db.createConnection();
+            conn.setAutoCommit(false); 
             PreparedStatement pstmtInsert = conn.prepareStatement(sqlInsert);
             PreparedStatement pstmtUpdate = conn.prepareStatement(sqlUpdateQty);
 
