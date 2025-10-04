@@ -127,14 +127,12 @@ public class AdminMethods extends Methods {
 
             int selectedIndex = cmbName.getSelectedIndex();
 
-            // Disable all buttons first
             btnAdminUpdateBook.setEnabled(false);
             btnAdminAddBook.setEnabled(false);
             btnAdminDeleteBook.setEnabled(false);
             btnAdd.setEnabled(false);
             btnMinus.setEnabled(false);
 
-            // Default: all fields not editable
             txtBookID.setEditable(false);
             txtTitle.setEditable(false);
             txtAuthor.setEditable(false);
@@ -142,9 +140,7 @@ public class AdminMethods extends Methods {
             txtYearPublished.setEditable(false);
             txtBookQty.setEditable(false);
 
-            // Main logic
             if (selectedIndex == 0) {
-                // Default or View mode
                 clearTxt(tblBooksList, txtBookID, txtTitle, txtAuthor, txtPublisher, txtYearPublished, txtBookQty);
                 tblBooksList.clearSelection();
 
@@ -154,13 +150,11 @@ public class AdminMethods extends Methods {
                 txtAuthor.setEditable(true);
                 txtPublisher.setEditable(true);
                 txtYearPublished.setEditable(true);
-                // Quantity not editable when updating
                 txtBookQty.setEditable(false);
 
                 btnAdminUpdateBook.setEnabled(true);
 
             } else if (selectedIndex == 2) {
-                // Add mode
                 clearTxt(tblBooksList, txtBookID, txtTitle, txtAuthor, txtPublisher, txtYearPublished, txtBookQty);
                 tblBooksList.clearSelection();
 
@@ -175,7 +169,6 @@ public class AdminMethods extends Methods {
                 tblBooksList.clearSelection();
 
             } else if (selectedIndex == 3) {
-                // Delete mode
                 txtBookQty.setEditable(false);
                 btnAdminDeleteBook.setEnabled(true);
             }

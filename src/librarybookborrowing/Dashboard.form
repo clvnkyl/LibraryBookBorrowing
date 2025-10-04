@@ -2073,14 +2073,14 @@
                                           <Component id="txtAdminYearPublished" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel19" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                               <Component id="btnAdminMinusQty" alignment="3" max="32767" attributes="0"/>
                                               <Component id="btnAdminAddQty" alignment="3" max="32767" attributes="0"/>
                                               <Component id="txtAdminQty" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="btnAdminClear" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <Component id="jLabel19" min="-2" pref="24" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="btnAdminUpdateBook" min="-2" pref="41" max="-2" attributes="0"/>
