@@ -7,6 +7,7 @@ package librarybookborrowing;
 
 import java.sql.*;
 import java.awt.Font;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Random;
 import javax.swing.JOptionPane;
@@ -26,6 +27,8 @@ public class Dashboard extends javax.swing.JFrame {
     Filters callFilters = new Filters();
     LocalDateTime dateTime = LocalDateTime.now();
     Methods callMethods = new Methods();
+    AdminMethods callAdminMethods = new AdminMethods();
+    
     
     
     
@@ -59,6 +62,7 @@ public class Dashboard extends javax.swing.JFrame {
         lblReturn = new javax.swing.JLabel();
         lblCheckAcc = new javax.swing.JLabel();
         lblSearch = new javax.swing.JLabel();
+        lblOptions = new javax.swing.JLabel();
         pnlScreen = new javax.swing.JPanel();
         pnlHome = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -119,6 +123,36 @@ public class Dashboard extends javax.swing.JFrame {
         btnSearchBook = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        pnlOptions = new javax.swing.JPanel();
+        tabbedMenu = new javax.swing.JTabbedPane();
+        pnlOptionsTab = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        pnlAdmin = new javax.swing.JPanel();
+        pnlBookForm = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtAdminBookID = new javax.swing.JTextField();
+        txtAdminBookTitle = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        txtAdminAuthor = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtAdminYearPublished = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtAdminQty = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtAdminPublisher = new javax.swing.JTextField();
+        btnAdminMinusQty = new javax.swing.JButton();
+        btnAdminAddQty = new javax.swing.JButton();
+        cmbAdminChooseToDo = new javax.swing.JComboBox<>();
+        btnAdminUpdateBook = new javax.swing.JButton();
+        btnAdminAddBook = new javax.swing.JButton();
+        btnAdminDeleteBook = new javax.swing.JButton();
+        btnAdminClear = new javax.swing.JButton();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tblAdminBooksList = new javax.swing.JTable();
+        txtAdminSearchBookTitle = new javax.swing.JTextField();
+        btnAdminSearchBook = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 168, 107));
@@ -141,7 +175,7 @@ public class Dashboard extends javax.swing.JFrame {
         java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
         jPanel2Layout.columnWidths = new int[] {50};
         jPanel2Layout.rowHeights = new int[] {60};
-        jPanel2Layout.columnWeights = new double[] {30.0, 30.0, 30.0, 30.0, 30.0};
+        jPanel2Layout.columnWeights = new double[] {30.0, 30.0, 30.0, 30.0, 30.0, 5.0};
         jPanel2Layout.rowWeights = new double[] {0.0};
         pnlNavigation.setLayout(jPanel2Layout);
 
@@ -200,6 +234,23 @@ public class Dashboard extends javax.swing.JFrame {
         });
         pnlNavigation.add(lblSearch, new java.awt.GridBagConstraints());
 
+        lblOptions.setBackground(new java.awt.Color(0, 0, 0));
+        lblOptions.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblOptions.setForeground(new java.awt.Color(0, 0, 0));
+        lblOptions.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblOptions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menu.png"))); // NOI18N
+        lblOptions.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblOptions.setMaximumSize(new java.awt.Dimension(50, 32));
+        lblOptions.setMinimumSize(new java.awt.Dimension(50, 32));
+        lblOptions.setName(""); // NOI18N
+        lblOptions.setPreferredSize(new java.awt.Dimension(50, 32));
+        lblOptions.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblOptionsMouseClicked(evt);
+            }
+        });
+        pnlNavigation.add(lblOptions, new java.awt.GridBagConstraints());
+
         pnlScreen.setBackground(new java.awt.Color(165, 214, 167));
         pnlScreen.setMaximumSize(new java.awt.Dimension(1300, 900));
         pnlScreen.setLayout(new java.awt.CardLayout());
@@ -212,17 +263,17 @@ public class Dashboard extends javax.swing.JFrame {
 
         tblDashboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Transaction ID", "Member Name", "Issued By", "Book Title", "Borrow Date", "Due Date", "Return Date", "Status"
+                "Transaction ID", "Member Name", "Issued By", "Book Title", "Borrow Date", "Due Date", "Return Date", "Received By", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -239,14 +290,17 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Dashboard");
+        jLabel3.setText("Book Records");
 
         javax.swing.GroupLayout pnlHomeLayout = new javax.swing.GroupLayout(pnlHome);
         pnlHome.setLayout(pnlHomeLayout);
         pnlHomeLayout.setHorizontalGroup(
             pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1355, Short.MAX_VALUE)
+            .addGroup(pnlHomeLayout.createSequentialGroup()
+                .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         pnlHomeLayout.setVerticalGroup(
             pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,8 +308,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlScreen.add(pnlHome, "card2");
@@ -481,6 +534,7 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblAvailBooks.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblAvailBooks.setMinimumSize(new java.awt.Dimension(900, 500));
         tblAvailBooks.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblAvailBooks.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -496,10 +550,8 @@ public class Dashboard extends javax.swing.JFrame {
             pnlAvailBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAvailBooksLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlAvailBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAvailBooks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(lblAvailBooks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane6)
         );
         pnlAvailBooksLayout.setVerticalGroup(
             pnlAvailBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,18 +568,17 @@ public class Dashboard extends javax.swing.JFrame {
         pnlBorrowLayout.setHorizontalGroup(
             pnlBorrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(pnlBorrowLayout.createSequentialGroup()
-                .addGroup(pnlBorrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
-                    .addComponent(pnlBorrowingInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlBorrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnlBorrowingInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlBorrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblBorrowList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBorrowLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(4, 4, 4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBorrowLayout.createSequentialGroup()
-                        .addComponent(pnlAvailBooks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlBorrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
+                            .addComponent(pnlAvailBooks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         pnlBorrowLayout.setVerticalGroup(
@@ -541,7 +592,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(76, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlBorrowLayout.createSequentialGroup()
                         .addComponent(lblBorrowList)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -762,7 +813,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -904,12 +955,361 @@ public class Dashboard extends javax.swing.JFrame {
 
         pnlScreen.add(pnlSearchBook, "card6");
 
+        pnlOptions.setBackground(new java.awt.Color(165, 214, 167));
+
+        tabbedMenu.setBackground(new java.awt.Color(165, 214, 167));
+        tabbedMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tabbedMenu.setForeground(new java.awt.Color(0, 0, 0));
+        tabbedMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tabbedMenuMouseReleased(evt);
+            }
+        });
+
+        pnlOptionsTab.setBackground(new java.awt.Color(165, 214, 167));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Logout");
+
+        javax.swing.GroupLayout pnlOptionsTabLayout = new javax.swing.GroupLayout(pnlOptionsTab);
+        pnlOptionsTab.setLayout(pnlOptionsTabLayout);
+        pnlOptionsTabLayout.setHorizontalGroup(
+            pnlOptionsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsTabLayout.createSequentialGroup()
+                .addContainerGap(1050, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlOptionsTabLayout.setVerticalGroup(
+            pnlOptionsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsTabLayout.createSequentialGroup()
+                .addContainerGap(436, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        tabbedMenu.addTab("Options", pnlOptionsTab);
+
+        pnlAdmin.setBackground(new java.awt.Color(165, 214, 167));
+        pnlAdmin.setEnabled(false);
+        pnlAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                pnlAdminMouseReleased(evt);
+            }
+        });
+
+        pnlBookForm.setBackground(new java.awt.Color(165, 214, 167));
+        pnlBookForm.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Book ID");
+
+        txtAdminBookID.setEditable(false);
+        txtAdminBookID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAdminBookID.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtAdminBookTitle.setEditable(false);
+        txtAdminBookTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAdminBookTitle.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Book Title");
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel17.setText("Author");
+
+        txtAdminAuthor.setEditable(false);
+        txtAdminAuthor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAdminAuthor.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setText("Year published");
+
+        txtAdminYearPublished.setEditable(false);
+        txtAdminYearPublished.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAdminYearPublished.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel19.setText("Quantity");
+
+        txtAdminQty.setEditable(false);
+        txtAdminQty.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAdminQty.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel20.setText("Publisher");
+
+        txtAdminPublisher.setEditable(false);
+        txtAdminPublisher.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAdminPublisher.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnAdminMinusQty.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAdminMinusQty.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdminMinusQty.setText("-");
+        btnAdminMinusQty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeQty(evt);
+            }
+        });
+
+        btnAdminAddQty.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAdminAddQty.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdminAddQty.setText("+");
+        btnAdminAddQty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeQty(evt);
+            }
+        });
+
+        cmbAdminChooseToDo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cmbAdminChooseToDo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select-", "Update Book Info", "Add new book", "Delete book" }));
+        cmbAdminChooseToDo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbAdminChooseToDoActionPerformed(evt);
+            }
+        });
+
+        btnAdminUpdateBook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAdminUpdateBook.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdminUpdateBook.setText("Update");
+        btnAdminUpdateBook.setEnabled(false);
+        btnAdminUpdateBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminUpdateBookActionPerformed(evt);
+            }
+        });
+
+        btnAdminAddBook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAdminAddBook.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdminAddBook.setText("Add New");
+        btnAdminAddBook.setEnabled(false);
+        btnAdminAddBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminAddBookActionPerformed(evt);
+            }
+        });
+
+        btnAdminDeleteBook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAdminDeleteBook.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdminDeleteBook.setText("Delete Book");
+        btnAdminDeleteBook.setEnabled(false);
+        btnAdminDeleteBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminDeleteBookActionPerformed(evt);
+            }
+        });
+
+        btnAdminClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdminClear.setText("Clear");
+        btnAdminClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminClearActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlBookFormLayout = new javax.swing.GroupLayout(pnlBookForm);
+        pnlBookForm.setLayout(pnlBookFormLayout);
+        pnlBookFormLayout.setHorizontalGroup(
+            pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBookFormLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlBookFormLayout.createSequentialGroup()
+                        .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnlBookFormLayout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(34, 34, 34))
+                                .addGroup(pnlBookFormLayout.createSequentialGroup()
+                                    .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addGroup(pnlBookFormLayout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)))
+                        .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAdminBookID)
+                            .addComponent(txtAdminBookTitle)
+                            .addComponent(txtAdminAuthor)
+                            .addComponent(txtAdminYearPublished)
+                            .addComponent(txtAdminPublisher)
+                            .addGroup(pnlBookFormLayout.createSequentialGroup()
+                                .addComponent(btnAdminMinusQty)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtAdminQty, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAdminAddQty)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                .addComponent(btnAdminClear, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pnlBookFormLayout.createSequentialGroup()
+                        .addComponent(cmbAdminChooseToDo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnAdminUpdateBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdminAddBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdminDeleteBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlBookFormLayout.setVerticalGroup(
+            pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBookFormLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cmbAdminChooseToDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAdminBookID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAdminBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAdminAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAdminPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAdminYearPublished, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlBookFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAdminMinusQty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdminAddQty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtAdminQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdminClear)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAdminUpdateBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAdminAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAdminDeleteBook, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(258, 258, 258))
+        );
+
+        tblAdminBooksList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Title", "Author", "Publisher", "Year published", "Quantity"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblAdminBooksList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblAdminBooksList.getTableHeader().setReorderingAllowed(false);
+        tblAdminBooksList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblAdminBooksListMouseReleased(evt);
+            }
+        });
+        jScrollPane9.setViewportView(tblAdminBooksList);
+
+        txtAdminSearchBookTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAdminSearchBookTitle.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAdminSearchBookTitleKeyReleased(evt);
+            }
+        });
+
+        btnAdminSearchBook.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAdminSearchBook.setText("Search");
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText("Search Book Title");
+
+        javax.swing.GroupLayout pnlAdminLayout = new javax.swing.GroupLayout(pnlAdmin);
+        pnlAdmin.setLayout(pnlAdminLayout);
+        pnlAdminLayout.setHorizontalGroup(
+            pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlBookForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9)
+                    .addGroup(pnlAdminLayout.createSequentialGroup()
+                        .addGap(0, 123, Short.MAX_VALUE)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtAdminSearchBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAdminSearchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnlAdminLayout.setVerticalGroup(
+            pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlBookForm, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlAdminLayout.createSequentialGroup()
+                        .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtAdminSearchBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel21))
+                            .addGroup(pnlAdminLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(btnAdminSearchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tabbedMenu.addTab("Admin", pnlAdmin);
+
+        javax.swing.GroupLayout pnlOptionsLayout = new javax.swing.GroupLayout(pnlOptions);
+        pnlOptions.setLayout(pnlOptionsLayout);
+        pnlOptionsLayout.setHorizontalGroup(
+            pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsLayout.createSequentialGroup()
+                .addComponent(tabbedMenu)
+                .addContainerGap())
+        );
+        pnlOptionsLayout.setVerticalGroup(
+            pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabbedMenu)
+                .addContainerGap())
+        );
+
+        pnlScreen.add(pnlOptions, "card7");
+
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
         pnlBaseLayout.setHorizontalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlNavigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 1355, Short.MAX_VALUE)
+            .addGroup(pnlBaseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -917,19 +1317,19 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(pnlNavigation, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 1361, Short.MAX_VALUE)
+            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+                .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -991,6 +1391,7 @@ public class Dashboard extends javax.swing.JFrame {
             String issuerName = txtIssuedBy.getText();
             if (!borrowerName.isEmpty() && !issuerName.isEmpty()) {
                 borrowAddBook();
+                tblAvailBooks.clearSelection();
             }
             callFilters.resizeColumnWidth(tblBorrowList);
         }
@@ -1003,9 +1404,11 @@ public class Dashboard extends javax.swing.JFrame {
         int staffID = callMethods.getFirstCell(tblStaffInfo);
 
         DefaultTableModel doneBorrow = (DefaultTableModel) tblBorrowList.getModel();
+        DefaultTableModel memberInfo = (DefaultTableModel) tblMemberInfo.getModel();
+        DefaultTableModel staffInfo = (DefaultTableModel) tblStaffInfo.getModel();
 
         String sqlInsert = "INSERT INTO tbl_transaction " +
-                    "(fld_reference_id, fld_member_id, fld_staff_id, fld_book_id, " +
+                    "(fld_reference_id, fld_member_id, fld_issuer_staff_id, fld_book_id, " +
                     "fld_borrow_date, fld_due_date, fld_status) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -1019,26 +1422,32 @@ public class Dashboard extends javax.swing.JFrame {
 
             String referenceId = callMethods.generateReference(5);
 
-            
-            boolean allAvailable = true;
-            String unavailableBooks = "";
-            for (int row = 0; row < doneBorrow.getRowCount(); row++) {
-                int bookId = Integer.parseInt(doneBorrow.getValueAt(row, 0).toString());
-                if (!callFilters.isBookAvailable(bookId)) {
-                    allAvailable = false;
-                    unavailableBooks += "\nBook with ID #" + bookId + " is not available!";
-                }
-            }
-
-            if (!allAvailable) {
-                conn.rollback(); 
-                JOptionPane.showMessageDialog(this, "Transaction cancelled!" + unavailableBooks);
+            if (doneBorrow.getRowCount() < 1) {
+                conn.rollback();
                 pstmtInsert.close();
                 pstmtUpdate.close();
                 conn.close();
                 return;
             }
             
+//          ---------------- CHECK IF THE MEMBER HAVE UNRETURNED BOOKS ---------------------
+//
+//            if (!callMethods.memberHavePending(memberID)) {
+//                JOptionPane.showMessageDialog(this, 
+//                    "This member still has unreturned books. They cannot borrow until all are returned.");
+//                return;
+//            } 
+//  ---------- DISABLED LANG MUNA PARA MA TRY KO YUNG BORROWING SINCE WALA PANG RETURN FEATURE -------------------
+
+
+            if (!callFilters.canBorrowBooks(doneBorrow)) {
+                conn.rollback();
+                pstmtInsert.close();
+                pstmtUpdate.close();
+                conn.close();
+                return;
+            }
+
             for (int row = 0; row < doneBorrow.getRowCount(); row++) {
                 int bookId = Integer.parseInt(doneBorrow.getValueAt(row, 0).toString());
 
@@ -1054,6 +1463,8 @@ public class Dashboard extends javax.swing.JFrame {
                 String dueDateStr = doneBorrow.getValueAt(row, 4).toString();
                 LocalDateTime dueLocalDate = callFilters.convertStringToLocalDate(dueDateStr);
                 pstmtInsert.setTimestamp(6, java.sql.Timestamp.valueOf(dueLocalDate));
+                
+                
 
                 pstmtInsert.setString(7, "Borrowed");
                 pstmtInsert.executeUpdate();
@@ -1070,6 +1481,16 @@ public class Dashboard extends javax.swing.JFrame {
             pstmtInsert.close();
             pstmtUpdate.close();
             conn.close();
+            
+            txtBorrowerName.setText("");
+            txtBookTitle.setText("");
+            txtIssuedBy.setText("");
+            tblAvailBooks.clearSelection();
+            tblMemberInfo.clearSelection();
+            tblStaffInfo.clearSelection();
+            doneBorrow.setRowCount(0);
+            memberInfo.setRowCount(0);
+            staffInfo.setRowCount(0);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1081,8 +1502,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(this, "Error: " + e.toString());
         }
-
-
     }//GEN-LAST:event_btnDoneBorrowingActionPerformed
 
     private void txtBorrowerNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBorrowerNameKeyReleased
@@ -1091,6 +1510,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBorrowerNameKeyReleased
 
     private void tblMemberInfoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMemberInfoMouseReleased
+
         callMethods.getID(tblMemberInfo, txtBorrowerName);
     }//GEN-LAST:event_tblMemberInfoMouseReleased
 
@@ -1123,6 +1543,136 @@ public class Dashboard extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setExtendedState(this.MAXIMIZED_BOTH);
     }//GEN-LAST:event_formWindowOpened
+
+    private void lblOptionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOptionsMouseClicked
+        pnlScreen.removeAll();
+        pnlScreen.add(pnlOptions);
+        pnlScreen.repaint();
+        pnlScreen.revalidate();
+    }//GEN-LAST:event_lblOptionsMouseClicked
+
+    private void pnlAdminMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlAdminMouseReleased
+        callAdminMethods.loadBooks(tblAdminBooksList);
+    }//GEN-LAST:event_pnlAdminMouseReleased
+
+    private void tabbedMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedMenuMouseReleased
+        int tabIndex = tabbedMenu.indexAtLocation(evt.getX(), evt.getY());
+        if (tabIndex == 1) {
+            callAdminMethods.loadBooks(tblAdminBooksList);
+        }else{
+            
+        }
+    }//GEN-LAST:event_tabbedMenuMouseReleased
+
+    private void changeQty(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeQty
+        String operator = evt.getActionCommand();
+        String value = txtAdminQty.getText().trim();
+
+        if (value.isEmpty()) {
+            return;
+        }
+
+        int qtyVal;
+            qtyVal = Integer.parseInt(value);
+        
+
+        if (operator.equals("+")) {
+            qtyVal++;
+        } else if (operator.equals("-") && qtyVal > 0) {
+            qtyVal--;
+        }
+
+        txtAdminQty.setText(String.valueOf(qtyVal));
+    }//GEN-LAST:event_changeQty
+
+    private void txtAdminSearchBookTitleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdminSearchBookTitleKeyReleased
+        String bookTitle = txtAdminSearchBookTitle.getText();
+        callAdminMethods.searchUpdateBook(tblAdminBooksList, bookTitle);
+    }//GEN-LAST:event_txtAdminSearchBookTitleKeyReleased
+
+    private void btnAdminClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminClearActionPerformed
+        callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
+                txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
+                txtAdminQty);
+        
+        cmbAdminChooseToDo.setSelectedIndex(0);
+    }//GEN-LAST:event_btnAdminClearActionPerformed
+
+    private void btnAdminUpdateBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminUpdateBookActionPerformed
+        callAdminMethods.updateBook(txtAdminBookID, txtAdminBookTitle, txtAdminAuthor,
+                txtAdminPublisher, txtAdminYearPublished, txtAdminQty);
+        
+        callAdminMethods.loadBooks(tblAdminBooksList);
+        
+        cmbAdminChooseToDo.setSelectedIndex(0);
+        callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
+                txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
+                txtAdminQty);
+        txtAdminSearchBookTitle.setText("");
+        
+    }//GEN-LAST:event_btnAdminUpdateBookActionPerformed
+
+    private void btnAdminAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminAddBookActionPerformed
+        callAdminMethods.insertBook(txtAdminBookTitle, txtAdminAuthor,
+                txtAdminPublisher, txtAdminYearPublished, txtAdminQty);
+        
+        callAdminMethods.loadBooks(tblAdminBooksList);
+        
+        cmbAdminChooseToDo.setSelectedIndex(0);
+        callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
+                txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
+                txtAdminQty);
+        txtAdminSearchBookTitle.setText("");
+    }//GEN-LAST:event_btnAdminAddBookActionPerformed
+
+    private void btnAdminDeleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminDeleteBookActionPerformed
+        callAdminMethods.deleteBook(txtAdminBookID);
+        
+        callAdminMethods.loadBooks(tblAdminBooksList);
+        
+        cmbAdminChooseToDo.setSelectedIndex(0);
+        callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
+                txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
+                txtAdminQty);
+        txtAdminSearchBookTitle.setText("");
+    }//GEN-LAST:event_btnAdminDeleteBookActionPerformed
+
+    private void cmbAdminChooseToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAdminChooseToDoActionPerformed
+        int toDo = cmbAdminChooseToDo.getSelectedIndex();
+        callAdminMethods.cmboxToDo(tblBorrowList,
+                cmbAdminChooseToDo, txtAdminBookID, txtAdminBookTitle, txtAdminAuthor,
+                txtAdminPublisher, txtAdminYearPublished, txtAdminQty,
+                btnAddBook, btnAddBook, btnAdminUpdateBook, btnAdminAddBook,
+                btnAdminDeleteBook);
+        
+        callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
+                txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
+                txtAdminQty);
+        if (toDo == 2) {
+            txtAdminQty.setText("0");
+        }
+    }//GEN-LAST:event_cmbAdminChooseToDoActionPerformed
+
+    private void tblAdminBooksListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminBooksListMouseReleased
+        int toDo = cmbAdminChooseToDo.getSelectedIndex();
+        int selectedRow = tblAdminBooksList.getSelectedRow();
+        
+        if (toDo == 1 || toDo == 3) {
+            callAdminMethods.cmboxToDo(tblBorrowList,
+                cmbAdminChooseToDo, txtAdminBookID, txtAdminBookTitle, txtAdminAuthor,
+                txtAdminPublisher, txtAdminYearPublished, txtAdminQty,
+                btnAddBook, btnAddBook, btnAdminUpdateBook, btnAdminAddBook,
+                btnAdminDeleteBook);
+            callAdminMethods.getBookInfo(tblAdminBooksList, txtAdminBookID,
+                    txtAdminBookTitle, txtAdminAuthor, txtAdminPublisher,
+                    txtAdminYearPublished, txtAdminQty);
+        } else{
+            callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
+                txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
+                txtAdminQty);
+        }  
+        
+    }//GEN-LAST:event_tblAdminBooksListMouseReleased
 
     
     public void borrowAddBook(){
@@ -1170,11 +1720,20 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddBook;
+    private javax.swing.JButton btnAdminAddBook;
+    private javax.swing.JButton btnAdminAddQty;
+    private javax.swing.JButton btnAdminClear;
+    private javax.swing.JButton btnAdminDeleteBook;
+    private javax.swing.JButton btnAdminMinusQty;
+    private javax.swing.JButton btnAdminSearchBook;
+    private javax.swing.JButton btnAdminUpdateBook;
     private javax.swing.JButton btnDelBook;
     private javax.swing.JButton btnDoneBorrowing;
     private javax.swing.JButton btnDoneReceive;
     private javax.swing.JButton btnSearchBook;
     private javax.swing.JButton btnSearchMember;
+    private javax.swing.JComboBox<String> cmbAdminChooseToDo;
+    public javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1183,7 +1742,14 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1198,6 +1764,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable5;
     private javax.swing.JTextField jTextField6;
@@ -1206,25 +1773,39 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel lblBorrowList;
     private javax.swing.JLabel lblCheckAcc;
     private javax.swing.JLabel lblHome;
+    private javax.swing.JLabel lblOptions;
     private javax.swing.JLabel lblReturn;
     private javax.swing.JLabel lblSearch;
+    private javax.swing.JPanel pnlAdmin;
     private javax.swing.JPanel pnlAvailBooks;
     private javax.swing.JPanel pnlBase;
+    private javax.swing.JPanel pnlBookForm;
     private javax.swing.JPanel pnlBorrow;
     private javax.swing.JPanel pnlBorrowingInfo;
     private javax.swing.JPanel pnlCheckAcc;
     private javax.swing.JPanel pnlHome;
     private javax.swing.JPanel pnlNavigation;
+    private javax.swing.JPanel pnlOptions;
+    private javax.swing.JPanel pnlOptionsTab;
     private javax.swing.JPanel pnlReturn;
     private javax.swing.JPanel pnlReturningInfo;
     private javax.swing.JPanel pnlScreen;
     private javax.swing.JPanel pnlSearchBook;
+    public static javax.swing.JTabbedPane tabbedMenu;
+    private javax.swing.JTable tblAdminBooksList;
     private javax.swing.JTable tblAvailBooks;
     private javax.swing.JTable tblBorrowList;
     private javax.swing.JTable tblDashboard;
     private javax.swing.JTable tblMemberHistory;
     private javax.swing.JTable tblMemberInfo;
     private javax.swing.JTable tblStaffInfo;
+    private javax.swing.JTextField txtAdminAuthor;
+    private javax.swing.JTextField txtAdminBookID;
+    private javax.swing.JTextField txtAdminBookTitle;
+    private javax.swing.JTextField txtAdminPublisher;
+    private javax.swing.JTextField txtAdminQty;
+    private javax.swing.JTextField txtAdminSearchBookTitle;
+    private javax.swing.JTextField txtAdminYearPublished;
     private javax.swing.JTextField txtBookTitle;
     private javax.swing.JTextField txtBorrowerName;
     private javax.swing.JTextField txtIssuedBy;

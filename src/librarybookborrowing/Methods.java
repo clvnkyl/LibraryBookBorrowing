@@ -37,8 +37,6 @@ public class Methods {
         
         return datePart + randomPart.toString();
     }
-
-
     
     public void refreshDashboard(JTable tblDestination){
         callFilters.resizeColumnWidth(tblDestination);
@@ -71,7 +69,6 @@ public class Methods {
                 dtm.addRow(newRow);
             }
             
-            
             conn.close();
         } catch (Exception e) {
             Object[] errRow = {"error", e.getMessage()};
@@ -79,7 +76,7 @@ public class Methods {
         }
     }
     
-   void searchMemberByLastName(JTable tblDestination, String inSearchVal){
+    void searchMemberByLastName(JTable tblDestination, String inSearchVal){
         String searchField, searchLikeVal;
         
         searchLikeVal = "%" + inSearchVal + "%";
@@ -100,11 +97,11 @@ public class Methods {
             ResultSet rs = pstmt.executeQuery();
             
             while (rs.next()) {
-            Object[] newRow = {
-                rs.getInt("fld_member_id"),
-                rs.getString("full_name")
-            };
-                
+                Object[] newRow = {
+                    rs.getInt("fld_member_id"),
+                    rs.getString("full_name")
+                };
+            
                 dtm.addRow(newRow);
             }
             
@@ -125,7 +122,7 @@ public class Methods {
         String sqlQuery = "SELECT fld_staff_id," +
                 "CONCAT(fld_first_name, ' ', fld_middle_name, ' ', fld_last_name) AS full_name " +
                 "FROM tbl_staff " +
-                "WHERE fld_last_name LIKE ? ";
+                "WHERE fld_last_name LIKE ?";
         
         try {
             Connection conn = db.createConnection();
@@ -136,10 +133,10 @@ public class Methods {
             ResultSet rs = pstmt.executeQuery();
             
             while (rs.next()) {
-            Object[] newRow = {
-                rs.getInt("fld_staff_id"),
-                rs.getString("full_name")
-            };
+                Object[] newRow = {
+                    rs.getInt("fld_staff_id"),
+                    rs.getString("full_name")
+                };
                 
                 dtm.addRow(newRow);
             }
@@ -151,7 +148,7 @@ public class Methods {
         }
     }
     
-    void searchBookTitle(JTable tblDestination, String inSearchVal){
+    public void searchBookTitle(JTable tblDestination, String inSearchVal){
         String searchLikeVal;
         
         searchLikeVal = "%" + inSearchVal + "%";
@@ -201,7 +198,7 @@ public class Methods {
         }
     }
     
-    void getBookID(JTable tblDestination, JTextField txtPersonName){
+    void getBookID(JTable tblDestination, JTextField txtBookTitle){
         int selectedRow = tblDestination.getSelectedRow();
 
         
@@ -213,7 +210,7 @@ public class Methods {
                 tblDestination.getValueAt(selectedRow, 3),
                 tblDestination.getValueAt(selectedRow, 4)
             };
-            txtPersonName.setText(value[1].toString());
+            txtBookTitle.setText(value[1].toString());
         }
     }
     
@@ -235,25 +232,57 @@ public class Methods {
         return -1;
     }
     
+    public boolean memberHavePending(int memberId){
+        boolean canBorrow = false;
+
+        try {
+            Connection conn = db.createConnection();
+            String sql = "SELECT COUNT(*) AS borrowed_count " +
+                         "FROM tbl_transaction " +
+                         "WHERE fld_member_id = ? AND fld_status = 'Borrowed'";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, memberId);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int borrowedCount = rs.getInt("borrowed_count");
+                canBorrow = (borrowedCount == 0);
+            }
+
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return canBorrow;
+    }
+    
     public void getDashboard(JTable tblDestination) {
         DefaultTableModel dashboard = new DefaultTableModel(
             new String[]{
-                "Transaction ID", "Member Name", "Staff Name", "Book Title",
-                "Borrow Date", "Due Date", "Return Date", "Status"
+                "Transaction ID", "Member Name", "Issuer", "Book Title",
+                "Borrow Date", "Due Date", "Return Date", "Receiver", "Status"
             }, 0
         );
 
         String sqlSelect = "SELECT t.fld_reference_id, " +
-                "CONCAT_WS(' ', m.fld_first_name, m.fld_middle_name, m.fld_last_name) AS member_name, " +
-                "CONCAT_WS(' ', s.fld_first_name, s.fld_middle_name, s.fld_last_name) AS staff_name, " +
-                "b.fld_title AS book_title, " +
-                "t.fld_borrow_date, t.fld_due_date, " +
-                "t.fld_return_date, t.fld_status " +
-                "FROM tbl_transaction t " +
-                "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
-                "JOIN tbl_staff s ON t.fld_staff_id = s.fld_staff_id " +
-                "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " +
-                "ORDER BY t.fld_borrow_date DESC";
+            "CONCAT_WS(' ', m.fld_first_name, m.fld_middle_name, m.fld_last_name) AS member_name, " +
+            "CONCAT_WS(' ', s1.fld_first_name, s1.fld_middle_name, s1.fld_last_name) AS issued_by, " +
+            "CONCAT_WS(' ', s2.fld_first_name, s2.fld_middle_name, s2.fld_last_name) AS received_by, " +
+            "b.fld_title AS book_title, " +
+            "t.fld_borrow_date, t.fld_due_date, " +
+            "t.fld_return_date, t.fld_status " +
+            "FROM tbl_transaction t " +
+            "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
+            "JOIN tbl_staff s1 ON t.fld_issuer_staff_id = s1.fld_staff_id " +
+            "LEFT JOIN tbl_staff s2 ON t.fld_reveiver_staff_id = s2.fld_staff_id " +  // <-- fixed typo
+            "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " +
+            "ORDER BY t.fld_borrow_date DESC";
+
+
         
         try {
             Connection conn = db.createConnection();
@@ -262,24 +291,37 @@ public class Methods {
             
             while (rs.next()) {  
                 Timestamp returnDate = rs.getTimestamp("fld_return_date");
-                String returnDateVal = (returnDate != null) 
-                    ? callFilters.convertLocalDateTimeToPattern(returnDate.toLocalDateTime())
-                    : "Not Returned";
+                String returnDateVal;
+                if (returnDate != null) {
+                    returnDateVal = callFilters.convertLocalDateTimeToPattern(returnDate.toLocalDateTime());
+                } else {
+                    returnDateVal = "Not Returned";
+                }
+
+                String receiverName;
+                if (rs.getString("received_by") != null) {
+                    receiverName = rs.getString("received_by");
+                } else {
+                    receiverName = "Not Processed";
+                }
 
                 Object[] newRow = {
-                    rs.getString("fld_reference_id"),
-                    rs.getString("member_name"),
-                    rs.getString("staff_name"),
+                    rs.getString("fld_reference_id"),   
+                    rs.getString("member_name"),       
+                    rs.getString("issued_by"),
                     rs.getString("book_title"),
                     callFilters.convertLocalDateTimeToPattern(
                         rs.getTimestamp("fld_borrow_date").toLocalDateTime()
-                    ),
+                    ),                
                     callFilters.convertLocalDateTimeToPattern(
                         rs.getTimestamp("fld_due_date").toLocalDateTime()
-                    ),
+                    ),                             
                     returnDateVal,
-                    rs.getString("fld_status")
-                }; 
+                    receiverName,
+                    rs.getString("fld_status") 
+                };
+
+
                 dashboard.addRow(newRow);
             }
 
