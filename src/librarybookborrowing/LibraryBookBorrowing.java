@@ -1,21 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package librarybookborrowing;
 
-/**
- *
- * @author Savannah Masmela
- */
 public class LibraryBookBorrowing {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // Open Login Page (When right click project -> Run / Shift + F6)
+        new Login().setVisible(true);
     }
     
 }
