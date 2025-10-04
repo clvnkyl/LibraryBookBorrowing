@@ -103,14 +103,14 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         pnlCheckAcc = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        txtSearchMemberName = new javax.swing.JTextField();
-        btnSearchMember = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblMemberHistory = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        txtSearchMemberID = new javax.swing.JTextField();
+        txtSearchInput = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        cmbSearchType = new javax.swing.JComboBox<>();
+        btnRefresh = new javax.swing.JButton();
         pnlSearchBook = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -733,16 +733,11 @@ public class Dashboard extends javax.swing.JFrame {
         pnlCheckAcc.setMaximumSize(new java.awt.Dimension(1300, 900));
         pnlCheckAcc.setMinimumSize(new java.awt.Dimension(900, 500));
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Member Name:");
-
-        btnSearchMember.setText("Search");
-        btnSearchMember.setToolTipText("");
-        btnSearchMember.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Search");
+        btnSearch.setToolTipText("");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchMemberActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -776,7 +771,16 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Member ID#:");
+        jLabel16.setText("Search By:");
+
+        cmbSearchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Member Name:", "Member ID:" }));
+
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCheckAccLayout = new javax.swing.GroupLayout(pnlCheckAcc);
         pnlCheckAcc.setLayout(pnlCheckAccLayout);
@@ -787,16 +791,17 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(pnlCheckAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4)
                     .addGroup(pnlCheckAccLayout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearchMemberName, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearchMemberID, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSearchMember)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(txtSearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRefresh)
+                        .addGap(0, 609, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -805,11 +810,11 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(pnlCheckAccLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlCheckAccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearchMemberName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearchMemberID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchMember))
+                    .addComponent(cmbSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch)
+                    .addComponent(btnRefresh))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1373,9 +1378,9 @@ public class Dashboard extends javax.swing.JFrame {
         pnlScreen.revalidate();
     }//GEN-LAST:event_lblSearchMouseClicked
 
-    private void btnSearchMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMemberActionPerformed
-       
-    }//GEN-LAST:event_btnSearchMemberActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+       searchMemberHistory();
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDoneReceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneReceiveActionPerformed
         
@@ -1674,6 +1679,18 @@ public class Dashboard extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tblAdminBooksListMouseReleased
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        loadAllMemberHistory();
+        if (!txtBookTitle.getText().isEmpty() ) {
+            String borrowerName = txtBookTitle.getText();
+            String issuerName = txtIssuedBy.getText();
+            if (!borrowerName.isEmpty() && !issuerName.isEmpty()) {
+                borrowAddBook();
+            }
+            callFilters.resizeColumnWidth(tblBorrowList);
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
     
     public void borrowAddBook(){
         
@@ -1689,6 +1706,123 @@ public class Dashboard extends javax.swing.JFrame {
         borrowList.addRow(new Object[]{selectedBook , bookTitle, memberName, issuerName, dateBorrow, dueDate });
         txtBookTitle.setText("");
     }
+    
+    
+    private void loadAllMemberHistory() {
+
+    String sql = "SELECT t.fld_transaction_id AS TransactionID, " +
+                 "CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " +
+                 "b.fld_title AS BookTitle, t.fld_borrow_date AS BorrowDate, " +
+                 "t.fld_due_date AS DueDate, t.fld_return_date AS ReturnDate, " +
+                 "t.fld_status AS Status " +
+                 "FROM tbl_transaction t " +
+                 "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
+                 "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id";
+
+    try (Connection conn = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/db_library_system", "root", "");
+         PreparedStatement pst = conn.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+
+        DefaultTableModel model = (DefaultTableModel) tblMemberHistory.getModel();
+        model.setRowCount(0);
+
+        while (rs.next()) {
+            Object returnDate = rs.getTimestamp("ReturnDate");
+            if (returnDate == null) returnDate = "Not Returned";
+
+            model.addRow(new Object[]{
+                rs.getInt("TransactionID"),
+                rs.getString("MemberName"),
+                rs.getString("BookTitle"),
+                rs.getString("BorrowDate"),
+                rs.getString("DueDate"),
+                returnDate,
+                rs.getString("Status")
+            });
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error loading data: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
+    
+    private void searchMemberHistory() {
+    String searchInput = txtSearchInput.getText().trim();
+    if (searchInput.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter a search value.");
+        return;
+    }
+
+    String searchType = (String) cmbSearchType.getSelectedItem();
+    String sql = "";
+
+    if ("Member Name:".equals(searchType)) {
+        sql = "SELECT t.fld_transaction_id AS TransactionID, " +
+              "CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " +
+              "b.fld_title AS BookTitle, t.fld_borrow_date AS BorrowDate, " +
+              "t.fld_due_date AS DueDate, t.fld_return_date AS ReturnDate, t.fld_status AS Status " +
+              "FROM tbl_transaction t " +
+              "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
+              "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " +
+              "WHERE CONCAT(m.fld_first_name, ' ', m.fld_last_name) LIKE ?";
+    } else if ("Member ID:".equals(searchType)) {
+        sql = "SELECT t.fld_transaction_id AS TransactionID, " +
+              "CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " +
+              "b.fld_title AS BookTitle, t.fld_borrow_date AS BorrowDate, " +
+              "t.fld_due_date AS DueDate, t.fld_return_date AS ReturnDate, t.fld_status AS Status " +
+              "FROM tbl_transaction t " +
+              "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
+              "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " +
+              "WHERE m.fld_member_id = ?";
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a valid search type.");
+        return;
+    }
+
+    try (Connection conn = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/db_library_system", "root", "");
+         PreparedStatement pst = conn.prepareStatement(sql)) {
+
+        if ("Member Name:".equals(searchType)) {
+            pst.setString(1, "%" + searchInput + "%");
+        } else { // Member ID
+            try {
+                int memberId = Integer.parseInt(searchInput);
+                pst.setInt(1, memberId);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid numeric member ID.");
+                return;
+            }
+        }
+
+        ResultSet rs = pst.executeQuery();
+        DefaultTableModel model = (DefaultTableModel) tblMemberHistory.getModel();
+        model.setRowCount(0);
+
+        while (rs.next()) {
+            Object returnDate = rs.getTimestamp("ReturnDate");
+            if (returnDate == null) returnDate = "Not Returned";
+
+            model.addRow(new Object[]{
+                rs.getInt("TransactionID"),
+                rs.getString("MemberName"),
+                rs.getString("BookTitle"),
+                rs.getString("BorrowDate"),
+                rs.getString("DueDate"),
+                returnDate,
+                rs.getString("Status")
+            });
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
     
     /**
      * @param args the command line arguments
@@ -1730,9 +1864,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnDelBook;
     private javax.swing.JButton btnDoneBorrowing;
     private javax.swing.JButton btnDoneReceive;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearchBook;
-    private javax.swing.JButton btnSearchMember;
     private javax.swing.JComboBox<String> cmbAdminChooseToDo;
+    private javax.swing.JComboBox<String> cmbSearchType;
     public javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1740,7 +1876,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1814,8 +1949,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField txtReturneeName;
     private javax.swing.JTextField txtSearchBookAuthor;
     private javax.swing.JTextField txtSearchBookTitle;
-    private javax.swing.JTextField txtSearchMemberID;
-    private javax.swing.JTextField txtSearchMemberName;
+    private javax.swing.JTextField txtSearchInput;
     private javax.swing.JTextField txtSearchYearPublished;
     // End of variables declaration//GEN-END:variables
 }
