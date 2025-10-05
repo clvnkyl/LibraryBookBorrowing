@@ -30,8 +30,6 @@ public class Dashboard extends javax.swing.JFrame {
     AdminMethods callAdminMethods = new AdminMethods();
     
     
-    
-    
     private static final java.util.logging.Logger logger =
             java.util.logging.Logger.getLogger(Dashboard.class.getName());
 
@@ -296,10 +294,10 @@ public class Dashboard extends javax.swing.JFrame {
         pnlHome.setLayout(pnlHomeLayout);
         pnlHomeLayout.setHorizontalGroup(
             pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHomeLayout.createSequentialGroup()
-                .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHomeLayout.createSequentialGroup()
+                .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
         pnlHomeLayout.setVerticalGroup(
@@ -308,7 +306,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pnlScreen.add(pnlHome, "card2");
@@ -1647,7 +1645,7 @@ public class Dashboard extends javax.swing.JFrame {
         callAdminMethods.cmboxToDo(tblBorrowList,
                 cmbAdminChooseToDo, txtAdminBookID, txtAdminBookTitle, txtAdminAuthor,
                 txtAdminPublisher, txtAdminYearPublished, txtAdminQty,
-                btnAddBook, btnAddBook, btnAdminUpdateBook, btnAdminAddBook,
+                btnAdminAddQty, btnAdminMinusQty, btnAdminUpdateBook, btnAdminAddBook,
                 btnAdminDeleteBook);
         
         callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
@@ -1666,7 +1664,7 @@ public class Dashboard extends javax.swing.JFrame {
             callAdminMethods.cmboxToDo(tblBorrowList,
                 cmbAdminChooseToDo, txtAdminBookID, txtAdminBookTitle, txtAdminAuthor,
                 txtAdminPublisher, txtAdminYearPublished, txtAdminQty,
-                btnAddBook, btnAddBook, btnAdminUpdateBook, btnAdminAddBook,
+                btnAdminAddQty, btnAdminMinusQty, btnAdminUpdateBook, btnAdminAddBook,
                 btnAdminDeleteBook);
             callAdminMethods.getBookInfo(tblAdminBooksList, txtAdminBookID,
                     txtAdminBookTitle, txtAdminAuthor, txtAdminPublisher,
