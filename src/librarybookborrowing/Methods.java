@@ -86,7 +86,7 @@ public class Methods {
         }
     }
     
-    void searchMemberByLastName(JTable tblDestination, String inSearchVal){
+    void searchMemberName(JTable tblDestination, String inSearchVal){
         String searchField, searchLikeVal;
         
         searchLikeVal = "%" + inSearchVal + "%";
@@ -96,7 +96,7 @@ public class Methods {
         String sqlQuery = "SELECT fld_member_id," +
                 "CONCAT(fld_first_name, ' ', fld_middle_name, ' ', fld_last_name) AS full_name " +
                 "FROM tbl_member " +
-                "WHERE fld_last_name LIKE ? ";
+                "WHERE CONCAT(fld_first_name, ' ', fld_middle_name, ' ', fld_last_name) LIKE ? ";
         
         try {
             Connection conn = db.createConnection();
@@ -122,7 +122,7 @@ public class Methods {
         }
     }
    
-    void searchStaffByLastName(JTable tblDestination, String inSearchVal){
+    void searchStaffName(JTable tblDestination, String inSearchVal){
         String searchField, searchLikeVal;
         
         searchLikeVal = "%" + inSearchVal + "%";
@@ -132,7 +132,7 @@ public class Methods {
         String sqlQuery = "SELECT fld_staff_id," +
                 "CONCAT(fld_first_name, ' ', fld_middle_name, ' ', fld_last_name) AS full_name " +
                 "FROM tbl_staff " +
-                "WHERE fld_last_name LIKE ?";
+                "WHERE CONCAT(fld_first_name, ' ', fld_middle_name, ' ', fld_last_name) LIKE ?";
         
         try {
             Connection conn = db.createConnection();

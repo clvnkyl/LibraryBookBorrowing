@@ -400,13 +400,13 @@ public class Dashboard extends javax.swing.JFrame {
         }
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel12.setText("Member Last Name:");
+        jLabel12.setText("Member Name:");
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("Book Title:");
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel14.setText("Issuer Last Name:");
+        jLabel14.setText("Issuer Name:");
 
         txtBorrowerName.setMaximumSize(new java.awt.Dimension(64, 22));
         txtBorrowerName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -676,8 +676,10 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         txtReturnBook.setEditable(false);
+        txtReturnBook.setBackground(new java.awt.Color(255, 179, 186));
 
         txtBorrowDate.setEditable(false);
+        txtBorrowDate.setBackground(new java.awt.Color(255, 179, 186));
 
         btnDoneReceive.setText("Return");
         btnDoneReceive.setToolTipText("");
@@ -688,8 +690,10 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         txtDueDate.setEditable(false);
+        txtDueDate.setBackground(new java.awt.Color(255, 179, 186));
 
         txtReturnDate.setEditable(false);
+        txtReturnDate.setBackground(new java.awt.Color(255, 179, 186));
 
         txtReceivedBy1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtReceivedBy1.setText("Due Date:");
@@ -1691,6 +1695,9 @@ public class Dashboard extends javax.swing.JFrame {
             }
             callFilters.resizeColumnWidth(tblBorrowList);
         }
+        else{
+            JOptionPane.showMessageDialog(this, "Choose a book to borrow");
+        }
     }//GEN-LAST:event_btnAddBookActionPerformed
 
     private void btnDoneBorrowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneBorrowingActionPerformed
@@ -1798,7 +1805,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void txtBorrowerNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBorrowerNameKeyReleased
         String txtin = txtBorrowerName.getText();
-        callMethods.searchMemberByLastName(tblMemberInfo, txtin);
+        callMethods.searchMemberName(tblMemberInfo, txtin);
     }//GEN-LAST:event_txtBorrowerNameKeyReleased
 
     private void tblMemberInfoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMemberInfoMouseReleased
@@ -1820,7 +1827,7 @@ public class Dashboard extends javax.swing.JFrame {
     
     private void txtIssuedByKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIssuedByKeyReleased
         String txtin = txtIssuedBy.getText();
-        callMethods.searchStaffByLastName(tblStaffInfo, txtin);
+        callMethods.searchStaffName(tblStaffInfo, txtin);
     }//GEN-LAST:event_txtIssuedByKeyReleased
 
     private void tblStaffInfoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStaffInfoMouseReleased
