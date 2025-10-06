@@ -1199,10 +1199,12 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel2.setText("Book ID");
 
         txtAdminBookID.setEditable(false);
+        txtAdminBookID.setBackground(new java.awt.Color(255, 179, 186));
         txtAdminBookID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAdminBookID.setForeground(new java.awt.Color(0, 0, 0));
 
         txtAdminBookTitle.setEditable(false);
+        txtAdminBookTitle.setBackground(new java.awt.Color(255, 179, 186));
         txtAdminBookTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAdminBookTitle.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -1215,6 +1217,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel17.setText("Author");
 
         txtAdminAuthor.setEditable(false);
+        txtAdminAuthor.setBackground(new java.awt.Color(255, 179, 186));
         txtAdminAuthor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAdminAuthor.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -1223,6 +1226,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel18.setText("Year published");
 
         txtAdminYearPublished.setEditable(false);
+        txtAdminYearPublished.setBackground(new java.awt.Color(255, 179, 186));
         txtAdminYearPublished.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAdminYearPublished.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -1231,6 +1235,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel19.setText("Quantity");
 
         txtAdminQty.setEditable(false);
+        txtAdminQty.setBackground(new java.awt.Color(255, 179, 186));
         txtAdminQty.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAdminQty.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -1239,6 +1244,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel20.setText("Publisher");
 
         txtAdminPublisher.setEditable(false);
+        txtAdminPublisher.setBackground(new java.awt.Color(255, 179, 186));
         txtAdminPublisher.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAdminPublisher.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -1626,7 +1632,7 @@ public class Dashboard extends javax.swing.JFrame {
                                  + "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id "
                                  + "SET t.fld_status = 'Returned', "
                                  + "t.fld_return_date = NOW(), "
-                                 + "t.fld_reveiver_staff_id = ? "
+                                 + "t.fld_receiver_staff_id = ? "
                                  + "WHERE t.fld_transaction_id = ?";
                 PreparedStatement ps = conn.prepareStatement(updateSql);
                 ps.setInt(1, receiverStaffId);

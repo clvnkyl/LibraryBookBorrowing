@@ -288,7 +288,7 @@ public class Methods {
             "FROM tbl_transaction t " +
             "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
             "JOIN tbl_staff s1 ON t.fld_issuer_staff_id = s1.fld_staff_id " +
-            "LEFT JOIN tbl_staff s2 ON t.fld_reveiver_staff_id = s2.fld_staff_id " + 
+            "LEFT JOIN tbl_staff s2 ON t.fld_receiver_staff_id = s2.fld_staff_id " + 
             "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " +
             "ORDER BY t.fld_borrow_date DESC";
         try {
