@@ -125,7 +125,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblSearchBooksList = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
+        pnlSearchingForm = new javax.swing.JPanel();
         txtSearchBookTitle = new javax.swing.JTextField();
         btnSearchBook = new javax.swing.JButton();
         cmbChooseSearch = new javax.swing.JComboBox<>();
@@ -960,7 +960,7 @@ public class Dashboard extends javax.swing.JFrame {
         tblSearchBooksList.setRowHeight(25);
         jScrollPane5.setViewportView(tblSearchBooksList);
 
-        jPanel1.setBackground(new java.awt.Color(165, 214, 167));
+        pnlSearchingForm.setBackground(new java.awt.Color(165, 214, 167));
 
         txtSearchBookTitle.setEditable(false);
         txtSearchBookTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -1009,16 +1009,16 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlSearchingFormLayout = new javax.swing.GroupLayout(pnlSearchingForm);
+        pnlSearchingForm.setLayout(pnlSearchingFormLayout);
+        pnlSearchingFormLayout.setHorizontalGroup(
+            pnlSearchingFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSearchingFormLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlSearchingFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtSearchBookYearPub, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlSearchingFormLayout.createSequentialGroup()
+                        .addGroup(pnlSearchingFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmbChooseSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1026,15 +1026,15 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(txtSearchBookAuthor)
                     .addComponent(txtSearchBookTitle)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSearchingFormLayout.createSequentialGroup()
                         .addComponent(btnSearchClear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSearchBook)))
                 .addGap(16, 16, 16))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        pnlSearchingFormLayout.setVerticalGroup(
+            pnlSearchingFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSearchingFormLayout.createSequentialGroup()
                 .addComponent(cmbChooseSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
@@ -1049,7 +1049,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSearchBookYearPub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlSearchingFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearchBook)
                     .addComponent(btnSearchClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(125, Short.MAX_VALUE))
@@ -1061,7 +1061,7 @@ public class Dashboard extends javax.swing.JFrame {
             pnlSearchBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSearchBookLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlSearchingForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlSearchBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlSearchBookLayout.createSequentialGroup()
@@ -1078,7 +1078,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(pnlSearchBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
                     .addGroup(pnlSearchBookLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlSearchingForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1922,7 +1922,6 @@ public class Dashboard extends javax.swing.JFrame {
                 String formattedReturn = returnDate.format(formatter);
                 txtReturnDate.setText(formattedReturn);
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }       
@@ -1958,8 +1957,9 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbChooseSearchActionPerformed
 
     private void btnSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchBookActionPerformed
+        
+        // Calls the method that choose what field to search on Title, Author, or year Published
         int cmbIndex = cmbChooseSearch.getSelectedIndex();
-        System.out.println(cmbIndex);
         switch (cmbIndex) {
             case 0:
                 JOptionPane.showMessageDialog(this, "Select what you want to search");
@@ -1976,14 +1976,20 @@ public class Dashboard extends javax.swing.JFrame {
             default:
                 throw new AssertionError();
         }
+        //////
+        
+        // Calls the method that clears all texfield after search
         callSearch.clearSearchTxt(txtSearchBookTitle, txtSearchBookAuthor, txtSearchBookYearPub);
     }//GEN-LAST:event_btnSearchBookActionPerformed
 
     private void btnSearchClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchClearActionPerformed
+         //Clears all text on textfield and sets the combox index to default value
         callSearch.clearSearchTxt(txtSearchBookTitle, txtSearchBookAuthor, txtSearchBookYearPub);
         cmbChooseSearch.setSelectedIndex(0);
     }//GEN-LAST:event_btnSearchClearActionPerformed
 
+    ////// FOLLOWING ARE CUSTOM METHODS
+    
     
     public void borrowAddBook(){
         
@@ -2184,7 +2190,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2219,6 +2224,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel pnlReturningInfo;
     private javax.swing.JPanel pnlScreen;
     private javax.swing.JPanel pnlSearchBook;
+    private javax.swing.JPanel pnlSearchingForm;
     public static javax.swing.JTabbedPane tabbedMenu;
     private javax.swing.JTable tblAdminBooksList;
     private javax.swing.JTable tblAvailBooks;

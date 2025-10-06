@@ -101,7 +101,6 @@ public class SearchBookMethods {
         
         searchStr = inSearchVal.getText();
         
-        
         if (callFilter.isNumeric(searchStr)) {
             searchVal = Integer.parseInt(searchStr);
         } else{
