@@ -1632,7 +1632,7 @@ public class Dashboard extends javax.swing.JFrame {
                                  + "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id "
                                  + "SET t.fld_status = 'Returned', "
                                  + "t.fld_return_date = NOW(), "
-                                 + "t.fld_receiver_staff_id = ? "
+                                 + "t.fld_reveiver_staff_id = ? "
                                  + "WHERE t.fld_transaction_id = ?";
                 PreparedStatement ps = conn.prepareStatement(updateSql);
                 ps.setInt(1, receiverStaffId);

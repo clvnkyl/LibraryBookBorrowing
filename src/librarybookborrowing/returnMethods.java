@@ -84,7 +84,7 @@ public class returnMethods {
                         + "FROM tbl_transaction t " 
                         + "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id "
                         + "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " 
-                        + "LEFT JOIN tbl_staff s ON t.fld_receiver_staff_id = s.fld_staff_id " 
+                        + "LEFT JOIN tbl_staff s ON t.fld_reveiver_staff_id = s.fld_staff_id " 
                         + "WHERE t.fld_status = 'Returned'" 
                         + "ORDER BY t.fld_borrow_date DESC";
 
