@@ -1,12 +1,10 @@
 package librarybookborrowing;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -41,7 +39,6 @@ public class Methods {
         });
         timer.start();
 
-        // Smooth refresh niceties
         DefaultTableModel model = (DefaultTableModel) tblDestination.getModel();
         model.fireTableDataChanged();
         tblDestination.setFillsViewportHeight(true);
@@ -255,29 +252,38 @@ public class Methods {
         }
     }
 
-    /** Record returned by account lookup. */
+    /** Account row supporting either member or staff. */
     public static class AccountLookup {
         public final int accountId;
         public final String username;
         public final String hashedPassword;
         public final String role;
-        public final int staffId;
-        public AccountLookup(int accountId, String username, String hashedPassword, String role, int staffId) {
+        public final Integer staffId;   // may be null
+        public final Integer memberId;  // may be null
+        public final String email;      // email from whichever person row matched
+
+        public AccountLookup(int accountId, String username, String hashedPassword, String role,
+                             Integer staffId, Integer memberId, String email) {
             this.accountId = accountId;
             this.username = username;
             this.hashedPassword = hashedPassword;
             this.role = role;
             this.staffId = staffId;
+            this.memberId = memberId;
+            this.email = email;
         }
     }
 
-    /** Find account by username OR staff email. */
+    /** Find account by username OR email (works for both staff and member emails). */
     public AccountLookup findAccountByUsernameOrEmail(String userOrEmail) throws Exception {
         String sql =
-            "SELECT a.fld_account_id, a.fld_username, a.fld_password, a.fld_role, a.fld_staff_id "
+            "SELECT a.fld_account_id, a.fld_username, a.fld_password, a.fld_role, "
+          + "       a.fld_staff_id, a.fld_member_id, "
+          + "       COALESCE(s.fld_email, m.fld_email) AS email_match "
           + "FROM tbl_accounts a "
-          + "LEFT JOIN tbl_staff s ON s.fld_staff_id = a.fld_staff_id "
-          + "WHERE a.fld_username = ? OR s.fld_email = ? "
+          + "LEFT JOIN tbl_staff  s ON s.fld_staff_id  = a.fld_staff_id "
+          + "LEFT JOIN tbl_member m ON m.fld_member_id = a.fld_member_id "
+          + "WHERE a.fld_username = ? OR s.fld_email = ? OR m.fld_email = ? "
           + "LIMIT 1";
 
         try (Connection conn = db.createConnection();
@@ -285,6 +291,7 @@ public class Methods {
 
             ps.setString(1, userOrEmail);
             ps.setString(2, userOrEmail);
+            ps.setString(3, userOrEmail);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -293,7 +300,9 @@ public class Methods {
                         rs.getString("fld_username"),
                         rs.getString("fld_password"),
                         rs.getString("fld_role"),
-                        rs.getInt("fld_staff_id")
+                        (Integer)rs.getObject("fld_staff_id"),
+                        (Integer)rs.getObject("fld_member_id"),
+                        rs.getString("email_match")
                     );
                 }
                 return null;
@@ -302,9 +311,9 @@ public class Methods {
     }
 
     /**
-     * Register flow depending on role:
-     * - Member: insert into tbl_member (phone may be null), then tbl_accounts with NULL fld_staff_id
-     * - Librarian/Admin: insert into tbl_staff, then tbl_accounts with new staff id
+     * Register:
+     * - Member  -> insert tbl_member, then account with fld_member_id set, fld_staff_id = NULL
+     * - Librarian/Admin -> insert tbl_staff, then account with fld_staff_id set, fld_member_id = NULL
      */
     public void registerPersonAndAccount(
         String first, String middle, String last, String phoneOrNull, String email,
@@ -314,9 +323,7 @@ public class Methods {
         final boolean isMember = "Member".equalsIgnoreCase(role);
         final boolean isStaff  = "Librarian".equalsIgnoreCase(role) || "Admin".equalsIgnoreCase(role);
 
-        if (!isMember && !isStaff) {
-            throw new SQLException("Unsupported role: " + role);
-        }
+        if (!isMember && !isStaff) throw new SQLException("Unsupported role: " + role);
 
         final String insMember =
             "INSERT INTO tbl_member (fld_first_name, fld_middle_name, fld_last_name, fld_phone_number, fld_email) "
@@ -326,62 +333,59 @@ public class Methods {
             "INSERT INTO tbl_staff (fld_first_name, fld_middle_name, fld_last_name, fld_email) "
           + "VALUES (?, ?, ?, ?)";
 
-        final String insAccountWithStaff =
-            "INSERT INTO tbl_accounts (fld_username, fld_password, fld_role, fld_staff_id) "
-          + "VALUES (?, ?, ?, ?)";
+        final String insAccountMember =
+            "INSERT INTO tbl_accounts (fld_username, fld_password, fld_role, fld_staff_id, fld_member_id) "
+          + "VALUES (?, ?, ?, NULL, ?)";
 
-        final String insAccountNoStaff =
-            "INSERT INTO tbl_accounts (fld_username, fld_password, fld_role, fld_staff_id) "
-          + "VALUES (?, ?, ?, NULL)";
+        final String insAccountStaff =
+            "INSERT INTO tbl_accounts (fld_username, fld_password, fld_role, fld_staff_id, fld_member_id) "
+          + "VALUES (?, ?, ?, ?, NULL)";
 
         try (Connection conn = db.createConnection()) {
             conn.setAutoCommit(false);
-
             try {
                 if (isMember) {
-                    // 1) Insert member
-                    try (PreparedStatement ps = conn.prepareStatement(insMember)) {
+                    int newMemberId;
+                    try (PreparedStatement ps = conn.prepareStatement(insMember, java.sql.Statement.RETURN_GENERATED_KEYS)) {
                         ps.setString(1, first);
                         ps.setString(2, (middle == null || middle.isBlank()) ? null : middle);
                         ps.setString(3, last);
                         ps.setString(4, (phoneOrNull == null || phoneOrNull.isBlank()) ? null : phoneOrNull);
                         ps.setString(5, email);
                         ps.executeUpdate();
+                        try (ResultSet keys = ps.getGeneratedKeys()) {
+                            if (!keys.next()) throw new SQLException("Failed to get new member id.");
+                            newMemberId = keys.getInt(1);
+                        }
                     }
-                    // 2) Account with NULL staff_id
-                    try (PreparedStatement ps = conn.prepareStatement(insAccountNoStaff)) {
+                    try (PreparedStatement ps = conn.prepareStatement(insAccountMember)) {
                         ps.setString(1, username);
                         ps.setString(2, hashedPassword);
                         ps.setString(3, role);
+                        ps.setInt(4, newMemberId);
                         ps.executeUpdate();
                     }
                 } else {
-                    // Staff (Admin/Librarian)
                     int newStaffId;
-                    try (PreparedStatement ps1 = conn.prepareStatement(
-                            insStaff, java.sql.Statement.RETURN_GENERATED_KEYS)) {
-                        ps1.setString(1, first);
-                        ps1.setString(2, (middle == null || middle.isBlank()) ? null : middle);
-                        ps1.setString(3, last);
-                        ps1.setString(4, email);
-                        ps1.executeUpdate();
-                        try (ResultSet keys = ps1.getGeneratedKeys()) {
-                            if (!keys.next()) {
-                                conn.rollback();
-                                throw new SQLException("Failed to get new staff id.");
-                            }
+                    try (PreparedStatement ps = conn.prepareStatement(insStaff, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+                        ps.setString(1, first);
+                        ps.setString(2, (middle == null || middle.isBlank()) ? null : middle);
+                        ps.setString(3, last);
+                        ps.setString(4, email);
+                        ps.executeUpdate();
+                        try (ResultSet keys = ps.getGeneratedKeys()) {
+                            if (!keys.next()) throw new SQLException("Failed to get new staff id.");
                             newStaffId = keys.getInt(1);
                         }
                     }
-                    try (PreparedStatement ps2 = conn.prepareStatement(insAccountWithStaff)) {
-                        ps2.setString(1, username);
-                        ps2.setString(2, hashedPassword);
-                        ps2.setString(3, role);
-                        ps2.setInt(4, newStaffId);
-                        ps2.executeUpdate();
+                    try (PreparedStatement ps = conn.prepareStatement(insAccountStaff)) {
+                        ps.setString(1, username);
+                        ps.setString(2, hashedPassword);
+                        ps.setString(3, role);
+                        ps.setInt(4, newStaffId);
+                        ps.executeUpdate();
                     }
                 }
-
                 conn.commit();
             } catch (Exception ex) {
                 conn.rollback();

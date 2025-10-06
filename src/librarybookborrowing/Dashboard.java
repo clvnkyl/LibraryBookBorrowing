@@ -1568,123 +1568,119 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDoneReceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneReceiveActionPerformed
-        ConnectDatabase db = new ConnectDatabase();
-        Connection conn = null;
-        try {
-            conn = db.createConnection();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Failed to connect to database: " + ex.getMessage());
-            ex.printStackTrace();
-            return;
-        }
-        
-        int selectedRow = tblBorrowed.getSelectedRow();
+        // Open DB connection
+        try (Connection conn = new ConnectDatabase().createConnection()) {
+
+            // Must select a row from the "Borrowed" table
+            int selectedRow = tblBorrowed.getSelectedRow();
             if (selectedRow == -1) {
                 JOptionPane.showMessageDialog(this, "Please select a book to return.");
                 return;
             }
-            
-            int transId = Integer.parseInt(tblBorrowed.getValueAt(selectedRow, 0).toString());
-        
-            
-            String staffReceiver = txtReceivedBy.getText().trim();
-            if(staffReceiver.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Please enter staff ID");
+
+            // We expect column 0 to contain the transaction id.
+            // If your loader doesn't put the ID in col 0, adjust the index here.
+            int transId;
+            try {
+                transId = Integer.parseInt(String.valueOf(tblBorrowed.getValueAt(selectedRow, 0)));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Invalid or missing Transaction ID in the selected row.");
                 return;
             }
+
+            // Validate receiver staff id from the textbox
+            String staffReceiver = txtReceivedBy.getText().trim();
+            if (staffReceiver.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter staff ID.");
+                return;
+            }
+
             int receiverStaffId;
             try {
                 receiverStaffId = Integer.parseInt(staffReceiver);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Invalid Staff ID");
+                JOptionPane.showMessageDialog(this, "Invalid Staff ID.");
                 return;
             }
-            
-            LocalDateTime returnDate = LocalDateTime.now();  
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM:dd:yyyy HH:mm");
-            String formattedReturn = returnDate.format(formatter);
-            
-            try {
-                String checkSql = "SELECT COUNT(*) FROM tbl_staff WHERE fld_staff_id = ?";
-                PreparedStatement checkPs = conn.prepareStatement(checkSql);
+
+            // Verify the staff exists
+            String checkSql = "SELECT 1 FROM tbl_staff WHERE fld_staff_id = ?";
+            try (PreparedStatement checkPs = conn.prepareStatement(checkSql)) {
                 checkPs.setInt(1, receiverStaffId);
-                ResultSet rs = checkPs.executeQuery();
-                
-                if (rs.next() && rs.getInt(1) == 0) {
-                    txtReturnee.setText("");
-                    txtReturnBook.setText("");
-                    txtReceivedBy.setText("");
-                    txtBorrowDate.setText(""); 
-                    txtDueDate.setText(""); 
-                    txtReturnDate.setText("");
-                    txtReceivedBy.setText("");
-                    JOptionPane.showMessageDialog(this, "Staff Id not Found!");
-                    rs.close();
-                    checkPs.close();
-                    return;
-                }
-                    
-                rs.close();
-                checkPs.close();
-                
-                String updateSql = "UPDATE tbl_transaction t "
-                                 + "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id "
-                                 + "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id "
-                                 + "SET t.fld_status = 'Returned', "
-                                 + "t.fld_return_date = NOW(), "
-                                 + "t.fld_receiver_staff_id = ? "
-                                 + "WHERE t.fld_transaction_id = ?";
-                PreparedStatement ps = conn.prepareStatement(updateSql);
-                ps.setInt(1, receiverStaffId);
-                ps.setInt(2, transId);
-                int rows = ps.executeUpdate();
-
-                if (rows > 0) {
-                    // --- Get the book ID of the returned book ---
-                    String getBookIdSql = "SELECT fld_book_id FROM tbl_transaction WHERE fld_transaction_id = ?";
-                    PreparedStatement psBook = conn.prepareStatement(getBookIdSql);
-                    psBook.setInt(1, transId);
-                    ResultSet rsBook = psBook.executeQuery();
-
-                    int bookId = -1;
-                    if (rsBook.next()) {
-                        bookId = rsBook.getInt("fld_book_id");
+                try (ResultSet rs = checkPs.executeQuery()) {
+                    if (!rs.next()) {
+                        // clear UI and inform user
+                        txtReturnee.setText("");
+                        txtReturnBook.setText("");
+                        txtReceivedBy.setText("");
+                        txtBorrowDate.setText("");
+                        txtDueDate.setText("");
+                        txtReturnDate.setText("");
+                        JOptionPane.showMessageDialog(this, "Staff ID not found!");
+                        return;
                     }
-                    rsBook.close();
-                    psBook.close();
-
-                    // --- Update book quantity (add 1 back) ---
-                    if (bookId != -1) {
-                        String updateQtySql = "UPDATE tbl_book SET fld_quantity = fld_quantity + 1 WHERE fld_book_id = ?";
-                        PreparedStatement psQty = conn.prepareStatement(updateQtySql);
-                        psQty.setInt(1, bookId);
-                        psQty.executeUpdate();
-                        psQty.close();
-                    }
-
-                    // --- Clear fields and refresh tables ---
-                    txtReturnee.setText("");
-                    txtReturnBook.setText("");
-                    txtReceivedBy.setText("");
-                    txtBorrowDate.setText(""); 
-                    txtDueDate.setText(""); 
-                    txtReturnDate.setText("");
-                    txtReceivedBy.setText("");
-
-                    returnMethods.loadBorrowedBook(tblBorrowed);
-                    returnMethods.loadReturnedBook(tblReturned);
-
-                    JOptionPane.showMessageDialog(this, "Book successfully returned!");
-                } else {
-                    JOptionPane.showMessageDialog(this, "No matching record found!");
                 }
-
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Error updating return: " + e.getMessage());
-                e.printStackTrace();
             }
 
+            // Mark transaction as returned (NOTE: correct column name → fld_receiver_staff_id)
+            String updateSql =
+                "UPDATE tbl_transaction t " +
+                "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " +
+                "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
+                "SET t.fld_status = 'Returned', " +
+                "    t.fld_return_date = NOW(), " +
+                "    t.fld_receiver_staff_id = ? " +
+                "WHERE t.fld_transaction_id = ?";
+
+            int rowsUpdated;
+            try (PreparedStatement ps = conn.prepareStatement(updateSql)) {
+                ps.setInt(1, receiverStaffId);
+                ps.setInt(2, transId);
+                rowsUpdated = ps.executeUpdate();
+            }
+
+            if (rowsUpdated > 0) {
+                // Fetch returned book id
+                int bookId = -1;
+                String getBookIdSql = "SELECT fld_book_id FROM tbl_transaction WHERE fld_transaction_id = ?";
+                try (PreparedStatement psBook = conn.prepareStatement(getBookIdSql)) {
+                    psBook.setInt(1, transId);
+                    try (ResultSet rsBook = psBook.executeQuery()) {
+                        if (rsBook.next()) {
+                            bookId = rsBook.getInt("fld_book_id");
+                        }
+                    }
+                }
+
+                // Add back 1 to book quantity
+                if (bookId != -1) {
+                    String updateQtySql = "UPDATE tbl_book SET fld_quantity = fld_quantity + 1 WHERE fld_book_id = ?";
+                    try (PreparedStatement psQty = conn.prepareStatement(updateQtySql)) {
+                        psQty.setInt(1, bookId);
+                        psQty.executeUpdate();
+                    }
+                }
+
+                // Clear fields and refresh tables
+                txtReturnee.setText("");
+                txtReturnBook.setText("");
+                txtReceivedBy.setText("");
+                txtBorrowDate.setText("");
+                txtDueDate.setText("");
+                txtReturnDate.setText("");
+
+                returnMethods.loadBorrowedBook(tblBorrowed);
+                returnMethods.loadReturnedBook(tblReturned);
+
+                JOptionPane.showMessageDialog(this, "Book successfully returned!");
+            } else {
+                JOptionPane.showMessageDialog(this, "No matching record found!");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error updating return: " + e.getMessage());
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnDoneReceiveActionPerformed
 
     private void tblAvailBooksMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAvailBooksMouseReleased

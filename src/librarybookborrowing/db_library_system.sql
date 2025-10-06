@@ -1,282 +1,210 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
+-- MySQL dump 10.13  Distrib 8.0.x (compatible)
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2025 at 03:29 PM
--- Server version: 10.4.32-MariaDB
+-- Generation Time: Oct 05, 2025 at 03:37 PM
+-- Server version: 10.4.32-MariaDB (compatible)
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+ /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+ /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ /*!50503 SET NAMES utf8 */;
+ /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+ /*!40103 SET TIME_ZONE='+00:00' */;
+ /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+ /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+ /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+ /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Database: `db_library_system`
---
+-- ------------------------------------------------------
+-- Database: db_library_system
+-- ------------------------------------------------------
 
--- --------------------------------------------------------
+/* =========================
+   DROP TABLES (child -> parent)
+   ========================= */
+DROP TABLE IF EXISTS `tbl_transaction`;
+DROP TABLE IF EXISTS `tbl_accounts`;
+DROP TABLE IF EXISTS `tbl_book`;
+DROP TABLE IF EXISTS `tbl_member`;
+DROP TABLE IF EXISTS `tbl_staff`;
 
---
--- Table structure for table `tbl_accounts`
---
+/* =========================
+   CREATE TABLES (parent -> child)
+   ========================= */
 
-CREATE TABLE `tbl_accounts` (
-  `fld_account_id` int(11) NOT NULL,
-  `fld_username` varchar(50) NOT NULL,
-  `fld_password` varchar(255) NOT NULL,
-  `fld_role` varchar(10) NOT NULL,
-  `fld_staff_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_accounts`
---
-
-INSERT INTO `tbl_accounts` (`fld_account_id`, `fld_username`, `fld_password`, `fld_role`, `fld_staff_id`) VALUES
-(1, 'kylevin', 'cc7d240bed51883786b24756316eddf520680f1686fba69e6e11e07e4e389d5e', 'Admin', 1),
-(2, 'strawhat', 'be99ef4cb48a502f26683edc7641d04e82a8e50be64844f5395782f858e8f321', 'Librarian', 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_book`
---
-
-CREATE TABLE `tbl_book` (
-  `fld_book_id` int(11) NOT NULL,
-  `fld_title` varchar(300) NOT NULL,
-  `fld_author` varchar(45) NOT NULL,
-  `fld_publisher` varchar(45) NOT NULL,
-  `fld_year_published` int(4) DEFAULT NULL,
-  `fld_quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_book`
---
-
-INSERT INTO `tbl_book` (`fld_book_id`, `fld_title`, `fld_author`, `fld_publisher`, `fld_year_published`, `fld_quantity`) VALUES
-(1, 'Harry Potter and the Sorcerer’s Stone', 'J.K. Rowling', 'Bloomsburry', 1997, 15),
-(2, 'Harry Potter and the Chamber of Secrets ', 'J.K. Rowling', 'Bloomsburry', 1998, 4),
-(3, 'Harry Potter and the Prisoner of Azkaban ', 'J.K. Rowling', 'Bloomsburry', 1999, 5),
-(4, 'Harry Potter and the Goblet of Fire', 'J.K. Rowling', 'Bloomsburry', 2000, 3),
-(5, 'Harry Potter and the Order of the Phoenix', 'J.K. Rowling', 'Bloomsburry', 2003, 4),
-(6, 'Harry Potter and the Half-Blood Prince ', 'J.K. Rowling', 'Bloomsburry', 2005, 4),
-(7, 'Harry Potter and the Deathly Hallows', 'J.K. Rowling', 'Bloomsburry', 2007, 5),
-(8, 'Harry Potter and the Cursed Child', 'J.K. Rowling', 'Bloomsburry', 2016, 2),
-(17, 'Clean code', 'Uncle Bob', 'Pearson', 2008, 9),
-(18, 'To Kill a Mockingbird', 'Harper Lee', 'J.B. Lippincott & Co.', 1960, 10),
-(19, '1984', 'George Orwell', 'Secker & Warburg', 1949, 6),
-(20, 'The Great Gatsby', 'F. Scott Fitzgerald', 'Charles Scribner’s Sons', 1925, 12),
-(21, 'Pride and Prejudice', 'Jane Austen', 'T. Egerton', 1813, 8),
-(22, 'The Catcher in the Rye', 'J.D. Salinger', 'Little, Brown and Company', 1951, 9),
-(23, 'The Hobbit', 'J.R.R. Tolkien', 'George Allen & Unwin', 1937, 14),
-(24, 'Fahrenheit 451', 'Ray Bradbury', 'Ballantine Books', 1953, 7),
-(25, 'The Lord of the Rings', 'J.R.R. Tolkien', 'George Allen & Unwin', 1954, 11),
-(26, 'Animal Farm', 'George Orwell', 'Secker & Warburg', 1945, 5),
-(27, 'The Lion, the Witch and the Wardrobe', 'C.S. Lewis', 'Geoffrey Bles', 1950, 13),
-(28, 'Moby-Dick', 'Herman Melville', 'Harper & Brothers', 1851, 4),
-(29, 'The Alchemist', 'Paulo Coelho', 'HarperTorch', 1988, 8),
-(30, 'Harry Potter and the Sorcerer’s Stone', 'J.K. Rowling', 'Bloomsbury', 1997, 15),
-(31, 'The Da Vinci Code', 'Dan Brown', 'Doubleday', 2003, 9),
-(32, 'The Hunger Games', 'Suzanne Collins', 'Scholastic Press', 2008, 6),
-(33, 'The Fault in Our Stars', 'John Green', 'Dutton Books', 2012, 10),
-(34, 'The Kite Runner', 'Khaled Hosseini', 'Riverhead Books', 2003, 7),
-(35, 'The Girl on the Train', 'Paula Hawkins', 'Riverhead Books', 2015, 12),
-(36, 'The Book Thief', 'Markus Zusak', 'Picador', 2005, 5),
-(37, 'The Shining', 'Stephen King', 'Doubleday', 1977, 9),
-(38, 'Clean Code: A Handbook of Agile Software Craftsmanship', 'Robert C. Martin', 'Prentice Hall', 2008, 10),
-(39, 'The Pragmatic Programmer: Your Journey to Mastery', 'Andrew Hunt', 'Addison-Wesley', 1999, 8),
-(40, 'Code Complete: A Practical Handbook of Software Construction', 'Steve McConnell', 'Microsoft Press', 2004, 12),
-(41, 'Design Patterns: Elements of Reusable Object-Oriented Software', 'Erich Gamma', 'Addison-Wesley', 1994, 5),
-(42, 'Refactoring: Improving the Design of Existing Code', 'Martin Fowler', 'Addison-Wesley', 1999, 9),
-(43, 'Head First Design Patterns', 'Eric Freeman', 'O’Reilly Media', 2004, 14),
-(44, 'Introduction to Algorithms', 'Thomas H. Cormen', 'MIT Press', 1990, 7),
-(45, 'The Clean Coder: A Code of Conduct for Professional Programmers', 'Robert C. Martin', 'Prentice Hall', 2011, 11),
-(46, 'Cracking the Coding Interview', 'Gayle Laakmann McDowell', 'CareerCup', 2015, 13),
-(47, 'Structure and Interpretation of Computer Programs', 'Harold Abelson', 'MIT Press', 1985, 6),
-(48, 'You Don’t Know JS Yet: Get Started', 'Kyle Simpson', 'O’Reilly Media', 2020, 15),
-(49, 'Effective Java', 'Joshua Bloch', 'Addison-Wesley', 2001, 4),
-(50, 'Python Crash Course', 'Eric Matthes', 'No Starch Press', 2015, 9),
-(51, 'Automate the Boring Stuff with Python', 'Al Sweigart', 'No Starch Press', 2015, 8),
-(52, 'The Art of Computer Programming, Volume 1: Fundamental Algorithms', 'Donald E. Knuth', 'Addison-Wesley', 1968, 5);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_member`
---
-
-CREATE TABLE `tbl_member` (
-  `fld_member_id` int(11) NOT NULL,
-  `fld_first_name` varchar(45) NOT NULL,
-  `fld_middle_name` varchar(45) DEFAULT NULL,
-  `fld_last_name` varchar(45) NOT NULL,
-  `fld_phone_number` varchar(15) DEFAULT NULL,
-  `fld_email` varchar(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_member`
---
-
-INSERT INTO `tbl_member` (`fld_member_id`, `fld_first_name`, `fld_middle_name`, `fld_last_name`, `fld_phone_number`, `fld_email`) VALUES
-(1, 'Calvin', 'F', 'Nocon', '09987651234', 'sj10.cknocon24@joysistvi.edu.ph'),
-(2, 'Kyle', 'Calvin', 'Nocon', '09321459867', 'sj10.cknocon24@joysistvi.edu.ph1'),
-(3, 'Jin', 'Woo', 'Sung', '09987651234', 'sungjinwoo@email.com'),
-(4, 'Chae', 'Hae', 'In', '09123456789', 'mschae@email.com');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_staff`
---
-
+-- Staff
 CREATE TABLE `tbl_staff` (
-  `fld_staff_id` int(11) NOT NULL,
-  `fld_first_name` varchar(45) NOT NULL,
-  `fld_middle_name` varchar(45) DEFAULT NULL,
-  `fld_last_name` varchar(45) NOT NULL,
-  `fld_email` varchar(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `fld_staff_id` INT NOT NULL AUTO_INCREMENT,
+  `fld_first_name` VARCHAR(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_middle_name` VARCHAR(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `fld_last_name` VARCHAR(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_email` VARCHAR(300) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`fld_staff_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_staff`
---
+-- Members
+CREATE TABLE `tbl_member` (
+  `fld_member_id` INT NOT NULL AUTO_INCREMENT,
+  `fld_first_name` VARCHAR(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_middle_name` VARCHAR(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `fld_last_name` VARCHAR(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_phone_number` VARCHAR(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_email` VARCHAR(300) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`fld_member_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `tbl_staff` (`fld_staff_id`, `fld_first_name`, `fld_middle_name`, `fld_last_name`, `fld_email`) VALUES
-(1, 'Calvin Kyle', 'Fortaleza', 'Nocon', 'sj10.cknocon24@joysistvi.edu.ph'),
-(2, 'Luffy', 'D', 'Monkey', 'pirateking@email.com');
+-- Books
+CREATE TABLE `tbl_book` (
+  `fld_book_id` INT NOT NULL AUTO_INCREMENT,
+  `fld_title` VARCHAR(300) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_author` VARCHAR(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_publisher` VARCHAR(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_year_published` INT DEFAULT NULL,
+  `fld_quantity` INT NOT NULL,
+  PRIMARY KEY (`fld_book_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- Accounts (supports both staff and member logins)
+CREATE TABLE `tbl_accounts` (
+  `fld_account_id` INT NOT NULL AUTO_INCREMENT,
+  `fld_username`   VARCHAR(50)  COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_password`   VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_role`       VARCHAR(20)  COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_staff_id`   INT DEFAULT NULL,
+  `fld_member_id`  INT DEFAULT NULL,
+  PRIMARY KEY (`fld_account_id`),
+  UNIQUE KEY `ux_accounts_username` (`fld_username`),
+  KEY `fk_accounts_staff`  (`fld_staff_id`),
+  KEY `fk_accounts_member` (`fld_member_id`),
+  CONSTRAINT `fk_accounts_staff`  FOREIGN KEY (`fld_staff_id`)  REFERENCES `tbl_staff`  (`fld_staff_id`)  ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_accounts_member` FOREIGN KEY (`fld_member_id`) REFERENCES `tbl_member` (`fld_member_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Table structure for table `tbl_transaction`
---
-
+-- Transactions
 CREATE TABLE `tbl_transaction` (
-  `fld_transaction_id` int(11) NOT NULL,
-  `fld_reference_id` varchar(15) NOT NULL,
-  `fld_member_id` int(11) NOT NULL,
-  `fld_issuer_staff_id` int(11) NOT NULL,
-  `fld_book_id` int(11) NOT NULL,
-  `fld_borrow_date` datetime NOT NULL,
-  `fld_due_date` datetime NOT NULL,
-  `fld_return_date` datetime DEFAULT NULL,
-  `fld_receiver_staff_id` int(11) DEFAULT NULL,
-  `fld_status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `fld_transaction_id` INT NOT NULL AUTO_INCREMENT,
+  `fld_reference_id`   VARCHAR(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `fld_member_id`      INT NOT NULL,
+  `fld_issuer_staff_id`   INT NOT NULL,
+  `fld_book_id`        INT NOT NULL,
+  `fld_borrow_date`    DATETIME NOT NULL,
+  `fld_due_date`       DATETIME NOT NULL,
+  `fld_return_date`    DATETIME DEFAULT NULL,
+  `fld_receiver_staff_id` INT DEFAULT NULL,
+  `fld_status`         VARCHAR(10) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`fld_transaction_id`),
+  KEY `idx_trans_ref`      (`fld_reference_id`),
+  KEY `fk_trans_member`    (`fld_member_id`),
+  KEY `fk_trans_book`      (`fld_book_id`),
+  KEY `fk_trans_issuer`    (`fld_issuer_staff_id`),
+  KEY `fk_trans_receiver`  (`fld_receiver_staff_id`),
+  CONSTRAINT `fk_trans_member`   FOREIGN KEY (`fld_member_id`)         REFERENCES `tbl_member` (`fld_member_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_trans_book`     FOREIGN KEY (`fld_book_id`)           REFERENCES `tbl_book`   (`fld_book_id`)   ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_trans_issuer`   FOREIGN KEY (`fld_issuer_staff_id`)   REFERENCES `tbl_staff`  (`fld_staff_id`)  ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_trans_receiver` FOREIGN KEY (`fld_receiver_staff_id`) REFERENCES `tbl_staff`  (`fld_staff_id`)  ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_transaction`
---
+/* =========================
+   SEED DATA
+   ========================= */
 
-INSERT INTO `tbl_transaction` (`fld_transaction_id`, `fld_reference_id`, `fld_member_id`, `fld_issuer_staff_id`, `fld_book_id`, `fld_borrow_date`, `fld_due_date`, `fld_return_date`, `fld_receiver_staff_id`, `fld_status`) VALUES
-(1, '20251006XQEGT', 4, 1, 27, '2025-10-06 21:10:25', '2025-10-06 21:10:00', '2025-10-06 21:21:08', 1, 'Returned'),
-(2, '20251006XQEGT', 4, 1, 26, '2025-10-06 21:10:25', '2025-10-06 21:10:00', '2025-10-06 21:21:11', 1, 'Returned'),
-(3, '20251006GTKNW', 3, 1, 41, '2025-10-06 21:10:46', '2025-10-06 21:10:00', '2025-10-06 21:21:03', 1, 'Returned'),
-(4, '20251006GTKNW', 3, 1, 50, '2025-10-06 21:10:46', '2025-10-06 21:10:00', '2025-10-06 21:21:05', 1, 'Returned');
+-- Staff
+LOCK TABLES `tbl_staff` WRITE;
+/*!40000 ALTER TABLE `tbl_staff` DISABLE KEYS */;
+INSERT INTO `tbl_staff` (`fld_staff_id`,`fld_first_name`,`fld_middle_name`,`fld_last_name`,`fld_email`) VALUES
+(1,'Calvin Kyle','Fortaleza','Nocon','sj10.cknocon24@joysistvi.edu.ph'),
+(2,'Libby',NULL,'Librarian','libby.librarian@example.com');
+/*!40000 ALTER TABLE `tbl_staff` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Indexes for dumped tables
---
+-- Members
+LOCK TABLES `tbl_member` WRITE;
+/*!40000 ALTER TABLE `tbl_member` DISABLE KEYS */;
+INSERT INTO `tbl_member` (`fld_member_id`,`fld_first_name`,`fld_middle_name`,`fld_last_name`,`fld_phone_number`,`fld_email`) VALUES
+(1,'Calvin','F','Nocon','09987651234','sj10.cknocon24@joysistvi.edu.ph'),
+(2,'Kyle','Calvin','Nocon','09321459867','sj10.cknocon24@joysistvi.edu.ph1'),
+(3,'Jin','Woo','Sung','09987651234','sungjinwoo@email.com');
+/*!40000 ALTER TABLE `tbl_member` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Indexes for table `tbl_accounts`
---
-ALTER TABLE `tbl_accounts`
-  ADD PRIMARY KEY (`fld_account_id`),
-  ADD KEY `fld_staff_id` (`fld_staff_id`);
+-- Books
+LOCK TABLES `tbl_book` WRITE;
+/*!40000 ALTER TABLE `tbl_book` DISABLE KEYS */;
+INSERT INTO `tbl_book`
+(`fld_book_id`,`fld_title`,`fld_author`,`fld_publisher`,`fld_year_published`,`fld_quantity`) VALUES
+(1,'Harry Potter and the Sorcerer’s Stone','J.K. Rowling','Bloomsburry',1997,5),
+(2,'Harry Potter and the Chamber of Secrets','J.K. Rowling','Bloomsburry',1998,5),
+(3,'Harry Potter and the Prisoner of Azkaban','J.K. Rowling','Bloomsburry',1999,5),
+(4,'Harry Potter and the Goblet of Fire','J.K. Rowling','Bloomsburry',2000,4),
+(5,'Harry Potter and the Order of the Phoenix','J.K. Rowling','Bloomsburry',2003,5),
+(6,'Harry Potter and the Half-Blood Prince','J.K. Rowling','Bloomsburry',2005,4),
+(7,'Harry Potter and the Deathly Hallows','J.K. Rowling','Bloomsburry',2007,5),
+(8,'Harry Potter and the Cursed Child','J.K. Rowling','Bloomsburry',2016,3);
+/*!40000 ALTER TABLE `tbl_book` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Indexes for table `tbl_book`
---
-ALTER TABLE `tbl_book`
-  ADD PRIMARY KEY (`fld_book_id`);
+-- Accounts
+LOCK TABLES `tbl_accounts` WRITE;
+/*!40000 ALTER TABLE `tbl_accounts` DISABLE KEYS */;
+INSERT INTO `tbl_accounts`
+(`fld_account_id`,`fld_username`,`fld_password`,`fld_role`,`fld_staff_id`,`fld_member_id`) VALUES
+(1,'admin','5c06eb3d5a05a19f49476d694ca81a36344660e9d5b98e3d6a6630f31c2422e7','Admin',1,NULL),
+(2,'librarian','e370f928794e5621660058a4247e92d0b6edcf39ef923b3167f4f2c3480d4d99','Librarian',2,NULL);
+/*!40000 ALTER TABLE `tbl_accounts` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Indexes for table `tbl_member`
---
-ALTER TABLE `tbl_member`
-  ADD PRIMARY KEY (`fld_member_id`);
+-- Transactions (ONLY rows that match existing member/staff/book IDs; misspelled column fixed)
+LOCK TABLES `tbl_transaction` WRITE;
+/*!40000 ALTER TABLE `tbl_transaction` DISABLE KEYS */;
+INSERT INTO `tbl_transaction`
+(`fld_reference_id`,`fld_member_id`,`fld_issuer_staff_id`,`fld_book_id`,`fld_borrow_date`,`fld_due_date`,`fld_return_date`,`fld_receiver_staff_id`,`fld_status`) VALUES
+('5B2VC0DO',1,1,1,'2025-10-01 00:00:00','2025-10-06 00:00:00',NULL,NULL,'Borrowed'),
+('VM004PJM',1,1,1,'2025-10-01 00:00:00','2025-10-06 00:00:00',NULL,NULL,'Borrowed'),
+('NVQM9CUL',1,1,1,'2025-10-01 00:00:00','2025-10-06 00:00:00',NULL,NULL,'Borrowed'),
+('38R876P9',1,1,1,'2025-10-01 21:50:00','2025-10-06 21:50:00',NULL,NULL,'Borrowed'),
+('AH9V3MMD',1,1,1,'2025-10-02 16:39:00','2025-10-07 16:39:00',NULL,NULL,'Borrowed'),
+('HI67DOGC',3,1,1,'2025-10-02 17:05:09','2025-10-02 17:04:00',NULL,NULL,'Borrowed'),
+('KS9UG8KF',3,1,8,'2025-10-02 19:38:38','2025-10-02 19:38:00',NULL,NULL,'Borrowed'),
+('VAWIH5ZD',2,1,1,'2025-10-02 20:45:03','2025-10-02 20:44:00',NULL,NULL,'Borrowed'),
+('43TJYI74',3,1,2,'2025-10-02 21:34:17','2025-10-02 21:33:00',NULL,NULL,'Borrowed'),
+('WB47TYFA',1,1,3,'2025-10-02 21:35:34','2025-10-02 21:34:00',NULL,NULL,'Borrowed'),
+('SAD5D7RK',3,1,2,'2025-10-02 21:38:53','2025-10-02 21:37:00',NULL,NULL,'Borrowed'),
+('QSKZXSIL',3,1,1,'2025-10-02 21:54:56','2025-10-02 21:54:00',NULL,NULL,'Borrowed'),
+('XLLVNTW0',2,1,2,'2025-10-02 21:58:39','2025-10-02 21:57:00',NULL,NULL,'Borrowed'),
+('Z3L3ZZLY',1,1,1,'2025-10-02 22:17:15','2025-10-02 22:16:00',NULL,NULL,'Borrowed'),
+('20251002YXWYS',3,1,2,'2025-10-02 23:35:32','2025-10-02 23:35:00',NULL,NULL,'Borrowed'),
+('20251003QSAMJ',3,1,1,'2025-10-03 16:08:25','2025-10-03 16:08:00',NULL,NULL,'Borrowed'),
+('20251003MSRPU',2,1,3,'2025-10-03 17:43:40','2025-10-03 17:43:00',NULL,NULL,'Borrowed'),
+('20251004AZTVI',3,1,1,'2025-10-04 10:59:29','2025-10-04 10:59:00',NULL,NULL,'Borrowed'),
+('20251004CPWCP',3,1,2,'2025-10-04 10:59:51','2025-10-04 10:59:00',NULL,NULL,'Borrowed'),
+('20251004ROQYI',3,1,8,'2025-10-04 13:17:27','2025-10-04 13:17:00',NULL,NULL,'Borrowed'),
+('20251004ECIGJ',3,1,2,'2025-10-04 16:46:16','2025-10-04 16:46:00',NULL,NULL,'Borrowed'),
+('20251004UUOCN',3,1,4,'2025-10-04 16:46:37','2025-10-04 16:46:00',NULL,NULL,'Borrowed'),
+('20251004IWLWQ',3,1,6,'2025-10-04 17:48:13','2025-10-04 17:47:00',NULL,NULL,'Borrowed'),
+('20251004LMYZN',2,1,3,'2025-10-04 17:50:44','2025-10-04 17:49:00',NULL,NULL,'Borrowed'),
+('20251004FQLWT',1,1,3,'2025-10-04 17:53:44','2025-10-04 17:53:00',NULL,NULL,'Borrowed'),
+('20251004UHRUT',3,1,5,'2025-10-04 17:54:55','2025-10-04 17:54:00',NULL,NULL,'Borrowed'),
+('20251004DYYXW',3,1,5,'2025-10-04 17:55:38','2025-10-04 17:55:00',NULL,NULL,'Borrowed'),
+('20251004TFPBJ',3,1,5,'2025-10-04 18:03:38','2025-10-04 18:03:00',NULL,NULL,'Borrowed'),
+('20251005XIGEN',3,1,4,'2025-10-05 12:26:25','2025-10-05 12:25:00',NULL,NULL,'Borrowed');
+/*!40000 ALTER TABLE `tbl_transaction` ENABLE KEYS */;
+UNLOCK TABLES;
 
---
--- Indexes for table `tbl_staff`
---
-ALTER TABLE `tbl_staff`
-  ADD PRIMARY KEY (`fld_staff_id`);
+/* =========================
+   FINALIZE
+   ========================= */
 
---
--- Indexes for table `tbl_transaction`
---
-ALTER TABLE `tbl_transaction`
-  ADD PRIMARY KEY (`fld_transaction_id`),
-  ADD KEY `fk_transaction_book` (`fld_book_id`),
-  ADD KEY `fk_transaction_issuer_staff` (`fld_issuer_staff_id`),
-  ADD KEY `fk_transaction_member` (`fld_member_id`),
-  ADD KEY `fk_transaction_receiver_staff` (`fld_receiver_staff_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tbl_accounts`
---
-ALTER TABLE `tbl_accounts`
-  MODIFY `fld_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_book`
---
-ALTER TABLE `tbl_book`
-  MODIFY `fld_book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
---
--- AUTO_INCREMENT for table `tbl_member`
---
-ALTER TABLE `tbl_member`
-  MODIFY `fld_member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `tbl_staff`
---
-ALTER TABLE `tbl_staff`
-  MODIFY `fld_staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_transaction`
---
-ALTER TABLE `tbl_transaction`
-  MODIFY `fld_transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `tbl_accounts`
---
-ALTER TABLE `tbl_accounts`
-  ADD CONSTRAINT `tbl_accounts_ibfk_1` FOREIGN KEY (`fld_staff_id`) REFERENCES `tbl_staff` (`fld_staff_id`);
-
---
--- Constraints for table `tbl_transaction`
---
-ALTER TABLE `tbl_transaction`
-  ADD CONSTRAINT `fk_transaction_book` FOREIGN KEY (`fld_book_id`) REFERENCES `tbl_book` (`fld_book_id`),
-  ADD CONSTRAINT `fk_transaction_issuer_staff` FOREIGN KEY (`fld_issuer_staff_id`) REFERENCES `tbl_staff` (`fld_staff_id`),
-  ADD CONSTRAINT `fk_transaction_member` FOREIGN KEY (`fld_member_id`) REFERENCES `tbl_member` (`fld_member_id`),
-  ADD CONSTRAINT `fk_transaction_receiver_staff` FOREIGN KEY (`fld_receiver_staff_id`) REFERENCES `tbl_staff` (`fld_staff_id`);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+ /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+ /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+ /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+ /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+ /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+ /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

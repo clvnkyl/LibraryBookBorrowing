@@ -19,7 +19,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-103,0,0,4,54"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-98,0,0,4,68"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -241,7 +241,7 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
+                              <EmptySpace pref="295" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
                                   <Component id="TextFieldUsernameLogin" alignment="0" max="32767" attributes="0"/>
@@ -250,14 +250,14 @@
                                   <Component id="CheckBoxShowPasswordLogin" alignment="0" max="32767" attributes="0"/>
                                   <Component id="ButtonLogin" alignment="0" min="-2" pref="260" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="281" max="32767" attributes="0"/>
+                              <EmptySpace pref="292" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="84" max="32767" attributes="0"/>
+                              <EmptySpace pref="86" max="32767" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="TextFieldUsernameLogin" min="-2" max="-2" attributes="0"/>
@@ -269,7 +269,7 @@
                               <Component id="CheckBoxShowPasswordLogin" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="ButtonLogin" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="81" max="32767" attributes="0"/>
+                              <EmptySpace pref="84" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -414,47 +414,45 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace pref="26" max="32767" attributes="0"/>
+                              <EmptySpace pref="31" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="CheckBoxShowPasswordRegister" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" linkSize="1" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
-                                  <Component id="PasswordFieldRegister" linkSize="1" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="jLabel5" linkSize="1" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
-                                              <Component id="TextFieldEmail" linkSize="1" min="-2" pref="214" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jLabel1" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TextFieldFirstName" linkSize="1" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="TextFieldMiddleName" linkSize="1" pref="221" max="32767" attributes="0"/>
-                                          <Component id="jLabel4" linkSize="1" max="32767" attributes="0"/>
-                                          <Component id="TextFieldUsernameRegister" linkSize="1" max="32767" attributes="0"/>
-                                          <Component id="jLabel6" linkSize="1" pref="219" max="32767" attributes="0"/>
-                                          <Component id="ButtonRegister" min="-2" pref="250" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel5" linkSize="1" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" linkSize="1" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
+                                      <Component id="TextFieldFirstName" linkSize="1" pref="247" max="32767" attributes="0"/>
+                                      <Component id="TextFieldEmail" linkSize="1" alignment="0" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="TextFieldUsernameRegister" linkSize="1" alignment="1" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel11" linkSize="1" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" linkSize="1" alignment="0" pref="219" max="32767" attributes="0"/>
+                                  <Component id="jLabel4" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="TextFieldPhoneNumber" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="TextFieldMiddleName" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="ButtonRegister" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Component id="PasswordFieldRegister" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="ComboBoxRole" linkSize="1" pref="220" max="32767" attributes="0"/>
                                   <Component id="jLabel7" linkSize="1" max="32767" attributes="0"/>
                                   <Component id="TextFieldLastNameRegister" linkSize="1" pref="221" max="32767" attributes="0"/>
                                   <Component id="jLabel3" linkSize="1" max="32767" attributes="0"/>
+                                  <Component id="CheckBoxShowPasswordRegister" linkSize="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="42" max="32767" attributes="0"/>
+                              <EmptySpace pref="30" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace pref="20" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel1" linkSize="2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="TextFieldFirstName" linkSize="2" min="-2" pref="25" max="-2" attributes="0"/>
@@ -462,28 +460,18 @@
                                       <Component id="jLabel5" linkSize="2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="TextFieldEmail" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Component id="PasswordFieldRegister" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="CheckBoxShowPasswordRegister" linkSize="2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jLabel4" linkSize="2" min="-2" pref="26" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                                              <Component id="TextFieldMiddleName" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jLabel3" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                                              <Component id="TextFieldLastNameRegister" linkSize="2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel4" linkSize="2" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="TextFieldMiddleName" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TextFieldLastNameRegister" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel7" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel6" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -491,13 +479,24 @@
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="ComboBoxRole" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TextFieldUsernameRegister" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TextFieldPhoneNumber" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel11" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="PasswordFieldRegister" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TextFieldUsernameRegister" linkSize="2" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="CheckBoxShowPasswordRegister" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                               <Component id="ButtonRegister" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="56" max="32767" attributes="0"/>
+                              <EmptySpace pref="62" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -559,10 +558,10 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="33" red="33" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Password:"/>
+                        <Property name="text" type="java.lang.String" value="Username:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TextFieldUsernameRegister">
+                    <Component class="javax.swing.JTextField" name="TextFieldPhoneNumber">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -582,7 +581,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextFieldUsernameRegisterActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextFieldPhoneNumberActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -730,7 +729,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="33" red="33" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Username:"/>
+                        <Property name="text" type="java.lang.String" value="Phone No."/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="ComboBoxRole">
@@ -804,6 +803,43 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CheckBoxShowPasswordRegisterActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel11">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="33" green="33" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Inter" size="18" style="0"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="33" green="33" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Password:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="TextFieldUsernameRegister">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Inter" size="18" style="0"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="33" green="33" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextFieldUsernameRegisterActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
@@ -869,9 +905,9 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Waiting Connection..."/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
