@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package librarybookborrowing;
 
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Arrays;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -18,47 +12,41 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class AdminMethods extends Methods {
-    
-    public void loadBooks(JTable tblDestination){
+
+    public void loadBooks(JTable tblDestination) {
         DefaultTableModel dtm = new DefaultTableModel(
-            new String[]{
-                "ID", "Title", "Author", "Publisher",
-                "Year Published", "Quantity"
-            }, 0
-        );        
-        
-        String sqlSelect = "SELECT fld_book_id, fld_title, fld_author, fld_publisher, fld_year_published, fld_quantity FROM tbl_book";
-        try {
-            Connection conn = db.createConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sqlSelect);
-            ResultSet rs = pstmt.executeQuery();
-            
-            while (rs.next()) {                
+            new String[]{ "ID", "Title", "Author", "Publisher", "Year Published", "Quantity" }, 0
+        );
+
+        String sqlSelect = "SELECT fld_book_id, fld_title, fld_author, fld_publisher, "
+                         + "fld_year_published, fld_quantity "
+                         + "FROM tbl_book";
+        try (Connection conn = db.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlSelect);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
                 Object[] newRow = {
-                    rs.getInt("fld_book_id")
-                        , rs.getString("fld_title")
-                        , rs.getString("fld_author")
-                        , rs.getString("fld_publisher")
-                        , rs.getInt("fld_year_published")
-                        , rs.getInt("fld_quantity")
+                    rs.getInt("fld_book_id"),
+                    rs.getString("fld_title"),
+                    rs.getString("fld_author"),
+                    rs.getString("fld_publisher"),
+                    rs.getInt("fld_year_published"),
+                    rs.getInt("fld_quantity")
                 };
                 dtm.addRow(newRow);
             }
-            
             tblDestination.setModel(dtm);
-            
-            rs.close();
-            pstmt.close();
-            conn.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
-    void getBookInfo(JTable tblDestination, JTextField txtBookID, JTextField txtTitle, JTextField txtAuthor, JTextField txtPublisher, JTextField txtYearPublished, JTextField txtBookQty){
+
+    void getBookInfo(JTable tblDestination, JTextField txtBookID, JTextField txtTitle,
+                     JTextField txtAuthor, JTextField txtPublisher, JTextField txtYearPublished,
+                     JTextField txtBookQty) {
         int selectedRow = tblDestination.getSelectedRow();
-        
-        if (selectedRow != -1) {  
+        if (selectedRow != -1) {
             Object[] value = {
                 tblDestination.getValueAt(selectedRow, 0),
                 tblDestination.getValueAt(selectedRow, 1),
@@ -75,8 +63,10 @@ public class AdminMethods extends Methods {
             txtBookQty.setText(value[5].toString());
         }
     }
-    
-    public void clearTxt(JTable tblBooksList, JTextField txtBookID, JTextField txtTitle, JTextField txtAuthor, JTextField txtPublisher, JTextField txtYearPublished, JTextField txtBookQty){
+
+    public void clearTxt(JTable tblBooksList, JTextField txtBookID, JTextField txtTitle,
+                         JTextField txtAuthor, JTextField txtPublisher, JTextField txtYearPublished,
+                         JTextField txtBookQty) {
         txtBookID.setText("");
         txtTitle.setText("");
         txtAuthor.setText("");
@@ -85,70 +75,65 @@ public class AdminMethods extends Methods {
         txtBookQty.setText("");
         tblBooksList.clearSelection();
     }
-    
-    public void searchUpdateBook(JTable tblDestination, String inSearchVal){
-        String searchLikeVal;
-        
-        searchLikeVal = "%" + inSearchVal + "%";
-        
+
+    public void searchUpdateBook(JTable tblDestination, String inSearchVal) {
+        String searchLikeVal = "%" + inSearchVal + "%";
         DefaultTableModel dtm = (DefaultTableModel) tblDestination.getModel();
         dtm.setRowCount(0);
-        String sqlQuery = "SELECT fld_book_id, fld_title, fld_author, fld_publisher, fld_year_published, fld_quantity " +
-                "FROM tbl_book " +
-                "WHERE fld_title LIKE ? ";
-        try {
-            Connection conn = db.createConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
-            
+
+        String sqlQuery = "SELECT fld_book_id, fld_title, fld_author, fld_publisher, "
+                        + "fld_year_published, fld_quantity "
+                        + "FROM tbl_book WHERE fld_title LIKE ?";
+
+        try (Connection conn = db.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlQuery)) {
+
             pstmt.setString(1, searchLikeVal);
-            
-            ResultSet rs = pstmt.executeQuery();
-            
-            while (rs.next()) {                
-                Object[] newRow = {
-                    rs.getString("fld_book_id")
-                    , rs.getString("fld_title")
-                    , rs.getString("fld_author")
-                    , rs.getString("fld_publisher")
-                    , rs.getInt("fld_year_published")
-                    , rs.getInt("fld_quantity")
-                };
-                dtm.addRow(newRow);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Object[] newRow = {
+                        rs.getInt("fld_book_id"),
+                        rs.getString("fld_title"),
+                        rs.getString("fld_author"),
+                        rs.getString("fld_publisher"),
+                        rs.getInt("fld_year_published"),
+                        rs.getInt("fld_quantity")
+                    };
+                    dtm.addRow(newRow);
+                }
             }
-            
-            
-            conn.close();
         } catch (Exception e) {
             Object[] errRow = {"error", e.getMessage()};
             dtm.addRow(errRow);
         }
     }
-    
-    public void cmboxToDo(JTable tblBooksList, JComboBox cmbName, 
-        JTextField txtBookID, JTextField txtTitle, JTextField txtAuthor,
-        JTextField txtPublisher, JTextField txtYearPublished, JTextField txtBookQty,
-        JButton btnAdd, JButton btnMinus, JButton btnAdminUpdateBook, 
-        JButton btnAdminAddBook, JButton btnAdminDeleteBook) {
 
-        Color pastelRed = new Color(255, 179, 186);
+    /** Combo-box mode handler: 0=Default, 1=Update, 2=Add, 3=Delete */
+    public void cmboxToDo(JTable tblBooksList, JComboBox cmbName,
+                          JTextField txtBookID, JTextField txtTitle, JTextField txtAuthor,
+                          JTextField txtPublisher, JTextField txtYearPublished, JTextField txtBookQty,
+                          JButton btnAdd, JButton btnMinus, JButton btnAdminUpdateBook,
+                          JButton btnAdminAddBook, JButton btnAdminDeleteBook) {
+
         int selectedIndex = cmbName.getSelectedIndex();
 
-        // Disable all buttons first
+        // Disable all actions first
         btnAdminUpdateBook.setEnabled(false);
         btnAdminAddBook.setEnabled(false);
         btnAdminDeleteBook.setEnabled(false);
         btnAdd.setEnabled(false);
         btnMinus.setEnabled(false);
 
-        // Set all fields non-editable by default
+        // Make all fields non-editable by default
         txtBookID.setEditable(false);
         txtTitle.setEditable(false);
         txtAuthor.setEditable(false);
         txtPublisher.setEditable(false);
         txtYearPublished.setEditable(false);
         txtBookQty.setEditable(false);
-        
-        // Set default color to pastel red
+
+        // Pastel red for locked fields (visual cue)
+        Color pastelRed = new Color(255, 179, 186);
         txtBookID.setBackground(pastelRed);
         txtTitle.setBackground(pastelRed);
         txtAuthor.setBackground(pastelRed);
@@ -157,31 +142,28 @@ public class AdminMethods extends Methods {
         txtBookQty.setBackground(pastelRed);
 
         if (selectedIndex == 0) {
-            // Default mode: clear everything
+            // Default: clear and lock
             clearTxt(tblBooksList, txtBookID, txtTitle, txtAuthor, txtPublisher, txtYearPublished, txtBookQty);
             tblBooksList.clearSelection();
-            txtTitle.setBackground(pastelRed);
-            txtAuthor.setBackground(pastelRed);
-            txtPublisher.setBackground(pastelRed);
-            txtYearPublished.setBackground(pastelRed);
-            txtBookQty.setBackground(pastelRed);
 
         } else if (selectedIndex == 1) {
-            // Update Book
+            // Update book: allow edit except quantity
             txtTitle.setEditable(true);
             txtAuthor.setEditable(true);
             txtPublisher.setEditable(true);
             txtYearPublished.setEditable(true);
             txtBookQty.setEditable(false);
+
             txtTitle.setBackground(Color.WHITE);
             txtAuthor.setBackground(Color.WHITE);
             txtPublisher.setBackground(Color.WHITE);
             txtYearPublished.setBackground(Color.WHITE);
             txtBookQty.setBackground(pastelRed);
+
             btnAdminUpdateBook.setEnabled(true);
 
         } else if (selectedIndex == 2) {
-            // Add New Book
+            // Add new book: allow all fields (qty starts at 0)
             clearTxt(tblBooksList, txtBookID, txtTitle, txtAuthor, txtPublisher, txtYearPublished, txtBookQty);
             tblBooksList.clearSelection();
 
@@ -191,7 +173,7 @@ public class AdminMethods extends Methods {
             txtYearPublished.setEditable(true);
             txtBookQty.setEditable(true);
             txtBookQty.setText("0");
-            
+
             txtTitle.setBackground(Color.WHITE);
             txtAuthor.setBackground(Color.WHITE);
             txtPublisher.setBackground(Color.WHITE);
@@ -199,117 +181,84 @@ public class AdminMethods extends Methods {
             txtBookQty.setBackground(Color.WHITE);
 
             btnAdminAddBook.setEnabled(true);
-
-            // Enable quantity controls when adding a new book
             btnAdd.setEnabled(true);
             btnMinus.setEnabled(true);
 
         } else if (selectedIndex == 3) {
-            // Delete Book
+            // Delete book: nothing editable, only enable delete
             txtBookQty.setEditable(false);
             btnAdminDeleteBook.setEnabled(true);
         }
     }
 
+    public void updateBook(JTextField txtBookId, JTextField title, JTextField author,
+                           JTextField publisher, JTextField txtYearPublished, JTextField txtQuantity) {
+        String sqlUpdate = "UPDATE tbl_book "
+                         + "SET fld_title = ?, fld_author = ?, fld_publisher = ?, "
+                         + "fld_year_published = ?, fld_quantity = ? "
+                         + "WHERE fld_book_id = ?";
+        try (Connection conn = db.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlUpdate)) {
 
-    
-    public void updateBook(JTextField txtBookId, JTextField title, JTextField author, JTextField publisher, JTextField txtYearPublished, JTextField txtQuantity ){
-        String sqlUpdate = "UPDATE tbl_book SET fld_title = ?, fld_author = ?, fld_publisher = ?, fld_year_published = ?, fld_quantity = ? WHERE fld_book_id = ?";
-        try {
-            Connection conn = db.createConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sqlUpdate);
-            
             int yearPublished = Integer.parseInt(txtYearPublished.getText());
             int quantity = Integer.parseInt(txtQuantity.getText());
             int bookId = Integer.parseInt(txtBookId.getText());
-            
-                
-            pstmt.setString(1, title.getText());
-            pstmt.setString(2, author.getText());
-            pstmt.setString(3, publisher.getText());    
-            pstmt.setInt(4, yearPublished);
-            pstmt.setInt(5, quantity); 
-            pstmt.setInt(6, bookId);
-            
-            int rowsAffected = pstmt.executeUpdate();
 
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Book updated");
-            } else {
-                JOptionPane.showMessageDialog(null, "No record found with that ID.");
-            }
-            
-            pstmt.close();
-            conn.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
-    
-    public void insertBook(JTextField title, JTextField author, JTextField publisher, JTextField txtYearPublished, JTextField txtQuantity ){
-        String sqlInsert = "INSERT INTO tbl_book(fld_title, fld_author, fld_publisher, fld_year_published, fld_quantity) VALUES (?,?,?,?,?)";
-        try {
-            Connection conn = db.createConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sqlInsert);
-            
-            int yearPublished = 0;
-            int quantity = 0;
-            
-            if (callFilters.isNumeric(txtYearPublished.getText())) {
-                yearPublished = Integer.parseInt(txtYearPublished.getText());
-            }
-            if (callFilters.isNumeric(txtQuantity.getText())) {
-                quantity = Integer.parseInt(txtQuantity.getText());
-            }
-            
             pstmt.setString(1, title.getText());
             pstmt.setString(2, author.getText());
-            pstmt.setString(3, publisher.getText());    
+            pstmt.setString(3, publisher.getText());
             pstmt.setInt(4, yearPublished);
             pstmt.setInt(5, quantity);
-            
-            int rowsAffected = pstmt.executeUpdate();
+            pstmt.setInt(6, bookId);
 
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Book Added");
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid book added");
-            }
-            
-            pstmt.close();
-            conn.close();
+            int rows = pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, rows > 0 ? "Book updated" : "No record found with that ID.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
-    public void deleteBook(JTextField txtBookId){
-        String sqlUpdate = "DELETE FROM tbl_book WHERE fld_book_id = ? ";
-        try {
-            Connection conn = db.createConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sqlUpdate);
-            
+
+    public void insertBook(JTextField title, JTextField author, JTextField publisher,
+                           JTextField txtYearPublished, JTextField txtQuantity) {
+        String sqlInsert = "INSERT INTO tbl_book "
+                         + "(fld_title, fld_author, fld_publisher, fld_year_published, fld_quantity) "
+                         + "VALUES (?,?,?,?,?)";
+        try (Connection conn = db.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlInsert)) {
+
+            int yearPublished = callFilters.isNumeric(txtYearPublished.getText())
+                    ? Integer.parseInt(txtYearPublished.getText()) : 0;
+            int quantity = callFilters.isNumeric(txtQuantity.getText())
+                    ? Integer.parseInt(txtQuantity.getText()) : 0;
+
+            pstmt.setString(1, title.getText());
+            pstmt.setString(2, author.getText());
+            pstmt.setString(3, publisher.getText());
+            pstmt.setInt(4, yearPublished);
+            pstmt.setInt(5, quantity);
+
+            int rows = pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, rows > 0 ? "Book Added" : "Invalid book added");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    public void deleteBook(JTextField txtBookId) {
+        String sqlDelete = "DELETE FROM tbl_book WHERE fld_book_id = ?";
+        try (Connection conn = db.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlDelete)) {
+
             int bookId = Integer.parseInt(txtBookId.getText());
-            
             pstmt.setInt(1, bookId);
-            
-            int rowsAffected = pstmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Book deleted");
-            } else {
-                JOptionPane.showMessageDialog(null, "No record found with that ID.");
-            }
-            
-            pstmt.close();
-            conn.close();
+            int rows = pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, rows > 0 ? "Book deleted" : "No record found with that ID.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
-    public void aboutUs(){
-        // Create the group list
+
+    public void aboutUs() {
         String[] members = {
             "Calvin Kyle Nocon",
             "Von Luige Amamangpang",
@@ -318,26 +267,16 @@ public class AdminMethods extends Methods {
             "Savannah Masmela",
             "Stephannie Ann Lorente"
         };
+        java.util.Arrays.sort(members);
 
-        // Sort alphabetically
-        Arrays.sort(members);
-
-        // Build the message
         StringBuilder message = new StringBuilder("Group 1 Members:\n\n");
-        for (String name : members) {
-            message.append(name).append("\n");
-        }
+        for (String name : members) message.append(name).append("\n");
 
-        
-        String title = "Group 1";
-
-        // Show the message dialog
         JOptionPane.showMessageDialog(
             null,
             message.toString(),
-            title,
+            "Group 1",
             JOptionPane.INFORMATION_MESSAGE
         );
-
     }
 }
