@@ -1650,14 +1650,11 @@ public class Dashboard extends javax.swing.JFrame {
                 return;
             }
             
-//          ---------------- CHECK IF THE MEMBER HAVE UNRETURNED BOOKS ---------------------
-//
-//            if (!callMethods.memberHavePending(memberID)) {
-//                JOptionPane.showMessageDialog(this, 
-//                    "This member still has unreturned books. They cannot borrow until all are returned.");
-//                return;
-//            } 
-//  ---------- DISABLED LANG MUNA PARA MA TRY KO YUNG BORROWING SINCE WALA PANG RETURN FEATURE -------------------
+            if (!callMethods.memberHavePending(memberID)) {
+                JOptionPane.showMessageDialog(this, 
+                    "This member still has unreturned books. They cannot borrow until all are returned.");
+                return;
+            } 
 
 
             if (!callFilters.canBorrowBooks(doneBorrow)) {
@@ -1906,7 +1903,29 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void tblBorrowedMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBorrowedMouseReleased
-                  
+        int selectedRow = tblBorrowed.getSelectedRow();
+            
+            try {
+                String memberName = tblBorrowed.getValueAt(selectedRow, 1).toString();
+                String bookTitle = tblBorrowed.getValueAt(selectedRow, 2).toString();
+                String formattedBorrow = tblBorrowed.getValueAt(selectedRow, 3).toString();
+                String formattedDue= tblBorrowed.getValueAt(selectedRow, 4).toString();
+                
+                txtReturnee.setText(memberName);
+                txtReturnBook.setText(bookTitle); 
+                txtBorrowDate.setText(formattedBorrow); 
+                txtDueDate.setText(formattedDue); 
+                
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy   HH:mm");
+                LocalDateTime returnDate = LocalDateTime.now();
+                
+                String formattedReturn = returnDate.format(formatter);
+                txtReturnDate.setText(formattedReturn);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }       
     }//GEN-LAST:event_tblBorrowedMouseReleased
 
     private void cmbChooseSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbChooseSearchActionPerformed
