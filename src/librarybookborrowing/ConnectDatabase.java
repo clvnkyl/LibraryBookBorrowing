@@ -18,8 +18,4 @@ public class ConnectDatabase {
         Connection conn = DriverManager.getConnection(dbAddress, dbUsername, dbPassword);
         return conn;
     }
-    
-    
-    
-    
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package librarybookborrowing;
 
 import java.awt.Component;
@@ -26,7 +22,6 @@ public class Filters {
         boolean isConnected = true;
         try {
             Connection conn = db.createConnection();
-            
             conn.close();
         } catch (Exception e) {
             isConnected = false;
@@ -48,17 +43,15 @@ public class Filters {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateTimePattern);
         try {
             ldt = LocalDateTime.parse(strDateTimeIn, dtf);
-        } catch (Exception e) {
-        }
+        } catch (Exception e) { }
         return ldt;
     }
     
     boolean isValidDateTime(String strDateTimeIn) {
         boolean isValidDateTime = true;
-
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateTimePattern);
         try {
-            LocalDateTime ldt = LocalDateTime.parse(strDateTimeIn, dtf);
+            LocalDateTime.parse(strDateTimeIn, dtf);
         } catch (Exception e) {
             isValidDateTime = false;
         }
@@ -67,8 +60,7 @@ public class Filters {
     
     String convertLocalDateTimeToPattern(LocalDateTime ldtIn) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateTimePattern);
-        String patternDateTime = dtf.format(ldtIn);
-        return patternDateTime;
+        return dtf.format(ldtIn);
     }
     
     void resizeColumnWidth(JTable table) {
@@ -78,10 +70,9 @@ public class Filters {
             for (int row = 0; row < table.getRowCount(); row++) {
                 TableCellRenderer renderer = table.getCellRenderer(row, column);
                 Component comp = table.prepareRenderer(renderer, row, column);
-                width = Math.max(comp.getPreferredSize().width +1 , width);
+                width = Math.max(comp.getPreferredSize().width + 1, width);
             }
-            if(width > 300)
-                width = 300;
+            if (width > 300) width = 300;
             columnModel.getColumn(column).setPreferredWidth(width);
         }
     }
@@ -112,7 +103,10 @@ public class Filters {
                     int availableQty = rs.getInt("fld_quantity");
                     if (borrowQty > availableQty) {
                         allAvailable = false;
-                        unavailableBooks += String.format("\nBook ID #%d requested %d but only %d available.", bookId, borrowQty, availableQty);
+                        unavailableBooks += String.format(
+                            "\nBook ID #%d requested %d but only %d available.",
+                            bookId, borrowQty, availableQty
+                        );
                     }
                 } else {
                     allAvailable = false;
@@ -127,11 +121,36 @@ public class Filters {
         if (!allAvailable) {
             JOptionPane.showMessageDialog(null, "Borrowing cancelled!" + unavailableBooks);
         }
-
         return allAvailable;
     }
+    
+    /** Attach a checkbox to toggle a password field’s echo char. */
+    public void wireShowPassword(javax.swing.JCheckBox chk, javax.swing.JPasswordField pf) {
+        final char[] original = { pf.getEchoChar() == 0 ? '•' : pf.getEchoChar() };
+        if (pf.getEchoChar() == 0) pf.setEchoChar('•');
+        chk.addActionListener(e -> {
+            if (chk.isSelected()) {
+                pf.setEchoChar((char)0);
+            } else {
+                pf.setEchoChar(original[0]);
+            }
+        });
+    }
 
-    
-    
-    
+    /** Letters, spaces, hyphen, apostrophe; 1–60 chars. */
+    public boolean isValidName(String s) {
+        return s != null && s.matches("^[A-Za-z'\\- ]{1,60}$");
+    }
+
+    /** RFC-light email check. */
+    public boolean isValidEmail(String s) {
+        if (s == null) return false;
+        if (s.length() > 300) return false;
+        return s.matches("^(?=[^@\\s]+@[^@\\s]+$)(?!.*\\.\\.)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,24}$");
+    }
+
+    /** Username 3–50, letters numbers underscore or dot. */
+    public boolean isValidUsername(String s) {
+        return s != null && s.matches("^[A-Za-z0-9._]{3,50}$");
+    }
 }

@@ -1963,7 +1963,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void cmbAdminChooseToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAdminChooseToDoActionPerformed
         int toDo = cmbAdminChooseToDo.getSelectedIndex();
-        callAdminMethods.cmboxToDo(tblBorrowList,
+        callAdminMethods.cmboxToDo(tblAdminBooksList,
                 cmbAdminChooseToDo, txtAdminBookID, txtAdminBookTitle, txtAdminAuthor,
                 txtAdminPublisher, txtAdminYearPublished, txtAdminQty,
                 btnAdminAddQty, btnAdminMinusQty, btnAdminUpdateBook, btnAdminAddBook,
