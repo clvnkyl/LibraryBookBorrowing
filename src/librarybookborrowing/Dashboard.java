@@ -1223,6 +1223,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         txtDueDate.setEditable(false);
 
+        txtReturnDate.setEditable(false);
+
         txtReceivedBy1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtReceivedBy1.setText("Due Date:");
 
@@ -1477,14 +1479,24 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDoneReceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneReceiveActionPerformed
-
+        ConnectDatabase db = new ConnectDatabase();
+        Connection conn = null;
+        try {
+            conn = db.createConnection();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Failed to connect to database: " + ex.getMessage());
+            ex.printStackTrace();
+            return;
+        }
+        
         int selectedRow = tblBorrowed.getSelectedRow();
-        int transId = Integer.parseInt(tblBorrowed.getValueAt(selectedRow, 0).toString());
             if (selectedRow == -1) {
                 JOptionPane.showMessageDialog(this, "Please select a book to return.");
                 return;
             }
-
+            
+            int transId = Integer.parseInt(tblBorrowed.getValueAt(selectedRow, 0).toString());
+        
             
             String staffReceiver = txtReceivedBy.getText().trim();
             if(staffReceiver.isEmpty()){
@@ -1503,10 +1515,29 @@ public class Dashboard extends javax.swing.JFrame {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM:dd:yyyy HH:mm");
             String formattedReturn = returnDate.format(formatter);
             
-
             try {
+                String checkSql = "SELECT COUNT(*) FROM tbl_staff WHERE fld_staff_id = ?";
+                PreparedStatement checkPs = conn.prepareStatement(checkSql);
+                checkPs.setInt(1, receiverStaffId);
+                ResultSet rs = checkPs.executeQuery();
                 
-                Connection conn = db.createConnection();
+                if (rs.next() && rs.getInt(1) == 0) {
+                    txtReturnee.setText("");
+                    txtReturnBook.setText("");
+                    txtReceivedBy.setText("");
+                    txtBorrowDate.setText(""); 
+                    txtDueDate.setText(""); 
+                    txtReturnDate.setText("");
+                    txtReceivedBy.setText("");
+                    JOptionPane.showMessageDialog(this, "Staff Id not Found!");
+                    rs.close();
+                    checkPs.close();
+                    return;
+                }
+                    
+                rs.close();
+                checkPs.close();
+                
                 String updateSql = "UPDATE tbl_transaction t "
                                  + "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id "
                                  + "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id "
@@ -1520,9 +1551,6 @@ public class Dashboard extends javax.swing.JFrame {
                 int rows = ps.executeUpdate();
 
                 if (rows > 0) {
-                    JOptionPane.showMessageDialog(this, "Book successfully returned!");
-                    returnMethods.loadBorrowedBook(tblBorrowed);
-                    returnMethods.loadReturnedBook(tblReturned);
                     txtReturnee.setText("");
                     txtReturnBook.setText("");
                     txtReceivedBy.setText("");
@@ -1530,11 +1558,16 @@ public class Dashboard extends javax.swing.JFrame {
                     txtDueDate.setText(""); 
                     txtReturnDate.setText("");
                     txtReceivedBy.setText("");
+                    returnMethods.loadBorrowedBook(tblBorrowed);
+                    returnMethods.loadReturnedBook(tblReturned);
+                    JOptionPane.showMessageDialog(this, "Book successfully returned!");
+                    
+                    
                 } else {
                     JOptionPane.showMessageDialog(this, "No matching record found!");
                 }
 
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Error updating return: " + e.getMessage());
                 e.printStackTrace();
             }

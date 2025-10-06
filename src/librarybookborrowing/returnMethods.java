@@ -20,10 +20,11 @@ import javax.swing.table.DefaultTableModel;
 public class returnMethods {
         public static void loadBorrowedBook(JTable table) {
            
-            DefaultTableModel model = (DefaultTableModel)table.getModel();
-            model.setRowCount(0);
-
-            String sql = "SELECT t.fld_transaction_id, CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " 
+            DefaultTableModel model = new DefaultTableModel(
+                new Object[]{"transId", "Member Name", "Book Title", "Borrow Date","Due Date", "Status"}, 0);
+                table.setModel(model);
+                        
+                String sql = "SELECT t.fld_transaction_id, CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " 
                         + "b.fld_title, t.fld_borrow_date, t.fld_due_date, t.fld_status " 
                         + "FROM tbl_transaction t " 
                         + "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id "
@@ -53,8 +54,7 @@ public class returnMethods {
                     String formattedDue = dueDate.format(formatter);
                     String status = rs.getString("fld_status");
 
-                   model.addRow(new Object[]{ transId, 
-                        membername, bookTitle, formattedBorrow, formattedDue, status
+                   model.addRow(new Object[]{ transId, membername, bookTitle, formattedBorrow, formattedDue, status
                     }); 
                 } 
                 int transIdColIndex = 0;

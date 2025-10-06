@@ -2421,6 +2421,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtReturnDate">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtReceivedBy">
                     </Component>
