@@ -5,6 +5,7 @@
 package librarybookborrowing;
 
 
+import java.awt.Color;
 import java.sql.*;
 import java.awt.Font;
 import java.io.File;
@@ -56,6 +57,7 @@ public class Dashboard extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         pnlBase = new javax.swing.JPanel();
         pnlNavigation = new javax.swing.JPanel();
@@ -67,9 +69,9 @@ public class Dashboard extends javax.swing.JFrame {
         lblOptions = new javax.swing.JLabel();
         pnlScreen = new javax.swing.JPanel();
         pnlHome = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblDashboard = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        tblDashboard = new javax.swing.JTable();
         pnlBorrow = new javax.swing.JPanel();
         lblBorrowList = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -138,7 +140,8 @@ public class Dashboard extends javax.swing.JFrame {
         pnlOptions = new javax.swing.JPanel();
         tabbedMenu = new javax.swing.JTabbedPane();
         pnlOptionsTab = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        btnAboutUs = new javax.swing.JButton();
         pnlAdmin = new javax.swing.JPanel();
         pnlBookForm = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -163,7 +166,6 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         tblAdminBooksList = new javax.swing.JTable();
         txtAdminSearchBookTitle = new javax.swing.JTextField();
-        btnAdminSearchBook = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,8 +173,8 @@ public class Dashboard extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(1500, 900));
         setMinimumSize(new java.awt.Dimension(1300, 600));
-        setPreferredSize(new java.awt.Dimension(1300, 600));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(1320, 600));
+        setSize(new java.awt.Dimension(1300, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -195,63 +197,89 @@ public class Dashboard extends javax.swing.JFrame {
         lblHome.setBackground(new java.awt.Color(0, 0, 0));
         lblHome.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblHome.setForeground(new java.awt.Color(0, 0, 0));
+        lblHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHome.setText("Home");
+        lblHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblHomeMouseClicked(evt);
             }
         });
-        pnlNavigation.add(lblHome, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 25;
+        pnlNavigation.add(lblHome, gridBagConstraints);
 
         lblBorrow.setBackground(new java.awt.Color(0, 0, 0));
         lblBorrow.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblBorrow.setForeground(new java.awt.Color(0, 0, 0));
+        lblBorrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBorrow.setText("Borrow");
+        lblBorrow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBorrow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBorrowMouseClicked(evt);
             }
         });
-        pnlNavigation.add(lblBorrow, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 25;
+        pnlNavigation.add(lblBorrow, gridBagConstraints);
 
         lblReturn.setBackground(new java.awt.Color(0, 0, 0));
         lblReturn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblReturn.setForeground(new java.awt.Color(0, 0, 0));
+        lblReturn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblReturn.setText("Return");
+        lblReturn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblReturn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblReturnMouseClicked(evt);
             }
         });
-        pnlNavigation.add(lblReturn, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 25;
+        pnlNavigation.add(lblReturn, gridBagConstraints);
 
         lblCheckAcc.setBackground(new java.awt.Color(0, 0, 0));
         lblCheckAcc.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblCheckAcc.setForeground(new java.awt.Color(0, 0, 0));
+        lblCheckAcc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCheckAcc.setText("Check Account");
+        lblCheckAcc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCheckAcc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCheckAccMouseClicked(evt);
             }
         });
-        pnlNavigation.add(lblCheckAcc, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 25;
+        pnlNavigation.add(lblCheckAcc, gridBagConstraints);
 
         lblSearch.setBackground(new java.awt.Color(0, 0, 0));
         lblSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblSearch.setForeground(new java.awt.Color(0, 0, 0));
+        lblSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSearch.setText("Search Book");
+        lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSearchMouseClicked(evt);
             }
         });
-        pnlNavigation.add(lblSearch, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.ipady = 25;
+        pnlNavigation.add(lblSearch, gridBagConstraints);
 
         lblOptions.setBackground(new java.awt.Color(0, 0, 0));
         lblOptions.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblOptions.setForeground(new java.awt.Color(0, 0, 0));
         lblOptions.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblOptions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menu.png"))); // NOI18N
+        lblOptions.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblOptions.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblOptions.setMaximumSize(new java.awt.Dimension(50, 32));
         lblOptions.setMinimumSize(new java.awt.Dimension(50, 32));
@@ -262,7 +290,10 @@ public class Dashboard extends javax.swing.JFrame {
                 lblOptionsMouseClicked(evt);
             }
         });
-        pnlNavigation.add(lblOptions, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 15;
+        gridBagConstraints.ipady = 25;
+        pnlNavigation.add(lblOptions, gridBagConstraints);
 
         pnlScreen.setBackground(new java.awt.Color(165, 214, 167));
         pnlScreen.setMaximumSize(new java.awt.Dimension(1300, 900));
@@ -272,57 +303,57 @@ public class Dashboard extends javax.swing.JFrame {
         pnlHome.setMaximumSize(new java.awt.Dimension(1300, 900));
         pnlHome.setMinimumSize(new java.awt.Dimension(900, 500));
 
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(1300, 400));
-
-        tblDashboard.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Transaction ID", "Member Name", "Issued By", "Book Title", "Borrow Date", "Due Date", "Return Date", "Received By", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblDashboard.setMaximumSize(new java.awt.Dimension(1300, 5000));
-        tblDashboard.setMinimumSize(new java.awt.Dimension(900, 500));
-        tblDashboard.setPreferredSize(new java.awt.Dimension(1300, 5000));
-        tblDashboard.setRowHeight(25);
-        tblDashboard.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tblDashboard);
-
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Book Records");
 
+        tblDashboard.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Transaction ID", "Member Name", "Issuer", "Book Title", "Borrow Date", "Due Date", "Return Date", "Receiver", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDashboard.setMinimumSize(new java.awt.Dimension(900, 500));
+        tblDashboard.setRowHeight(25);
+        tblDashboard.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane11.setViewportView(tblDashboard);
+
         javax.swing.GroupLayout pnlHomeLayout = new javax.swing.GroupLayout(pnlHome);
         pnlHome.setLayout(pnlHomeLayout);
         pnlHomeLayout.setHorizontalGroup(
             pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHomeLayout.createSequentialGroup()
-                .addGroup(pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE)
+            .addComponent(jScrollPane11)
         );
         pnlHomeLayout.setVerticalGroup(
             pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHomeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
         );
 
         pnlScreen.add(pnlHome, "card2");
@@ -369,13 +400,13 @@ public class Dashboard extends javax.swing.JFrame {
         }
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel12.setText("Member Name:");
+        jLabel12.setText("Member Last Name:");
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("Book Title:");
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel14.setText("Issued by:");
+        jLabel14.setText("Issuer Last Name:");
 
         txtBorrowerName.setMaximumSize(new java.awt.Dimension(64, 22));
         txtBorrowerName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -638,7 +669,11 @@ public class Dashboard extends javax.swing.JFrame {
         lblReceivedBy.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblReceivedBy.setText("Received by:");
 
-        txtReturnee.setEditable(false);
+        txtReturnee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtReturneeKeyReleased(evt);
+            }
+        });
 
         txtReturnBook.setEditable(false);
 
@@ -800,6 +835,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         tblReturned.setMinimumSize(new java.awt.Dimension(900, 500));
         tblReturned.setRowHeight(25);
+        tblReturned.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane10.setViewportView(tblReturned);
 
         javax.swing.GroupLayout pnlReturnLayout = new javax.swing.GroupLayout(pnlReturn);
@@ -850,11 +886,11 @@ public class Dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Trasaction ID", "Member Name", "Book Title", "Borrow Date", "Due Date", "Return Date", "Status"
+                "Transaction ID", "Reference ID", "Member Name", "Book Title", "Borrow Date", "Due Date", "Return Date", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -863,6 +899,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         tblMemberHistory.setMinimumSize(new java.awt.Dimension(900, 500));
         tblMemberHistory.setRowHeight(25);
+        tblMemberHistory.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(tblMemberHistory);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -903,7 +940,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(btnSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRefresh)
-                        .addGap(0, 609, Short.MAX_VALUE))
+                        .addGap(0, 566, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -963,6 +1000,7 @@ public class Dashboard extends javax.swing.JFrame {
         pnlSearchingForm.setBackground(new java.awt.Color(165, 214, 167));
 
         txtSearchBookTitle.setEditable(false);
+        txtSearchBookTitle.setBackground(new java.awt.Color(255, 179, 186));
         txtSearchBookTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         btnSearchBook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -991,9 +1029,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel7.setText("Author");
 
         txtSearchBookAuthor.setEditable(false);
+        txtSearchBookAuthor.setBackground(new java.awt.Color(255, 179, 186));
         txtSearchBookAuthor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txtSearchBookYearPub.setEditable(false);
+        txtSearchBookYearPub.setBackground(new java.awt.Color(255, 179, 186));
         txtSearchBookYearPub.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -1098,24 +1138,42 @@ public class Dashboard extends javax.swing.JFrame {
 
         pnlOptionsTab.setBackground(new java.awt.Color(165, 214, 167));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Logout");
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(0, 0, 0));
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
+        btnAboutUs.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAboutUs.setForeground(new java.awt.Color(0, 0, 0));
+        btnAboutUs.setText("About us");
+        btnAboutUs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAboutUsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlOptionsTabLayout = new javax.swing.GroupLayout(pnlOptionsTab);
         pnlOptionsTab.setLayout(pnlOptionsTabLayout);
         pnlOptionsTabLayout.setHorizontalGroup(
             pnlOptionsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsTabLayout.createSequentialGroup()
-                .addContainerGap(1050, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(756, Short.MAX_VALUE)
+                .addComponent(btnAboutUs, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlOptionsTabLayout.setVerticalGroup(
             pnlOptionsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsTabLayout.createSequentialGroup()
                 .addContainerGap(436, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlOptionsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnAboutUs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1366,9 +1424,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnAdminSearchBook.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAdminSearchBook.setText("Search");
-
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -1383,14 +1438,12 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(pnlBookForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9)
-                    .addGroup(pnlAdminLayout.createSequentialGroup()
-                        .addGap(0, 123, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtAdminSearchBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAdminSearchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtAdminSearchBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlAdminLayout.setVerticalGroup(
@@ -1400,13 +1453,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlBookForm, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlAdminLayout.createSequentialGroup()
-                        .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtAdminSearchBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel21))
-                            .addGroup(pnlAdminLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(btnAdminSearchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAdminSearchBookTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1439,7 +1488,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addComponent(pnlNavigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlScreen, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE))
+                .addComponent(pnlScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1485,6 +1534,7 @@ public class Dashboard extends javax.swing.JFrame {
         pnlScreen.add(pnlReturn);
         pnlScreen.repaint();
         pnlScreen.revalidate();
+        returnMethods.loadBorrowedBook(tblBorrowed);
     }//GEN-LAST:event_lblReturnMouseClicked
 
     private void lblCheckAccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCheckAccMouseClicked
@@ -1492,6 +1542,7 @@ public class Dashboard extends javax.swing.JFrame {
         pnlScreen.add(pnlCheckAcc);
         pnlScreen.repaint();
         pnlScreen.revalidate();
+        loadAllMemberHistory();
     }//GEN-LAST:event_lblCheckAccMouseClicked
 
     private void lblSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMouseClicked
@@ -1499,6 +1550,7 @@ public class Dashboard extends javax.swing.JFrame {
         pnlScreen.add(pnlSearchBook);
         pnlScreen.repaint();
         pnlScreen.revalidate();
+        callMethods.getBooks(tblSearchBooksList);
     }//GEN-LAST:event_lblSearchMouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -1578,6 +1630,29 @@ public class Dashboard extends javax.swing.JFrame {
                 int rows = ps.executeUpdate();
 
                 if (rows > 0) {
+                    // --- Get the book ID of the returned book ---
+                    String getBookIdSql = "SELECT fld_book_id FROM tbl_transaction WHERE fld_transaction_id = ?";
+                    PreparedStatement psBook = conn.prepareStatement(getBookIdSql);
+                    psBook.setInt(1, transId);
+                    ResultSet rsBook = psBook.executeQuery();
+
+                    int bookId = -1;
+                    if (rsBook.next()) {
+                        bookId = rsBook.getInt("fld_book_id");
+                    }
+                    rsBook.close();
+                    psBook.close();
+
+                    // --- Update book quantity (add 1 back) ---
+                    if (bookId != -1) {
+                        String updateQtySql = "UPDATE tbl_book SET fld_quantity = fld_quantity + 1 WHERE fld_book_id = ?";
+                        PreparedStatement psQty = conn.prepareStatement(updateQtySql);
+                        psQty.setInt(1, bookId);
+                        psQty.executeUpdate();
+                        psQty.close();
+                    }
+
+                    // --- Clear fields and refresh tables ---
                     txtReturnee.setText("");
                     txtReturnBook.setText("");
                     txtReceivedBy.setText("");
@@ -1585,14 +1660,15 @@ public class Dashboard extends javax.swing.JFrame {
                     txtDueDate.setText(""); 
                     txtReturnDate.setText("");
                     txtReceivedBy.setText("");
+
                     returnMethods.loadBorrowedBook(tblBorrowed);
                     returnMethods.loadReturnedBook(tblReturned);
+
                     JOptionPane.showMessageDialog(this, "Book successfully returned!");
-                    
-                    
                 } else {
                     JOptionPane.showMessageDialog(this, "No matching record found!");
                 }
+
 
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Error updating return: " + e.getMessage());
@@ -1829,28 +1905,60 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdminUpdateBookActionPerformed
 
     private void btnAdminAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminAddBookActionPerformed
-        callAdminMethods.insertBook(txtAdminBookTitle, txtAdminAuthor,
+        
+        if (!txtAdminBookTitle.getText().trim().isEmpty()) {
+            callAdminMethods.insertBook(txtAdminBookTitle, txtAdminAuthor,
                 txtAdminPublisher, txtAdminYearPublished, txtAdminQty);
         
-        callAdminMethods.loadBooks(tblAdminBooksList);
-        
-        cmbAdminChooseToDo.setSelectedIndex(0);
-        callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
-                txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
-                txtAdminQty);
-        txtAdminSearchBookTitle.setText("");
+            callAdminMethods.loadBooks(tblAdminBooksList);
+
+            cmbAdminChooseToDo.setSelectedIndex(0);
+            callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
+                    txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
+                    txtAdminQty);
+            txtAdminSearchBookTitle.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "You did not enter book information");
+        }
     }//GEN-LAST:event_btnAdminAddBookActionPerformed
 
     private void btnAdminDeleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminDeleteBookActionPerformed
-        callAdminMethods.deleteBook(txtAdminBookID);
-        
-        callAdminMethods.loadBooks(tblAdminBooksList);
-        
-        cmbAdminChooseToDo.setSelectedIndex(0);
-        callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
-                txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
-                txtAdminQty);
-        txtAdminSearchBookTitle.setText("");
+            // First confirmation: ask if the user really wants to delete
+        int firstConfirm = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete this book?",
+                "Confirm Deletion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (firstConfirm == JOptionPane.YES_OPTION) {
+            // Second confirmation: final warning
+            int secondConfirm = JOptionPane.showConfirmDialog(
+                    null,
+                    "This action cannot be undone. Do you really want to proceed?",
+                    "Final Confirmation",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            if (secondConfirm == JOptionPane.YES_OPTION) {
+                // Proceed with delete
+                callAdminMethods.deleteBook(txtAdminBookID);
+
+                // Refresh and reset UI
+                callAdminMethods.loadBooks(tblAdminBooksList);
+                cmbAdminChooseToDo.setSelectedIndex(0);
+                callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
+                        txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
+                        txtAdminQty);
+                txtAdminSearchBookTitle.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Deletion cancelled.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Deletion cancelled.");
+        }
     }//GEN-LAST:event_btnAdminDeleteBookActionPerformed
 
     private void cmbAdminChooseToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAdminChooseToDoActionPerformed
@@ -1865,14 +1973,14 @@ public class Dashboard extends javax.swing.JFrame {
                 txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
                 txtAdminQty);
         if (toDo == 2) {
-            txtAdminQty.setText("0");
+            txtAdminQty.setText("1");
         }
     }//GEN-LAST:event_cmbAdminChooseToDoActionPerformed
 
     private void tblAdminBooksListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminBooksListMouseReleased
         int toDo = cmbAdminChooseToDo.getSelectedIndex();
         int selectedRow = tblAdminBooksList.getSelectedRow();
-        
+
         if (toDo == 1 || toDo == 3) {
             callAdminMethods.cmboxToDo(tblBorrowList,
                 cmbAdminChooseToDo, txtAdminBookID, txtAdminBookTitle, txtAdminAuthor,
@@ -1882,12 +1990,28 @@ public class Dashboard extends javax.swing.JFrame {
             callAdminMethods.getBookInfo(tblAdminBooksList, txtAdminBookID,
                     txtAdminBookTitle, txtAdminAuthor, txtAdminPublisher,
                     txtAdminYearPublished, txtAdminQty);
-        } else{
+
+            
+            if (!txtAdminBookTitle.getText().trim().isEmpty()) {
+                btnAdminAddQty.setEnabled(true);
+                btnAdminMinusQty.setEnabled(true);
+            } else {
+                btnAdminAddQty.setEnabled(false);
+                btnAdminMinusQty.setEnabled(false);
+            }
+
+        } else {
             callAdminMethods.clearTxt(tblAdminBooksList, txtAdminBookID, txtAdminBookTitle,
                 txtAdminAuthor, txtAdminPublisher, txtAdminYearPublished,
                 txtAdminQty);
+
+            // Disable quantity buttons if not in update/delete mode
+            btnAdminAddQty.setEnabled(false);
+            btnAdminMinusQty.setEnabled(false);
         }  
-        
+        if (toDo == 1) {
+            txtAdminQty.setBackground(Color.WHITE);
+        }
     }//GEN-LAST:event_tblAdminBooksListMouseReleased
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
@@ -1935,21 +2059,33 @@ public class Dashboard extends javax.swing.JFrame {
                 txtSearchBookTitle.setEditable(false);
                 txtSearchBookAuthor.setEditable(false);
                 txtSearchBookYearPub.setEditable(false);
+                txtSearchBookTitle.setBackground(new Color(255, 179, 186));
+                txtSearchBookAuthor.setBackground(new Color(255, 179, 186));
+                txtSearchBookYearPub.setBackground(new Color(255, 179, 186));
                 break;
             case 1:
                 txtSearchBookTitle.setEditable(true);
                 txtSearchBookAuthor.setEditable(false);
                 txtSearchBookYearPub.setEditable(false);
+                txtSearchBookTitle.setBackground(Color.WHITE);
+                txtSearchBookYearPub.setBackground(new Color(255, 179, 186));
+                txtSearchBookYearPub.setBackground(new Color(255, 179, 186));
                 break;
             case 2:
                 txtSearchBookTitle.setEditable(false);
                 txtSearchBookAuthor.setEditable(true);
                 txtSearchBookYearPub.setEditable(false);
+                txtSearchBookTitle.setBackground(new Color(255, 179, 186));
+                txtSearchBookAuthor.setBackground(Color.WHITE);
+                txtSearchBookYearPub.setBackground(new Color(255, 179, 186));
                 break;
             case 3:
                 txtSearchBookTitle.setEditable(false);
                 txtSearchBookAuthor.setEditable(false);
                 txtSearchBookYearPub.setEditable(true);
+                txtSearchBookTitle.setBackground(new Color(255, 179, 186));
+                txtSearchBookAuthor.setBackground(new Color(255, 179, 186));
+                txtSearchBookYearPub.setBackground(Color.WHITE);
                 break;
             default:
                 throw new AssertionError();
@@ -1986,10 +2122,26 @@ public class Dashboard extends javax.swing.JFrame {
          //Clears all text on textfield and sets the combox index to default value
         callSearch.clearSearchTxt(txtSearchBookTitle, txtSearchBookAuthor, txtSearchBookYearPub);
         cmbChooseSearch.setSelectedIndex(0);
+        callMethods.getBooks(tblSearchBooksList);
     }//GEN-LAST:event_btnSearchClearActionPerformed
 
+    private void btnAboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutUsActionPerformed
+        callAdminMethods.aboutUs();
+    }//GEN-LAST:event_btnAboutUsActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        JOptionPane.showMessageDialog(this, "Logout Successfully");
+        new Login().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void txtReturneeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReturneeKeyReleased
+        returnMethods callReturnMethods = new returnMethods();
+        
+        callReturnMethods.searchName(tblBorrowed, txtReturnee);
+    }//GEN-LAST:event_txtReturneeKeyReleased
+
     ////// FOLLOWING ARE CUSTOM METHODS
-    
     
     public void borrowAddBook(){
         
@@ -2008,8 +2160,8 @@ public class Dashboard extends javax.swing.JFrame {
     
     
     private void loadAllMemberHistory() {
-
-    String sql = "SELECT t.fld_transaction_id AS TransactionID, " +
+        String sql = "SELECT t.fld_transaction_id AS TransactionID, " +
+                 "t.fld_reference_id AS ReferenceID, " +
                  "CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " +
                  "b.fld_title AS BookTitle, t.fld_borrow_date AS BorrowDate, " +
                  "t.fld_due_date AS DueDate, t.fld_return_date AS ReturnDate, " +
@@ -2018,8 +2170,7 @@ public class Dashboard extends javax.swing.JFrame {
                  "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
                  "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id";
 
-    try (Connection conn = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/db_library_system", "root", "");
+    try (Connection conn = db.createConnection();
          PreparedStatement pst = conn.prepareStatement(sql);
          ResultSet rs = pst.executeQuery()) {
 
@@ -2032,6 +2183,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             model.addRow(new Object[]{
                 rs.getInt("TransactionID"),
+                rs.getString("ReferenceID"),
                 rs.getString("MemberName"),
                 rs.getString("BookTitle"),
                 rs.getString("BorrowDate"),
@@ -2060,6 +2212,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     if ("Member Name:".equals(searchType)) {
         sql = "SELECT t.fld_transaction_id AS TransactionID, " +
+              "t.fld_reference_id AS ReferenceID, " +
               "CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " +
               "b.fld_title AS BookTitle, t.fld_borrow_date AS BorrowDate, " +
               "t.fld_due_date AS DueDate, t.fld_return_date AS ReturnDate, t.fld_status AS Status " +
@@ -2069,6 +2222,7 @@ public class Dashboard extends javax.swing.JFrame {
               "WHERE CONCAT(m.fld_first_name, ' ', m.fld_last_name) LIKE ?";
     } else if ("Member ID:".equals(searchType)) {
         sql = "SELECT t.fld_transaction_id AS TransactionID, " +
+              "t.fld_reference_id AS ReferenceID, " +  
               "CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " +
               "b.fld_title AS BookTitle, t.fld_borrow_date AS BorrowDate, " +
               "t.fld_due_date AS DueDate, t.fld_return_date AS ReturnDate, t.fld_status AS Status " +
@@ -2076,13 +2230,13 @@ public class Dashboard extends javax.swing.JFrame {
               "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
               "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " +
               "WHERE m.fld_member_id = ?";
+        
     } else {
         JOptionPane.showMessageDialog(this, "Please select a valid search type.");
         return;
     }
 
-    try (Connection conn = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/db_library_system", "root", "");
+    try (Connection conn = db.createConnection();
          PreparedStatement pst = conn.prepareStatement(sql)) {
 
         if ("Member Name:".equals(searchType)) {
@@ -2107,6 +2261,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             model.addRow(new Object[]{
                 rs.getInt("TransactionID"),
+                rs.getString("ReferenceID"),
                 rs.getString("MemberName"),
                 rs.getString("BookTitle"),
                 rs.getString("BorrowDate"),
@@ -2152,17 +2307,18 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAboutUs;
     private javax.swing.JButton btnAddBook;
     private javax.swing.JButton btnAdminAddBook;
     private javax.swing.JButton btnAdminAddQty;
     private javax.swing.JButton btnAdminClear;
     private javax.swing.JButton btnAdminDeleteBook;
     private javax.swing.JButton btnAdminMinusQty;
-    private javax.swing.JButton btnAdminSearchBook;
     private javax.swing.JButton btnAdminUpdateBook;
     private javax.swing.JButton btnDelBook;
     private javax.swing.JButton btnDoneBorrowing;
     private javax.swing.JButton btnDoneReceive;
+    public javax.swing.JButton btnLogout;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearchBook;
@@ -2170,7 +2326,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbAdminChooseToDo;
     private javax.swing.JComboBox<String> cmbChooseSearch;
     private javax.swing.JComboBox<String> cmbSearchType;
-    public javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -2190,8 +2345,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

@@ -11,13 +11,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 
 /**
  *
  * @author Administrator
  */
 public class returnMethods {
+    ConnectDatabase db = new ConnectDatabase();
+    Filters callFilters = new Filters();
+    
         public static void loadBorrowedBook(JTable table) {
            
             DefaultTableModel model = new DefaultTableModel(
@@ -62,7 +67,6 @@ public class returnMethods {
                 table.getColumnModel().getColumn(transIdColIndex).setMaxWidth(0);
                 table.getColumnModel().getColumn(transIdColIndex).setWidth(0);
                 table.getColumnModel().getColumn(transIdColIndex).setPreferredWidth(0);
-                System.out.println("Columns: " + table.getColumnCount());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error loading table: " + e.getMessage());
             }
@@ -112,13 +116,59 @@ public class returnMethods {
                         membername, bookTitle, formattedBorrow, formattedDue, formattedReturn, receiver, status
                     }); 
                 } conn.close();
-                
-                
-                
-
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error loading table: " + e.getMessage());
             }    
     } 
+    
+    public void searchName(JTable tblDestination, JTextField inSearchVal) {
+        String searchVal = "%" + inSearchVal.getText().trim() + "%";
+
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[]{"Member Name", "Book Title", "Borrow Date", "Due Date", "Status"}, 0
+        );
+        tblDestination.setModel(model);
+
+        String sql = "SELECT CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " +
+                     "b.fld_title AS BookTitle, t.fld_borrow_date, t.fld_due_date, t.fld_status " +
+                     "FROM tbl_transaction t " +
+                     "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
+                     "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " +
+                     "WHERE (CONCAT(m.fld_first_name, ' ', m.fld_middle_name, ' ', m.fld_last_name) LIKE ? " +
+                     "OR b.fld_title LIKE ?) " +
+                     "AND t.fld_status = 'Borrowed' " +
+                     "ORDER BY t.fld_borrow_date DESC";
+
+        try (
+            Connection conn = db.createConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, searchVal);
+            pstmt.setString(2, searchVal);
+            ResultSet rs = pstmt.executeQuery();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
+
+            while (rs.next()) {
+                String memberName = rs.getString("MemberName");
+                String bookTitle = rs.getString("BookTitle");
+                String borrowDate = rs.getTimestamp("fld_borrow_date")
+                                      .toLocalDateTime().format(formatter);
+                String dueDate = rs.getTimestamp("fld_due_date")
+                                   .toLocalDateTime().format(formatter);
+                String status = rs.getString("fld_status");
+
+                model.addRow(new Object[]{memberName, bookTitle, borrowDate, dueDate, status});
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error loading table: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 }

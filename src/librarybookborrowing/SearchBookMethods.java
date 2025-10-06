@@ -61,8 +61,6 @@ public class SearchBookMethods {
         
         searchVal = "%" + inSearchVal.getText() + "%";
         
-            
-        System.out.println("Searching author with: " + searchVal);
         DefaultTableModel dtm = (DefaultTableModel) tblDestination.getModel();
         dtm.setRowCount(0);
         

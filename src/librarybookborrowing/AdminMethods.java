@@ -4,9 +4,12 @@
  */
 package librarybookborrowing;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -121,58 +124,92 @@ public class AdminMethods extends Methods {
         }
     }
     
-    public void cmboxToDo( JTable tblBooksList, JComboBox cmbName,JTextField txtBookID,JTextField txtTitle,JTextField txtAuthor,
-            JTextField txtPublisher,JTextField txtYearPublished,JTextField txtBookQty,
-            JButton btnAdd,JButton btnMinus,JButton btnAdminUpdateBook,JButton btnAdminAddBook,JButton btnAdminDeleteBook) {
+    public void cmboxToDo(JTable tblBooksList, JComboBox cmbName, 
+        JTextField txtBookID, JTextField txtTitle, JTextField txtAuthor,
+        JTextField txtPublisher, JTextField txtYearPublished, JTextField txtBookQty,
+        JButton btnAdd, JButton btnMinus, JButton btnAdminUpdateBook, 
+        JButton btnAdminAddBook, JButton btnAdminDeleteBook) {
 
-            int selectedIndex = cmbName.getSelectedIndex();
+        Color pastelRed = new Color(255, 179, 186);
+        int selectedIndex = cmbName.getSelectedIndex();
 
-            btnAdminUpdateBook.setEnabled(false);
-            btnAdminAddBook.setEnabled(false);
-            btnAdminDeleteBook.setEnabled(false);
-            btnAdd.setEnabled(false);
-            btnMinus.setEnabled(false);
+        // Disable all buttons first
+        btnAdminUpdateBook.setEnabled(false);
+        btnAdminAddBook.setEnabled(false);
+        btnAdminDeleteBook.setEnabled(false);
+        btnAdd.setEnabled(false);
+        btnMinus.setEnabled(false);
 
-            txtBookID.setEditable(false);
-            txtTitle.setEditable(false);
-            txtAuthor.setEditable(false);
-            txtPublisher.setEditable(false);
-            txtYearPublished.setEditable(false);
+        // Set all fields non-editable by default
+        txtBookID.setEditable(false);
+        txtTitle.setEditable(false);
+        txtAuthor.setEditable(false);
+        txtPublisher.setEditable(false);
+        txtYearPublished.setEditable(false);
+        txtBookQty.setEditable(false);
+        
+        // Set default color to pastel red
+        txtBookID.setBackground(pastelRed);
+        txtTitle.setBackground(pastelRed);
+        txtAuthor.setBackground(pastelRed);
+        txtPublisher.setBackground(pastelRed);
+        txtYearPublished.setBackground(pastelRed);
+        txtBookQty.setBackground(pastelRed);
+
+        if (selectedIndex == 0) {
+            // Default mode: clear everything
+            clearTxt(tblBooksList, txtBookID, txtTitle, txtAuthor, txtPublisher, txtYearPublished, txtBookQty);
+            tblBooksList.clearSelection();
+            txtTitle.setBackground(pastelRed);
+            txtAuthor.setBackground(pastelRed);
+            txtPublisher.setBackground(pastelRed);
+            txtYearPublished.setBackground(pastelRed);
+            txtBookQty.setBackground(pastelRed);
+
+        } else if (selectedIndex == 1) {
+            // Update Book
+            txtTitle.setEditable(true);
+            txtAuthor.setEditable(true);
+            txtPublisher.setEditable(true);
+            txtYearPublished.setEditable(true);
             txtBookQty.setEditable(false);
+            txtTitle.setBackground(Color.WHITE);
+            txtAuthor.setBackground(Color.WHITE);
+            txtPublisher.setBackground(Color.WHITE);
+            txtYearPublished.setBackground(Color.WHITE);
+            txtBookQty.setBackground(pastelRed);
+            btnAdminUpdateBook.setEnabled(true);
 
-            if (selectedIndex == 0) {
-                clearTxt(tblBooksList, txtBookID, txtTitle, txtAuthor, txtPublisher, txtYearPublished, txtBookQty);
-                tblBooksList.clearSelection();
+        } else if (selectedIndex == 2) {
+            // Add New Book
+            clearTxt(tblBooksList, txtBookID, txtTitle, txtAuthor, txtPublisher, txtYearPublished, txtBookQty);
+            tblBooksList.clearSelection();
 
-            } else if (selectedIndex == 1) {
-                // Update mode
-                txtTitle.setEditable(true);
-                txtAuthor.setEditable(true);
-                txtPublisher.setEditable(true);
-                txtYearPublished.setEditable(true);
-                txtBookQty.setEditable(false);
+            txtTitle.setEditable(true);
+            txtAuthor.setEditable(true);
+            txtPublisher.setEditable(true);
+            txtYearPublished.setEditable(true);
+            txtBookQty.setEditable(true);
+            txtBookQty.setText("0");
+            
+            txtTitle.setBackground(Color.WHITE);
+            txtAuthor.setBackground(Color.WHITE);
+            txtPublisher.setBackground(Color.WHITE);
+            txtYearPublished.setBackground(Color.WHITE);
+            txtBookQty.setBackground(Color.WHITE);
 
-                btnAdminUpdateBook.setEnabled(true);
+            btnAdminAddBook.setEnabled(true);
 
-            } else if (selectedIndex == 2) {
-                clearTxt(tblBooksList, txtBookID, txtTitle, txtAuthor, txtPublisher, txtYearPublished, txtBookQty);
-                tblBooksList.clearSelection();
+            // Enable quantity controls when adding a new book
+            btnAdd.setEnabled(true);
+            btnMinus.setEnabled(true);
 
-                txtTitle.setEditable(true);
-                txtAuthor.setEditable(true);
-                txtPublisher.setEditable(true);
-                txtYearPublished.setEditable(true);
-                txtBookQty.setEditable(true);
-                txtBookQty.setText("0");
-
-                btnAdminAddBook.setEnabled(true);
-                tblBooksList.clearSelection();
-
-            } else if (selectedIndex == 3) {
-                txtBookQty.setEditable(false);
-                btnAdminDeleteBook.setEnabled(true);
-            }
+        } else if (selectedIndex == 3) {
+            // Delete Book
+            txtBookQty.setEditable(false);
+            btnAdminDeleteBook.setEnabled(true);
         }
+    }
 
 
     
@@ -271,4 +308,36 @@ public class AdminMethods extends Methods {
         }
     }
     
+    public void aboutUs(){
+        // Create the group list
+        String[] members = {
+            "Calvin Kyle Nocon",
+            "Von Luige Amamangpang",
+            "Oliver Jann Klein Borre",
+            "Sam Bolina",
+            "Savannah Masmela",
+            "Stephannie Ann Lorente"
+        };
+
+        // Sort alphabetically
+        Arrays.sort(members);
+
+        // Build the message
+        StringBuilder message = new StringBuilder("Group 1 Members:\n\n");
+        for (String name : members) {
+            message.append(name).append("\n");
+        }
+
+        
+        String title = "Group 1";
+
+        // Show the message dialog
+        JOptionPane.showMessageDialog(
+            null,
+            message.toString(),
+            title,
+            JOptionPane.INFORMATION_MESSAGE
+        );
+
+    }
 }

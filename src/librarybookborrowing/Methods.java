@@ -46,6 +46,16 @@ public class Methods {
             getDashboard(tblDestination);
         });
         timer.start();
+        
+        DefaultTableModel model = (DefaultTableModel) tblDestination.getModel();
+        model.fireTableDataChanged();
+
+        tblDestination.setFillsViewportHeight(true);
+
+        if (model.getRowCount() > 0) {
+            tblDestination.setRowSelectionInterval(0, 0);
+            tblDestination.scrollRectToVisible(tblDestination.getCellRect(0, 0, true));
+        }
     }
     
     void getBooks(JTable tblName){
