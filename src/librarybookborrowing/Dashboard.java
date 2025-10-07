@@ -30,6 +30,7 @@ public class Dashboard extends javax.swing.JFrame {
     Methods callMethods = new Methods();
     AdminMethods callAdminMethods = new AdminMethods();
     SearchBookMethods callSearch = new SearchBookMethods();
+    private Methods.AccountLookup account;
     
     
     private static final java.util.logging.Logger logger =
@@ -46,7 +47,6 @@ public class Dashboard extends javax.swing.JFrame {
         callMethods.refreshDashboard(tblDashboard);
         returnMethods.loadBorrowedBook(tblBorrowed);
         returnMethods.loadReturnedBook(tblReturned);
-        
     }
 
     /**
@@ -2373,7 +2373,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel lblReceivedBy;
     private javax.swing.JLabel lblReturn;
     private javax.swing.JLabel lblSearch;
-    private javax.swing.JPanel pnlAdmin;
+    public javax.swing.JPanel pnlAdmin;
     private javax.swing.JPanel pnlAvailBooks;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlBookForm;

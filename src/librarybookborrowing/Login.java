@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.border.Border;
+import static librarybookborrowing.Dashboard.tabbedMenu;
 
 public class Login extends javax.swing.JFrame {
     
@@ -750,6 +751,8 @@ public class Login extends javax.swing.JFrame {
 
             this.setVisible(false);
             new Dashboard().setVisible(true);
+            
+            new Methods().checkAccountRole(userOrEmail);
             this.dispose();
 
         } catch (Exception ex) {

@@ -251,6 +251,8 @@ public class Methods {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+    
+    
 
     /** Account row supporting either member or staff. */
     public static class AccountLookup {
@@ -309,6 +311,36 @@ public class Methods {
             }
         }
     }
+    
+    public void checkAccountRole(String username) {
+        String query = "SELECT fld_role FROM tbl_accounts WHERE fld_username = ?";
+
+        try (Connection conn = new ConnectDatabase().createConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, username);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String role = rs.getString("fld_role");
+                    System.out.println("Account is " + role);
+
+                    if ("admin".equalsIgnoreCase(role)) {
+                        Dashboard.tabbedMenu.setEnabledAt(1, true);
+                    } else{
+                        Dashboard.tabbedMenu.setEnabledAt(1, false);
+                    }
+
+                } else {
+                    System.out.println("No account found for username: " + username);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Register:

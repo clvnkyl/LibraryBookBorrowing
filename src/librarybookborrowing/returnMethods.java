@@ -14,6 +14,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -122,51 +124,68 @@ public class returnMethods {
             }    
     } 
     
-    public void searchName(JTable tblDestination, JTextField inSearchVal) {
+
+    public void searchName(JTable table, JTextField inSearchVal) {
         String searchVal = "%" + inSearchVal.getText().trim() + "%";
 
         DefaultTableModel model = new DefaultTableModel(
-            new Object[]{"Member Name", "Book Title", "Borrow Date", "Due Date", "Status"}, 0
+            new Object[]{"transId", "Member Name", "Book Title", "Borrow Date", "Due Date", "Status"}, 0
         );
-        tblDestination.setModel(model);
+        table.setModel(model);
 
-        String sql = "SELECT CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " +
-                     "b.fld_title AS BookTitle, t.fld_borrow_date, t.fld_due_date, t.fld_status " +
+        String sql = "SELECT t.fld_transaction_id, " +
+                     "CONCAT(m.fld_first_name, ' ', m.fld_last_name) AS MemberName, " +
+                     "b.fld_title, t.fld_borrow_date, t.fld_due_date, t.fld_status " +
                      "FROM tbl_transaction t " +
                      "JOIN tbl_member m ON t.fld_member_id = m.fld_member_id " +
                      "JOIN tbl_book b ON t.fld_book_id = b.fld_book_id " +
-                     "WHERE (CONCAT(m.fld_first_name, ' ', m.fld_middle_name, ' ', m.fld_last_name) LIKE ? " +
-                     "OR b.fld_title LIKE ?) " +
-                     "AND t.fld_status = 'Borrowed' " +
+                     "WHERE t.fld_status = 'Borrowed' " +
+                     "AND CONCAT(m.fld_first_name, ' ', m.fld_last_name) LIKE ? " +
                      "ORDER BY t.fld_borrow_date DESC";
 
-        try (
+        try {
+            ConnectDatabase db = new ConnectDatabase();
             Connection conn = db.createConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement st = conn.prepareStatement(sql);
 
-            pstmt.setString(1, searchVal);
-            pstmt.setString(2, searchVal);
-            ResultSet rs = pstmt.executeQuery();
+            st.setString(1, searchVal); // ✅ correct parameter index
+            ResultSet rs = st.executeQuery(); // ✅ no SQL string here
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy   HH:mm");
 
             while (rs.next()) {
+                int transId = rs.getInt("fld_transaction_id");
                 String memberName = rs.getString("MemberName");
-                String bookTitle = rs.getString("BookTitle");
-                String borrowDate = rs.getTimestamp("fld_borrow_date")
-                                      .toLocalDateTime().format(formatter);
-                String dueDate = rs.getTimestamp("fld_due_date")
-                                   .toLocalDateTime().format(formatter);
+                String bookTitle = rs.getString("fld_title");
+
+                LocalDateTime borrowDate = rs.getTimestamp("fld_borrow_date").toLocalDateTime();
+                LocalDateTime dueDate = rs.getTimestamp("fld_due_date").toLocalDateTime();
+
+                String formattedBorrow = borrowDate.format(formatter);
+                String formattedDue = dueDate.format(formatter);
                 String status = rs.getString("fld_status");
 
-                model.addRow(new Object[]{memberName, bookTitle, borrowDate, dueDate, status});
+                model.addRow(new Object[]{transId, memberName, bookTitle, formattedBorrow, formattedDue, status});
             }
+
+            // ✅ hide transaction ID column
+            int transIdColIndex = 0;
+            table.getColumnModel().getColumn(transIdColIndex).setMinWidth(0);
+            table.getColumnModel().getColumn(transIdColIndex).setMaxWidth(0);
+            table.getColumnModel().getColumn(transIdColIndex).setWidth(0);
+            table.getColumnModel().getColumn(transIdColIndex).setPreferredWidth(0);
+
+            rs.close();
+            st.close();
+            conn.close();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error loading table: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+
 
 
 
