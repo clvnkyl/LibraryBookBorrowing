@@ -267,6 +267,7 @@ public class Login extends javax.swing.JFrame {
 
         LabelTitle.setBackground(new java.awt.Color(204, 204, 204));
         LabelTitle.setFont(new java.awt.Font("Inter", 1, 28)); // NOI18N
+        LabelTitle.setForeground(new java.awt.Color(255, 255, 255));
         LabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelTitle.setText("LIBRARY BOOK BORROWING SYSTEM");
         LabelTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -277,11 +278,10 @@ public class Login extends javax.swing.JFrame {
             PanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelHeaderLayout.createSequentialGroup()
                 .addComponent(LogoJoysis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LogoTesda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(50, 50, 50)
+                .addComponent(LogoTesda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelHeaderLayout.setVerticalGroup(
             PanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,7 +361,7 @@ public class Login extends javax.swing.JFrame {
         TabbedPanelLoginLayout.setHorizontalGroup(
             TabbedPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabbedPanelLoginLayout.createSequentialGroup()
-                .addContainerGap(295, Short.MAX_VALUE)
+                .addContainerGap(297, Short.MAX_VALUE)
                 .addGroup(TabbedPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TextFieldUsernameLogin)
@@ -369,7 +369,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(PasswordFieldLogin)
                     .addComponent(CheckBoxShowPasswordLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         TabbedPanelLoginLayout.setVerticalGroup(
             TabbedPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,7 +540,7 @@ public class Login extends javax.swing.JFrame {
         TabbedPanelRegisterLayout.setHorizontalGroup(
             TabbedPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TabbedPanelRegisterLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(TabbedPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabbedPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -565,7 +565,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(TextFieldLastNameRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(CheckBoxShowPasswordRegister))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         TabbedPanelRegisterLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {CheckBoxShowPasswordRegister, ComboBoxRole, PasswordFieldRegister, TextFieldEmail, TextFieldFirstName, TextFieldLastNameRegister, TextFieldMiddleName, TextFieldPhoneNumber, TextFieldUsernameRegister, jLabel1, jLabel11, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7});

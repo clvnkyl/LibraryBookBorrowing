@@ -167,6 +167,7 @@ public class Dashboard extends javax.swing.JFrame {
         tblAdminBooksList = new javax.swing.JTable();
         txtAdminSearchBookTitle = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 168, 107));
@@ -181,12 +182,14 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        pnlBase.setBackground(new java.awt.Color(165, 214, 167));
+        pnlBase.setBackground(new java.awt.Color(220, 220, 220));
         pnlBase.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlBase.setMaximumSize(new java.awt.Dimension(1500, 900));
         pnlBase.setPreferredSize(new java.awt.Dimension(1300, 700));
 
-        pnlNavigation.setBackground(new java.awt.Color(0, 168, 107));
+        pnlNavigation.setBackground(new java.awt.Color(0, 102, 0));
+        pnlNavigation.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlNavigation.setForeground(new java.awt.Color(0, 66, 11));
         java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
         jPanel2Layout.columnWidths = new int[] {50};
         jPanel2Layout.rowHeights = new int[] {60};
@@ -195,8 +198,8 @@ public class Dashboard extends javax.swing.JFrame {
         pnlNavigation.setLayout(jPanel2Layout);
 
         lblHome.setBackground(new java.awt.Color(0, 0, 0));
-        lblHome.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblHome.setForeground(new java.awt.Color(0, 0, 0));
+        lblHome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblHome.setForeground(new java.awt.Color(255, 255, 255));
         lblHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHome.setText("Home");
         lblHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -211,8 +214,8 @@ public class Dashboard extends javax.swing.JFrame {
         pnlNavigation.add(lblHome, gridBagConstraints);
 
         lblBorrow.setBackground(new java.awt.Color(0, 0, 0));
-        lblBorrow.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblBorrow.setForeground(new java.awt.Color(0, 0, 0));
+        lblBorrow.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblBorrow.setForeground(new java.awt.Color(255, 255, 255));
         lblBorrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBorrow.setText("Borrow");
         lblBorrow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -227,8 +230,8 @@ public class Dashboard extends javax.swing.JFrame {
         pnlNavigation.add(lblBorrow, gridBagConstraints);
 
         lblReturn.setBackground(new java.awt.Color(0, 0, 0));
-        lblReturn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblReturn.setForeground(new java.awt.Color(0, 0, 0));
+        lblReturn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblReturn.setForeground(new java.awt.Color(255, 255, 255));
         lblReturn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblReturn.setText("Return");
         lblReturn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -243,8 +246,8 @@ public class Dashboard extends javax.swing.JFrame {
         pnlNavigation.add(lblReturn, gridBagConstraints);
 
         lblCheckAcc.setBackground(new java.awt.Color(0, 0, 0));
-        lblCheckAcc.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblCheckAcc.setForeground(new java.awt.Color(0, 0, 0));
+        lblCheckAcc.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblCheckAcc.setForeground(new java.awt.Color(255, 255, 255));
         lblCheckAcc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCheckAcc.setText("Check Account");
         lblCheckAcc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -259,8 +262,8 @@ public class Dashboard extends javax.swing.JFrame {
         pnlNavigation.add(lblCheckAcc, gridBagConstraints);
 
         lblSearch.setBackground(new java.awt.Color(0, 0, 0));
-        lblSearch.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblSearch.setForeground(new java.awt.Color(0, 0, 0));
+        lblSearch.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblSearch.setForeground(new java.awt.Color(255, 255, 255));
         lblSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSearch.setText("Search Book");
         lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -276,7 +279,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         lblOptions.setBackground(new java.awt.Color(0, 0, 0));
         lblOptions.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblOptions.setForeground(new java.awt.Color(0, 0, 0));
         lblOptions.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblOptions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menu.png"))); // NOI18N
         lblOptions.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -299,15 +301,15 @@ public class Dashboard extends javax.swing.JFrame {
         pnlScreen.setMaximumSize(new java.awt.Dimension(1300, 900));
         pnlScreen.setLayout(new java.awt.CardLayout());
 
-        pnlHome.setBackground(new java.awt.Color(165, 214, 167));
+        pnlHome.setBackground(new java.awt.Color(204, 204, 204));
         pnlHome.setMaximumSize(new java.awt.Dimension(1300, 900));
         pnlHome.setMinimumSize(new java.awt.Dimension(900, 500));
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Book Records");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblDashboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -344,29 +346,30 @@ public class Dashboard extends javax.swing.JFrame {
         pnlHome.setLayout(pnlHomeLayout);
         pnlHomeLayout.setHorizontalGroup(
             pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE)
-            .addComponent(jScrollPane11)
+            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 1308, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlHomeLayout.setVerticalGroup(
             pnlHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHomeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pnlScreen.add(pnlHome, "card2");
 
-        pnlBorrow.setBackground(new java.awt.Color(165, 214, 167));
+        pnlBorrow.setBackground(new java.awt.Color(210, 210, 210));
         pnlBorrow.setMaximumSize(new java.awt.Dimension(1300, 900));
         pnlBorrow.setMinimumSize(new java.awt.Dimension(1300, 500));
 
-        lblBorrowList.setBackground(new java.awt.Color(0, 0, 0));
-        lblBorrowList.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblBorrowList.setForeground(new java.awt.Color(0, 0, 0));
+        lblBorrowList.setBackground(new java.awt.Color(255, 255, 255));
+        lblBorrowList.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblBorrowList.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBorrowList.setText("Borrowing List");
+        lblBorrowList.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblBorrowList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -399,15 +402,19 @@ public class Dashboard extends javax.swing.JFrame {
             tblBorrowList.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        jLabel12.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel12.setText("Member Name:");
 
+        jLabel13.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("Book Title:");
 
+        jLabel14.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Issuer Name:");
 
+        txtBorrowerName.setBackground(new java.awt.Color(204, 204, 204));
         txtBorrowerName.setMaximumSize(new java.awt.Dimension(64, 22));
         txtBorrowerName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -415,18 +422,21 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        txtBookTitle.setBackground(new java.awt.Color(204, 204, 204));
         txtBookTitle.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBookTitleKeyReleased(evt);
             }
         });
 
+        txtIssuedBy.setBackground(new java.awt.Color(204, 204, 204));
         txtIssuedBy.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIssuedByKeyReleased(evt);
             }
         });
 
+        btnDoneBorrowing.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         btnDoneBorrowing.setText("Done");
         btnDoneBorrowing.setToolTipText("");
         btnDoneBorrowing.addActionListener(new java.awt.event.ActionListener() {
@@ -435,6 +445,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        btnAddBook.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         btnAddBook.setText("Add Book");
         btnAddBook.setToolTipText("");
         btnAddBook.addActionListener(new java.awt.event.ActionListener() {
@@ -443,6 +454,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        btnDelBook.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         btnDelBook.setText("Delete Book");
         btnDelBook.setToolTipText("");
         btnDelBook.addActionListener(new java.awt.event.ActionListener() {
@@ -559,13 +571,13 @@ public class Dashboard extends javax.swing.JFrame {
         });
         jScrollPane8.setViewportView(tblStaffInfo);
 
-        pnlAvailBooks.setBackground(new java.awt.Color(165, 214, 167));
+        pnlAvailBooks.setBackground(new java.awt.Color(210, 210, 210));
 
-        lblAvailBooks.setBackground(new java.awt.Color(0, 0, 0));
-        lblAvailBooks.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblAvailBooks.setForeground(new java.awt.Color(0, 0, 0));
+        lblAvailBooks.setBackground(new java.awt.Color(255, 255, 255));
+        lblAvailBooks.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblAvailBooks.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAvailBooks.setText("Available Books");
+        lblAvailBooks.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblAvailBooks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -627,7 +639,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(lblBorrowList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBorrowLayout.createSequentialGroup()
                         .addGroup(pnlBorrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
                             .addComponent(pnlAvailBooks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
@@ -636,15 +648,15 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(pnlBorrowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlBorrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBorrowLayout.createSequentialGroup()
+                    .addGroup(pnlBorrowLayout.createSequentialGroup()
                         .addComponent(pnlBorrowingInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(19, Short.MAX_VALUE))
                     .addGroup(pnlBorrowLayout.createSequentialGroup()
-                        .addComponent(lblBorrowList)
+                        .addComponent(lblBorrowList, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -653,22 +665,25 @@ public class Dashboard extends javax.swing.JFrame {
 
         pnlScreen.add(pnlBorrow, "card3");
 
-        pnlReturn.setBackground(new java.awt.Color(165, 214, 167));
+        pnlReturn.setBackground(new java.awt.Color(210, 210, 210));
         pnlReturn.setMaximumSize(new java.awt.Dimension(1300, 900));
         pnlReturn.setMinimumSize(new java.awt.Dimension(900, 500));
 
-        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Return Book");
+        jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel9.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Member Name:");
 
+        lblReceivedBy.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         lblReceivedBy.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblReceivedBy.setText("Received by:");
 
+        txtReturnee.setBackground(new java.awt.Color(204, 204, 204));
         txtReturnee.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtReturneeKeyReleased(evt);
@@ -676,11 +691,12 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         txtReturnBook.setEditable(false);
-        txtReturnBook.setBackground(new java.awt.Color(255, 179, 186));
+        txtReturnBook.setBackground(new java.awt.Color(204, 204, 204));
 
         txtBorrowDate.setEditable(false);
-        txtBorrowDate.setBackground(new java.awt.Color(255, 179, 186));
+        txtBorrowDate.setBackground(new java.awt.Color(204, 204, 204));
 
+        btnDoneReceive.setFont(new java.awt.Font("Franklin Gothic Book", 1, 14)); // NOI18N
         btnDoneReceive.setText("Return");
         btnDoneReceive.setToolTipText("");
         btnDoneReceive.addActionListener(new java.awt.event.ActionListener() {
@@ -690,20 +706,26 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         txtDueDate.setEditable(false);
-        txtDueDate.setBackground(new java.awt.Color(255, 179, 186));
+        txtDueDate.setBackground(new java.awt.Color(204, 204, 204));
 
         txtReturnDate.setEditable(false);
-        txtReturnDate.setBackground(new java.awt.Color(255, 179, 186));
+        txtReturnDate.setBackground(new java.awt.Color(204, 204, 204));
 
+        txtReceivedBy.setBackground(new java.awt.Color(204, 204, 204));
+
+        txtReceivedBy1.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         txtReceivedBy1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtReceivedBy1.setText("Due Date:");
 
+        txtReceivedBy2.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         txtReceivedBy2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtReceivedBy2.setText("Book Title:");
 
+        txtReceivedBy3.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         txtReceivedBy3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtReceivedBy3.setText("Return Date:");
 
+        txtReceivedBy4.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         txtReceivedBy4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtReceivedBy4.setText("Borrow Date:");
 
@@ -853,7 +875,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(pnlReturnLayout.createSequentialGroup()
                         .addComponent(pnlReturningInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1005, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
                     .addComponent(jScrollPane10))
                 .addContainerGap())
         );
@@ -861,22 +883,23 @@ public class Dashboard extends javax.swing.JFrame {
             pnlReturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReturnLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
-                .addGap(12, 12, 12)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlReturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlReturningInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pnlScreen.add(pnlReturn, "card4");
 
-        pnlCheckAcc.setBackground(new java.awt.Color(165, 214, 167));
+        pnlCheckAcc.setBackground(new java.awt.Color(204, 204, 204));
         pnlCheckAcc.setMaximumSize(new java.awt.Dimension(1300, 900));
         pnlCheckAcc.setMinimumSize(new java.awt.Dimension(900, 500));
 
+        btnSearch.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         btnSearch.setText("Search");
         btnSearch.setToolTipText("");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -906,18 +929,19 @@ public class Dashboard extends javax.swing.JFrame {
         tblMemberHistory.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(tblMemberHistory);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Member Borrowing History");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setFont(new java.awt.Font("Franklin Gothic Book", 0, 18)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Search By:");
 
+        cmbSearchType.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         cmbSearchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Member Name:", "Member ID:" }));
 
+        btnRefresh.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -944,7 +968,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(btnSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRefresh)
-                        .addGap(0, 566, Short.MAX_VALUE))
+                        .addGap(0, 557, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -958,8 +982,8 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(txtSearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
                     .addComponent(btnRefresh))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                 .addContainerGap())
@@ -967,15 +991,15 @@ public class Dashboard extends javax.swing.JFrame {
 
         pnlScreen.add(pnlCheckAcc, "card5");
 
-        pnlSearchBook.setBackground(new java.awt.Color(165, 214, 167));
+        pnlSearchBook.setBackground(new java.awt.Color(204, 204, 204));
         pnlSearchBook.setMaximumSize(new java.awt.Dimension(1300, 900));
         pnlSearchBook.setMinimumSize(new java.awt.Dimension(900, 500));
 
-        jLabel11.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Search a Book");
+        jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblSearchBooksList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1001,14 +1025,14 @@ public class Dashboard extends javax.swing.JFrame {
         tblSearchBooksList.setRowHeight(25);
         jScrollPane5.setViewportView(tblSearchBooksList);
 
-        pnlSearchingForm.setBackground(new java.awt.Color(165, 214, 167));
+        pnlSearchingForm.setBackground(new java.awt.Color(255, 255, 255));
+        pnlSearchingForm.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtSearchBookTitle.setEditable(false);
-        txtSearchBookTitle.setBackground(new java.awt.Color(255, 179, 186));
+        txtSearchBookTitle.setBackground(new java.awt.Color(204, 204, 204));
         txtSearchBookTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        btnSearchBook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnSearchBook.setForeground(new java.awt.Color(0, 0, 0));
+        btnSearchBook.setFont(new java.awt.Font("Franklin Gothic Book", 0, 18)); // NOI18N
         btnSearchBook.setText("Search");
         btnSearchBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1016,7 +1040,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        cmbChooseSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbChooseSearch.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         cmbChooseSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose search", "Title", "Author", "Year" }));
         cmbChooseSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1024,28 +1048,24 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Franklin Gothic Book", 0, 18)); // NOI18N
         jLabel5.setText("Title");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Franklin Gothic Book", 0, 18)); // NOI18N
         jLabel7.setText("Author");
 
         txtSearchBookAuthor.setEditable(false);
-        txtSearchBookAuthor.setBackground(new java.awt.Color(255, 179, 186));
+        txtSearchBookAuthor.setBackground(new java.awt.Color(204, 204, 204));
         txtSearchBookAuthor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txtSearchBookYearPub.setEditable(false);
-        txtSearchBookYearPub.setBackground(new java.awt.Color(255, 179, 186));
+        txtSearchBookYearPub.setBackground(new java.awt.Color(204, 204, 204));
         txtSearchBookYearPub.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Franklin Gothic Book", 0, 18)); // NOI18N
         jLabel8.setText("Year Published");
 
-        btnSearchClear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnSearchClear.setForeground(new java.awt.Color(0, 0, 0));
+        btnSearchClear.setFont(new java.awt.Font("Franklin Gothic Book", 0, 18)); // NOI18N
         btnSearchClear.setText("Clear");
         btnSearchClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1060,7 +1080,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(pnlSearchingFormLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSearchingFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSearchBookYearPub, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                    .addComponent(txtSearchBookYearPub, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                     .addGroup(pnlSearchingFormLayout.createSequentialGroup()
                         .addGroup(pnlSearchingFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmbChooseSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1111,7 +1131,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(pnlSearchBookLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jScrollPane5))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 1001, Short.MAX_VALUE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 1003, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlSearchBookLayout.setVerticalGroup(
@@ -1120,7 +1140,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlSearchBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                     .addGroup(pnlSearchBookLayout.createSequentialGroup()
                         .addComponent(pnlSearchingForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -1129,21 +1149,19 @@ public class Dashboard extends javax.swing.JFrame {
 
         pnlScreen.add(pnlSearchBook, "card6");
 
-        pnlOptions.setBackground(new java.awt.Color(165, 214, 167));
+        pnlOptions.setBackground(new java.awt.Color(204, 204, 204));
 
-        tabbedMenu.setBackground(new java.awt.Color(165, 214, 167));
+        tabbedMenu.setBackground(new java.awt.Color(225, 225, 225));
         tabbedMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tabbedMenu.setForeground(new java.awt.Color(0, 0, 0));
         tabbedMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tabbedMenuMouseReleased(evt);
             }
         });
 
-        pnlOptionsTab.setBackground(new java.awt.Color(165, 214, 167));
+        pnlOptionsTab.setBackground(new java.awt.Color(225, 225, 225));
 
-        btnLogout.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnLogout.setForeground(new java.awt.Color(0, 0, 0));
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1151,9 +1169,9 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnAboutUs.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnAboutUs.setForeground(new java.awt.Color(0, 0, 0));
+        btnAboutUs.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnAboutUs.setText("About us");
+        btnAboutUs.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAboutUs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAboutUsActionPerformed(evt);
@@ -1165,25 +1183,25 @@ public class Dashboard extends javax.swing.JFrame {
         pnlOptionsTabLayout.setHorizontalGroup(
             pnlOptionsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsTabLayout.createSequentialGroup()
-                .addContainerGap(756, Short.MAX_VALUE)
+                .addContainerGap(754, Short.MAX_VALUE)
                 .addComponent(btnAboutUs, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
                 .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(44, 44, 44))
         );
         pnlOptionsTabLayout.setVerticalGroup(
             pnlOptionsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsTabLayout.createSequentialGroup()
-                .addContainerGap(436, Short.MAX_VALUE)
-                .addGroup(pnlOptionsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnAboutUs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(423, Short.MAX_VALUE)
+                .addGroup(pnlOptionsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAboutUs, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
         tabbedMenu.addTab("Options", pnlOptionsTab);
 
-        pnlAdmin.setBackground(new java.awt.Color(165, 214, 167));
+        pnlAdmin.setBackground(new java.awt.Color(225, 225, 225));
         pnlAdmin.setEnabled(false);
         pnlAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -1191,62 +1209,50 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        pnlBookForm.setBackground(new java.awt.Color(165, 214, 167));
+        pnlBookForm.setBackground(new java.awt.Color(255, 255, 255));
         pnlBookForm.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel2.setText("Book ID");
 
         txtAdminBookID.setEditable(false);
-        txtAdminBookID.setBackground(new java.awt.Color(255, 179, 186));
+        txtAdminBookID.setBackground(new java.awt.Color(204, 204, 204));
         txtAdminBookID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAdminBookID.setForeground(new java.awt.Color(0, 0, 0));
 
         txtAdminBookTitle.setEditable(false);
-        txtAdminBookTitle.setBackground(new java.awt.Color(255, 179, 186));
+        txtAdminBookTitle.setBackground(new java.awt.Color(204, 204, 204));
         txtAdminBookTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAdminBookTitle.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel4.setText("Book Title");
 
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel17.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel17.setText("Author");
 
         txtAdminAuthor.setEditable(false);
-        txtAdminAuthor.setBackground(new java.awt.Color(255, 179, 186));
+        txtAdminAuthor.setBackground(new java.awt.Color(204, 204, 204));
         txtAdminAuthor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAdminAuthor.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel18.setText("Year published");
 
         txtAdminYearPublished.setEditable(false);
-        txtAdminYearPublished.setBackground(new java.awt.Color(255, 179, 186));
+        txtAdminYearPublished.setBackground(new java.awt.Color(204, 204, 204));
         txtAdminYearPublished.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAdminYearPublished.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel19.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel19.setText("Quantity");
 
         txtAdminQty.setEditable(false);
-        txtAdminQty.setBackground(new java.awt.Color(255, 179, 186));
+        txtAdminQty.setBackground(new java.awt.Color(204, 204, 204));
         txtAdminQty.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAdminQty.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel20.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel20.setText("Publisher");
 
         txtAdminPublisher.setEditable(false);
-        txtAdminPublisher.setBackground(new java.awt.Color(255, 179, 186));
+        txtAdminPublisher.setBackground(new java.awt.Color(204, 204, 204));
         txtAdminPublisher.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAdminPublisher.setForeground(new java.awt.Color(0, 0, 0));
 
         btnAdminMinusQty.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAdminMinusQty.setForeground(new java.awt.Color(255, 255, 255));
@@ -1266,7 +1272,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        cmbAdminChooseToDo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cmbAdminChooseToDo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cmbAdminChooseToDo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select-", "Update Book Info", "Add new book", "Delete book" }));
         cmbAdminChooseToDo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1274,7 +1280,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnAdminUpdateBook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAdminUpdateBook.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnAdminUpdateBook.setForeground(new java.awt.Color(255, 255, 255));
         btnAdminUpdateBook.setText("Update");
         btnAdminUpdateBook.setEnabled(false);
@@ -1284,7 +1290,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnAdminAddBook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAdminAddBook.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnAdminAddBook.setForeground(new java.awt.Color(255, 255, 255));
         btnAdminAddBook.setText("Add New");
         btnAdminAddBook.setEnabled(false);
@@ -1294,7 +1300,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnAdminDeleteBook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAdminDeleteBook.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnAdminDeleteBook.setForeground(new java.awt.Color(255, 255, 255));
         btnAdminDeleteBook.setText("Delete Book");
         btnAdminDeleteBook.setEnabled(false);
@@ -1304,7 +1310,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnAdminClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdminClear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAdminClear.setText("Clear");
         btnAdminClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1434,8 +1440,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel21.setFont(new java.awt.Font("Franklin Gothic Book", 0, 14)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel21.setText("Search Book Title");
 
@@ -1448,7 +1453,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(pnlBookForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAdminLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1491,14 +1496,24 @@ public class Dashboard extends javax.swing.JFrame {
 
         pnlScreen.add(pnlOptions, "card7");
 
+        jLabel10.setFont(new java.awt.Font("Inter", 0, 10)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel10.setText("© 2025 Joysis Java Batch 10 — Group 1: Amamangpang, Bolina, Borre, Lorente, Masmela, Nocon.");
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
         pnlBase.setLayout(pnlBaseLayout);
         pnlBaseLayout.setHorizontalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlNavigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(39, 39, 39))
+            .addComponent(pnlNavigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1506,18 +1521,20 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(pnlNavigation, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE)
+            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 1320, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
         );
 
         pack();
@@ -2336,6 +2353,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbChooseSearch;
     private javax.swing.JComboBox<String> cmbSearchType;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
