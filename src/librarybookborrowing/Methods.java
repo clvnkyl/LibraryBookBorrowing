@@ -76,9 +76,9 @@ public class Methods {
         DefaultTableModel dtm = (DefaultTableModel) tblDestination.getModel();
         dtm.setRowCount(0);
         String sqlQuery = "SELECT fld_member_id, "
-                        + "CONCAT(fld_first_name, ' ', fld_middle_name, ' ', fld_last_name) AS full_name "
-                        + "FROM tbl_member "
-                        + "WHERE CONCAT(fld_first_name, ' ', fld_middle_name, ' ', fld_last_name) LIKE ? ";
+                + "CONCAT(fld_first_name, ' ', fld_last_name) AS full_name "
+                + "FROM tbl_member "
+                + "WHERE CONCAT(fld_first_name, ' ', fld_last_name) LIKE ? ";
         try (Connection conn = db.createConnection();
              PreparedStatement pstmt = conn.prepareStatement(sqlQuery)) {
             pstmt.setString(1, searchLikeVal);
@@ -99,9 +99,9 @@ public class Methods {
         DefaultTableModel dtm = (DefaultTableModel) tblDestination.getModel();
         dtm.setRowCount(0);
         String sqlQuery = "SELECT fld_staff_id, "
-                        + "CONCAT(fld_first_name, ' ', fld_middle_name, ' ', fld_last_name) AS full_name "
+                        + "CONCAT(fld_first_name, ' ', fld_last_name) AS full_name "
                         + "FROM tbl_staff "
-                        + "WHERE CONCAT(fld_first_name, ' ', fld_middle_name, ' ', fld_last_name) LIKE ?";
+                        + "WHERE CONCAT(fld_first_name, ' ', fld_last_name) LIKE ?";
         try (Connection conn = db.createConnection();
              PreparedStatement pstmt = conn.prepareStatement(sqlQuery)) {
             pstmt.setString(1, searchLikeVal);
@@ -327,7 +327,7 @@ public class Methods {
 
                     if ("admin".equalsIgnoreCase(role)) {
                         Dashboard.tabbedMenu.setEnabledAt(1, true);
-                    } else{
+                    }else{
                         Dashboard.tabbedMenu.setEnabledAt(1, false);
                     }
 
