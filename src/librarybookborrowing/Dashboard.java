@@ -2078,33 +2078,41 @@ public class Dashboard extends javax.swing.JFrame {
         callSearch.clearSearchTxt(txtSearchBookTitle, txtSearchBookAuthor, txtSearchBookYearPub);
         switch (cmbIndex) {
             case 0:
+                // Default
                 txtSearchBookTitle.setEditable(false);
                 txtSearchBookAuthor.setEditable(false);
                 txtSearchBookYearPub.setEditable(false);
+                
                 txtSearchBookTitle.setBackground(new Color(255, 179, 186));
                 txtSearchBookAuthor.setBackground(new Color(255, 179, 186));
                 txtSearchBookYearPub.setBackground(new Color(255, 179, 186));
                 break;
             case 1:
+                //Title
                 txtSearchBookTitle.setEditable(true);
                 txtSearchBookAuthor.setEditable(false);
                 txtSearchBookYearPub.setEditable(false);
+                
                 txtSearchBookTitle.setBackground(Color.WHITE);
                 txtSearchBookAuthor.setBackground(new Color(255, 179, 186)); //edited this maling txtfield nacall
                 txtSearchBookYearPub.setBackground(new Color(255, 179, 186));
                 break;
+                //Author
             case 2:
                 txtSearchBookTitle.setEditable(false);
                 txtSearchBookAuthor.setEditable(true);
                 txtSearchBookYearPub.setEditable(false);
+                
                 txtSearchBookTitle.setBackground(new Color(255, 179, 186));
                 txtSearchBookAuthor.setBackground(Color.WHITE);
                 txtSearchBookYearPub.setBackground(new Color(255, 179, 186));
                 break;
+                //Year
             case 3:
                 txtSearchBookTitle.setEditable(false);
                 txtSearchBookAuthor.setEditable(false);
                 txtSearchBookYearPub.setEditable(true);
+                
                 txtSearchBookTitle.setBackground(new Color(255, 179, 186));
                 txtSearchBookAuthor.setBackground(new Color(255, 179, 186));
                 txtSearchBookYearPub.setBackground(Color.WHITE);
