@@ -2090,7 +2090,7 @@ public class Dashboard extends javax.swing.JFrame {
                 txtSearchBookAuthor.setEditable(false);
                 txtSearchBookYearPub.setEditable(false);
                 txtSearchBookTitle.setBackground(Color.WHITE);
-                txtSearchBookYearPub.setBackground(new Color(255, 179, 186));
+                txtSearchBookAuthor.setBackground(new Color(255, 179, 186));
                 txtSearchBookYearPub.setBackground(new Color(255, 179, 186));
                 break;
             case 2:
