@@ -197,7 +197,7 @@ public class Dashboard extends javax.swing.JFrame {
         java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
         jPanel2Layout.columnWidths = new int[] {50};
         jPanel2Layout.rowHeights = new int[] {60};
-        jPanel2Layout.columnWeights = new double[] {30.0, 30.0, 30.0, 30.0, 30.0, 5.0};
+        jPanel2Layout.columnWeights = new double[] {30.0, 30.0, 30.0, 30.0, 30.0, 30.0};
         jPanel2Layout.rowWeights = new double[] {0.0};
         pnlNavigation.setLayout(jPanel2Layout);
 
@@ -282,15 +282,16 @@ public class Dashboard extends javax.swing.JFrame {
         pnlNavigation.add(lblSearch, gridBagConstraints);
 
         lblOptions.setBackground(new java.awt.Color(0, 0, 0));
-        lblOptions.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblOptions.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblOptions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menu.png"))); // NOI18N
+        lblOptions.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblOptions.setForeground(new java.awt.Color(255, 255, 255));
+        lblOptions.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblOptions.setText("Options");
         lblOptions.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblOptions.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblOptions.setMaximumSize(new java.awt.Dimension(50, 32));
-        lblOptions.setMinimumSize(new java.awt.Dimension(50, 32));
+        lblOptions.setMaximumSize(new java.awt.Dimension(148, 29));
+        lblOptions.setMinimumSize(new java.awt.Dimension(148, 29));
         lblOptions.setName(""); // NOI18N
-        lblOptions.setPreferredSize(new java.awt.Dimension(50, 32));
+        lblOptions.setPreferredSize(new java.awt.Dimension(148, 29));
         lblOptions.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblOptionsMouseClicked(evt);
@@ -1183,7 +1184,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         pnlLogo.setBackground(new java.awt.Color(225, 225, 225));
-        pnlLogo.setLayout(new java.awt.GridLayout());
+        pnlLogo.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-tesda.png"))); // NOI18N
@@ -1646,7 +1647,7 @@ public class Dashboard extends javax.swing.JFrame {
             try {
                 receiverStaffId = Integer.parseInt(staffReceiver);
             } catch (Exception e) {
-                txtReturnDate.setText("");
+                txtReceivedBy.setText("");
                 JOptionPane.showMessageDialog(this, "Invalid Staff ID.");
                 return;
             }
@@ -1658,7 +1659,7 @@ public class Dashboard extends javax.swing.JFrame {
                 try (ResultSet rs = checkPs.executeQuery()) {
                     if (!rs.next()) {
                         // clear UI and inform user
-                        txtReturnDate.setText("");
+                        txtReceivedBy.setText("");
                         JOptionPane.showMessageDialog(this, "Staff ID not found!");
                         return;
                     }
@@ -2182,7 +2183,7 @@ public class Dashboard extends javax.swing.JFrame {
          //Clears all text on textfield and sets the combox index to default value
         callSearch.clearSearchTxt(txtSearchBookTitle, txtSearchBookAuthor, txtSearchBookYearPub);
         cmbChooseSearch.setSelectedIndex(0);
-        callMethods.getBooks(tblSearchBooksList);
+        callSearch.getBooks(tblSearchBooksList);
     }//GEN-LAST:event_btnSearchClearActionPerformed
 
     private void btnAboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutUsActionPerformed
