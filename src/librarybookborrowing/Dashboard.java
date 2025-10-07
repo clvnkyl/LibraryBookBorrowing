@@ -1577,7 +1577,7 @@ public class Dashboard extends javax.swing.JFrame {
         pnlScreen.add(pnlSearchBook);
         pnlScreen.repaint();
         pnlScreen.revalidate();
-        callMethods.getBooks(tblSearchBooksList);
+        callSearch.getBooks(tblSearchBooksList);
     }//GEN-LAST:event_lblSearchMouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -1616,6 +1616,7 @@ public class Dashboard extends javax.swing.JFrame {
             try {
                 receiverStaffId = Integer.parseInt(staffReceiver);
             } catch (Exception e) {
+                txtReturnDate.setText("");
                 JOptionPane.showMessageDialog(this, "Invalid Staff ID.");
                 return;
             }
@@ -1627,11 +1628,6 @@ public class Dashboard extends javax.swing.JFrame {
                 try (ResultSet rs = checkPs.executeQuery()) {
                     if (!rs.next()) {
                         // clear UI and inform user
-                        txtReturnee.setText("");
-                        txtReturnBook.setText("");
-                        txtReceivedBy.setText("");
-                        txtBorrowDate.setText("");
-                        txtDueDate.setText("");
                         txtReturnDate.setText("");
                         JOptionPane.showMessageDialog(this, "Staff ID not found!");
                         return;

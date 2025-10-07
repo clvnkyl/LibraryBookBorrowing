@@ -748,10 +748,9 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Password is incorrect.");
                 return;
             }
-
+            
             this.setVisible(false);
             new Dashboard().setVisible(true);
-            
             new Methods().checkAccountRole(userOrEmail);
             this.dispose();
 

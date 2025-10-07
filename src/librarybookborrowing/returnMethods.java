@@ -148,8 +148,8 @@ public class returnMethods {
             Connection conn = db.createConnection();
             PreparedStatement st = conn.prepareStatement(sql);
 
-            st.setString(1, searchVal); // ✅ correct parameter index
-            ResultSet rs = st.executeQuery(); // ✅ no SQL string here
+            st.setString(1, searchVal);
+            ResultSet rs = st.executeQuery();
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy   HH:mm");
 
@@ -168,7 +168,6 @@ public class returnMethods {
                 model.addRow(new Object[]{transId, memberName, bookTitle, formattedBorrow, formattedDue, status});
             }
 
-            // ✅ hide transaction ID column
             int transIdColIndex = 0;
             table.getColumnModel().getColumn(transIdColIndex).setMinWidth(0);
             table.getColumnModel().getColumn(transIdColIndex).setMaxWidth(0);

@@ -18,6 +18,29 @@ public class SearchBookMethods {
     Filters callFilter = new Filters();
     ConnectDatabase db = new ConnectDatabase();
     
+    public void getBooks(JTable tblName) {
+        DefaultTableModel dtm = (DefaultTableModel) tblName.getModel();
+        dtm.setRowCount(0);
+        String sqlQuery = "SELECT fld_title, fld_author, fld_publisher, fld_year_published, fld_quantity FROM tbl_book";
+        try (Connection conn = db.createConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                Object[] newRow = {
+                    rs.getString("fld_title"),
+                    rs.getString("fld_author"),
+                    rs.getString("fld_publisher"),
+                    rs.getInt("fld_year_published"),
+                    rs.getInt("fld_quantity")
+                };
+                dtm.addRow(newRow);
+            }
+        } catch (Exception e) {
+            Object[] errRow = {"error", e.getMessage()};
+            dtm.addRow(errRow);
+        }
+    }
+    
     public void searchBookTitle(JTable tblDestination, JTextField inSearchVal){
         String searchVal;
         
